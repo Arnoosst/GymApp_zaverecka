@@ -14,10 +14,9 @@ public class MainFrame extends JFrame {
     }
 
     private void initUI() {
-        JPanel mainPanel = new JPanel();
-
-
+        MainPanel mainPanel = new MainPanel(new MainButtonListener());
         add(mainPanel);
+        setVisible(true);
     }
 
 
