@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Objects;
+
 public class Meal {
     private String name;
     private int kcal;
@@ -57,4 +59,15 @@ public class Meal {
         this.carbs = carbs;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Meal meal = (Meal) o;
+        return Objects.equals(name, meal.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
+    }
 }
