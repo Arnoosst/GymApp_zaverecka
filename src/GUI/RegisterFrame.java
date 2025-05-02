@@ -21,17 +21,19 @@ public class RegisterFrame extends JFrame {
     private JButton backButton;
     private UserManager userManager;
 
-    public RegisterFrame(UserManager userManager) {
+    private User user;
+
+    public RegisterFrame(UserManager userManager, User user) {
         this.userManager = userManager;
 
         setTitle("Registrace");
         setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initUI();
+        initUI(user);
     }
 
-    private void initUI() {
+    private void initUI(User user) {
         JPanel panel = new JPanel(new GridLayout(9, 2, 10, 5));
 
         usernameField = new JTextField();
@@ -107,7 +109,7 @@ public class RegisterFrame extends JFrame {
 
                 if (success) {
                     JOptionPane.showMessageDialog(RegisterFrame.this, "Registrace úspěšná!");
-                    new LoginFrame(userManager).setVisible(true);
+                    new LoginFrame(userManager, user).setVisible(true);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(RegisterFrame.this, "Uživatel už existuje.", "Chyba", JOptionPane.ERROR_MESSAGE);
@@ -118,7 +120,7 @@ public class RegisterFrame extends JFrame {
         // Zpět
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new LoginFrame(userManager).setVisible(true);
+                new LoginFrame(userManager, user).setVisible(true);
                 dispose();
             }
         });

@@ -1,5 +1,8 @@
 package GUI;
 
+import Model.User;
+import Model.UserManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,18 +11,21 @@ public class MainFrame extends JFrame {
     private JButton userProfileButton;
     private JButton workoutButton;
     private JButton mealButton;
+    private User user;
+    private UserManager userManager;
 
 
-    public MainFrame() {
+    public MainFrame(User user, UserManager userManager) {
+        this.user = user;
         setTitle("Fitness App");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        initUI();
+        initUI(user, userManager);
     }
 
-    private void initUI() {
+    private void initUI(User user, UserManager userManager) {
 
         JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
 
@@ -36,6 +42,14 @@ public class MainFrame extends JFrame {
 
         add(panel);
         setVisible(true);
+
+
+        userProfileButton.addActionListener(e -> {
+            getContentPane().removeAll();
+            add(new UserFrame(user, userManager));
+            revalidate();
+            repaint();
+        });
     }
 
 

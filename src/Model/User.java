@@ -9,7 +9,7 @@ public class User implements Serializable {
     private int age;
     private String name;
     private int height;
-    private int weight;
+    private double weight;
     private Gender gender;
     private String password;
     private HashSet<Meal> customMeals = new HashSet<>();
@@ -65,6 +65,32 @@ public class User implements Serializable {
         return bmr;
     }
 
+    public ArrayList<Workout> get7daysOldWorkout() {
+        ArrayList<Workout> temp = new ArrayList<>();
+        int a = workoutLogs.size();
+        if(workoutLogs.size() < 7){
+            a = 0;
+        }
+        for(int i = a; i < workoutLogs.size(); i++){
+            temp.add(workoutLogs.get(i));
+        }
+        return temp;
+    }
+    public ArrayList<Meal> get7daysOldMeal() {
+        ArrayList<Meal> temp = new ArrayList<>();
+        int a = workoutLogs.size();
+        if(workoutLogs.size() < 7){
+            a = 0;
+        }
+        for(int i = a ; i < mealLogs.size(); i++){
+            temp.add(mealLogs.get(i));
+        }
+        return temp;
+    }
+
+
+
+
 
     public String getName() {
         return name;
@@ -74,11 +100,11 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 

@@ -3,13 +3,17 @@ package Model;
 import java.io.*;
 import java.util.HashMap;
 
-public class UserManager implements Serializable{
+public class UserManager implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private HashMap<String, User> users;
-
     private static final String fileName = "users.txt";
 
     public UserManager() {
         users = loadUsers();
+        if (users == null) {
+            users = new HashMap<>();
+        }
     }
 
     public boolean registerUser(User user) {
@@ -29,29 +33,28 @@ public class UserManager implements Serializable{
         return null;
     }
 
-    private void saveUsers() {
+    public void saveUsers() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
             out.writeObject(users);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error saving users: " + e.getMessage());
         }
     }
 
-
-    //poradil chat
     private HashMap<String, User> loadUsers() {
-        File file = new File("users.txt");
+        File file = new File(fileName);
         if (!file.exists()) {
             return new HashMap<>();
         }
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
-            Object obj = in.readObject();
-            if (obj instanceof HashMap) {
-                return (HashMap<String, User>) obj;
-            }
+            return (HashMap<String, User>) in.readObject();
+        } catch (InvalidClassException e) {
+            // If there's a version mismatch, delete the file and start fresh
+            file.delete();
+            return new HashMap<>();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Error loading users: " + e.getMessage());
+            return new HashMap<>();
         }
-        return new HashMap<>();
     }
 }

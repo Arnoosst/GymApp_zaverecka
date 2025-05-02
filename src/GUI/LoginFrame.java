@@ -13,19 +13,21 @@ public class LoginFrame extends JFrame {
     private JButton loginButton;
     private JButton registerButton;
 
+    private User user;
+
     private UserManager userManager;
 
-    public LoginFrame(UserManager userManager) {
+    public LoginFrame(UserManager userManager, User user) {
         this.userManager = userManager;
 
         setTitle("Přihlášení");
         setSize(300, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initUI();
+        initUI(user);
     }
 
-    private void initUI() {
+    private void initUI(User user) {
         JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
 
         usernameField = new JTextField();
@@ -50,7 +52,7 @@ public class LoginFrame extends JFrame {
                 User user = userManager.login(username, password);
                 if (user != null) {
                     JOptionPane.showMessageDialog(LoginFrame.this, "Přihlášení úspěšné!");
-                    new MainFrame(); // otevře hlavní menu
+                    new MainFrame(user, userManager); // otevře hlavní menu
                     dispose(); // zavře okno
                 } else {
                     JOptionPane.showMessageDialog(LoginFrame.this, "Uživatel nenalezen.", "Chyba", JOptionPane.ERROR_MESSAGE);
@@ -61,7 +63,7 @@ public class LoginFrame extends JFrame {
         // Registrace
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new RegisterFrame(userManager).setVisible(true);
+                new RegisterFrame(userManager, user).setVisible(true);
                 dispose(); // zavře přihlašovací okno
             }
         });
