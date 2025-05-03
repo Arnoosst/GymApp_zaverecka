@@ -103,6 +103,14 @@ public class User implements Serializable {
     }
 
 
+    public boolean removeCustomMeal(Meal meal) {
+        return customMeals.remove(meal);
+    }
+    public boolean removeCustomWorkoout(Workout workout){
+        return customWorkouts.remove(workout);
+    }
+
+
 
 
 

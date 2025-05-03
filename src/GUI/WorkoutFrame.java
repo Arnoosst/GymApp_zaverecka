@@ -2,9 +2,11 @@ package GUI;
 
 import Model.User;
 import Model.UserManager;
+import Model.Workout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashSet;
 
 public class WorkoutFrame extends JFrame {
 
@@ -26,11 +28,11 @@ public class WorkoutFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        initGUI();
+        initGUI(user, userManager);
         setVisible(true);
     }
 
-    private void initGUI() {
+    private void initGUI(User user, UserManager userManager) {
         setLayout(new BorderLayout(10, 10));
 
         JLabel title = new JLabel("Workout sekce", SwingConstants.CENTER);
@@ -73,11 +75,29 @@ public class WorkoutFrame extends JFrame {
         });
 
         viewCustomWorkoutsButton.addActionListener(e -> {
-            // TODO zobrazit seznam vlastních tréninků
+            JFrame mealsFrame = new JFrame("Všechna cviceni uživatele");
+            mealsFrame.setSize(400, 300);
+            mealsFrame.setLocationRelativeTo(null);
+
+            JTextArea textArea = new JTextArea();
+            textArea.setEditable(false);
+
+            HashSet<Workout> workouts = this.user.getCustomWorkouts();
+            if (workouts != null && !workouts.isEmpty()) {
+                for (Workout workout : workouts) {
+                    textArea.append(workout.toString() + "\n\n");
+                }
+            } else {
+                textArea.setText("Uživatel zatím nemá žádná cviceni.");
+            }
+
+            mealsFrame.add(new JScrollPane(textArea));
+            mealsFrame.setVisible(true);
         });
 
         deleteCustomWorkoutButton.addActionListener(e -> {
-            // TODO umožnit uživateli smazat vlastní trénink
+            DeleteCustomWokoutButtonFrame deleteCustomWokoutButtonFrame = new DeleteCustomWokoutButtonFrame(user, userManager);
+            deleteCustomWokoutButtonFrame.setVisible(true);
         });
 
         backButton.addActionListener(e -> {

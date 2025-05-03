@@ -2,6 +2,7 @@ package GUI;
 
 import Model.User;
 import Model.UserManager;
+import Model.Workout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +52,17 @@ public class MainFrame extends JFrame {
         });
 
         workoutButton.addActionListener(e -> {
+            user.addCustomWorkout(new Workout("Push Workout", 300, 45, java.time.LocalDate.now(), 2000));
+            user.addCustomWorkout(new Workout("Pull Workout", 280, 40, java.time.LocalDate.now(), 1800));
+            user.addCustomWorkout(new Workout("Legs Workout", 350, 50, java.time.LocalDate.now(), 2500));
+            user.addCustomWorkout(new Workout("Upper Body", 290, 35, java.time.LocalDate.now(), 1600));
+            user.addCustomWorkout(new Workout("Lower Body", 320, 45, java.time.LocalDate.now(), 2200));
+            user.addCustomWorkout(new Workout("Full Body", 400, 60, java.time.LocalDate.now(), 2800));
+            user.addCustomWorkout(new Workout("Core Workout", 200, 30, java.time.LocalDate.now(), 1000));
+            user.addCustomWorkout(new Workout("Cardio Session", 350, 45, java.time.LocalDate.now(), 500));
+            user.addCustomWorkout(new Workout("HIIT Training", 380, 35, java.time.LocalDate.now(), 800));
+            user.addCustomWorkout(new Workout("Strength Training", 270, 50, java.time.LocalDate.now(), 2400));
+            user.addCustomWorkout(new Workout("Circuit Training", 330, 40, java.time.LocalDate.now(), 1500));
             WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
             workoutFrame.setVisible(true);
             dispose();
