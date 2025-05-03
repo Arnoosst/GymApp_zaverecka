@@ -12,7 +12,7 @@ public class ChangeUserDataFrame extends JFrame {
     private UserManager userManager;
     private UserFrame userFrame;
 
-    public ChangeUserDataFrame(User user, UserManager userManager, UserFrame userFrame) {
+    public ChangeUserDataFrame(User user, UserManager userManager) {
         setTitle("Změna údajů");
         setSize(400, 300);
         setLocationRelativeTo(null);
@@ -66,8 +66,9 @@ public class ChangeUserDataFrame extends JFrame {
         });
 
         backButton.addActionListener(e -> {
-            userFrame.refresh();  // aktualizuje údaje na obrazovce
-            dispose();            // zavře okno
+            UserFrame userFrame = new UserFrame(user, userManager);
+            userFrame.setVisible(true);
+            dispose();
         });
 
         panel.add(nameButton);

@@ -117,7 +117,7 @@ public class RegisterFrame extends JFrame {
             }
         });
 
-        // Zpět
+
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new LoginFrame(userManager, user).setVisible(true);

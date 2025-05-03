@@ -45,10 +45,15 @@ public class MainFrame extends JFrame {
 
 
         userProfileButton.addActionListener(e -> {
-            getContentPane().removeAll();
-            add(new UserFrame(user, userManager));
-            revalidate();
-            repaint();
+            UserFrame userFrame = new UserFrame(user, userManager);
+            userFrame.setVisible(true);
+            dispose();
+        });
+
+        workoutButton.addActionListener(e -> {
+            WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
+            workoutFrame.setVisible(true);
+            dispose();
         });
     }
 

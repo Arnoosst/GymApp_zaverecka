@@ -12,6 +12,18 @@ public class Workout {
     private int totalVolumeLifted;
     private ArrayList<Exercise> exercises;
 
+    public Workout(String name, int kcalBurned, int duration, LocalDate date, int totalVolumeLifted) {
+        this.name = name;
+        this.kcalBurned = kcalBurned;
+        this.duration = duration;
+        this.date = date;
+        this.totalVolumeLifted = totalVolumeLifted;
+        this.exercises = new ArrayList<>();
+    }
+
+    public Workout() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -22,5 +34,53 @@ public class Workout {
     @Override
     public int hashCode() {
         return Objects.hashCode(name);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getKcalBurned() {
+        return kcalBurned;
+    }
+
+    public void setKcalBurned(int kcalBurned) {
+        this.kcalBurned = kcalBurned;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public int getTotalVolumeLifted() {
+        return totalVolumeLifted;
+    }
+
+    public void setTotalVolumeLifted(int totalVolumeLifted) {
+        this.totalVolumeLifted = totalVolumeLifted;
+    }
+
+    public ArrayList<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(ArrayList<Exercise> exercises) {
+        this.exercises = exercises;
     }
 }

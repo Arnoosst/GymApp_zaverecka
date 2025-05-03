@@ -44,7 +44,7 @@ public class LoginFrame extends JFrame {
 
         add(panel);
 
-        // Přihlášení
+
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText().trim();
@@ -52,19 +52,19 @@ public class LoginFrame extends JFrame {
                 User user = userManager.login(username, password);
                 if (user != null) {
                     JOptionPane.showMessageDialog(LoginFrame.this, "Přihlášení úspěšné!");
-                    new MainFrame(user, userManager); // otevře hlavní menu
-                    dispose(); // zavře okno
+                    new MainFrame(user, userManager);
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(LoginFrame.this, "Uživatel nenalezen.", "Chyba", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
-        // Registrace
+
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new RegisterFrame(userManager, user).setVisible(true);
-                dispose(); // zavře přihlašovací okno
+                dispose();
             }
         });
     }

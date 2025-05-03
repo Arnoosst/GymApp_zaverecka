@@ -7,11 +7,10 @@ import Model.Workout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class UserFrame extends JPanel {
+public class UserFrame extends JFrame {
     private User user;
     private UserManager userManager;
     private JButton bmrButtonButton;
@@ -27,17 +26,15 @@ public class UserFrame extends JPanel {
         this.userManager = userManager;
 
         setLayout(new BorderLayout(10, 10));
-        initGUI();
+        setTitle("User: " + user.getUserName() + " - Fitness App -");
+        setSize(600, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        initGUI(user, userManager);
     }
 
-    public void refresh() {
-        removeAll();
-        initGUI();
-        revalidate();
-        repaint();
-    }
 
-    public void initGUI() {
+    public void initGUI(User user, UserManager userManager) {
         bmrButtonButton = new JButton("Ukázat BMR");
         showMealLogsButton = new JButton("Zobrazit kalorické tabulky (7 dní)");
         showWorkoutLogsButton = new JButton("Zobrazit tréninkové logy (7 dní)");
@@ -54,14 +51,14 @@ public class UserFrame extends JPanel {
 
         JPanel panel = new JPanel(new GridLayout(10, 1, 5, 5));
         panel.setBorder(BorderFactory.createTitledBorder("Informace o uživateli"));
-        panel.add(new JLabel("Uživatelské jméno: " + user.getUserName()));
-        panel.add(new JLabel("Jméno: " + user.getName()));
-        panel.add(new JLabel("Věk: " + user.getAge() + " let"));
-        panel.add(new JLabel("Výška: " + user.getHeight() + " cm"));
-        panel.add(new JLabel("Váha: " + user.getWeight() + " kg"));
-        panel.add(new JLabel("Pohlaví: " + user.getGender()));
-        panel.add(new JLabel("Záznamy o kaloriích: " + user.getMealLogs().size() + " dní"));
-        panel.add(new JLabel("Záznamy o tréninku: "+ user.getWorkoutLogs().size() +" dní"));
+        panel.add(new JLabel("Uživatelské jméno: " + this.user.getUserName()));
+        panel.add(new JLabel("Jméno: " + this.user.getName()));
+        panel.add(new JLabel("Věk: " + this.user.getAge() + " let"));
+        panel.add(new JLabel("Výška: " + this.user.getHeight() + " cm"));
+        panel.add(new JLabel("Váha: " + this.user.getWeight() + " kg"));
+        panel.add(new JLabel("Pohlaví: " + this.user.getGender()));
+        panel.add(new JLabel("Záznamy o kaloriích: " + this.user.getMealLogs().size() + " dní"));
+        panel.add(new JLabel("Záznamy o tréninku: "+ this.user.getWorkoutLogs().size() +" dní"));
         panel.add(bmrButtonButton);
 
 
@@ -82,7 +79,7 @@ public class UserFrame extends JPanel {
 
 
         bmrButtonButton.addActionListener(e -> {
-            double bmr = user.calculateBMR(user);
+            double bmr = this.user.calculateBMR(this.user);
             JOptionPane.showMessageDialog(this, "Tvůj BMR je: " + bmr, "BMR Výpočet", JOptionPane.INFORMATION_MESSAGE);
         });
         showMealLogsButton.addActionListener(e -> {
@@ -93,7 +90,7 @@ public class UserFrame extends JPanel {
             JTextArea textArea = new JTextArea();
             textArea.setEditable(false);
 
-            ArrayList<Meal> meals = user.get7daysOldMeal();
+            ArrayList<Meal> meals = this.user.get7daysOldMeal();
             if (meals != null && !meals.isEmpty()) {
                 for (Meal meal : meals) {
                     textArea.append(meal.toString() + "\n\n");
@@ -113,7 +110,7 @@ public class UserFrame extends JPanel {
             JTextArea textArea = new JTextArea();
             textArea.setEditable(false);
 
-            ArrayList<Workout> workouts = user.get7daysOldWorkout();
+            ArrayList<Workout> workouts = this.user.get7daysOldWorkout();
             if (workouts != null && !workouts.isEmpty()) {
                 for (Workout workout : workouts) {
                     textArea.append(workout.toString() + "\n\n");
@@ -127,7 +124,8 @@ public class UserFrame extends JPanel {
         });
 
         changeDataButtonButton.addActionListener(e -> {
-            new ChangeUserDataFrame(user, userManager, this);
+            new ChangeUserDataFrame(this.user, this.userManager);
+            dispose();
         });
         showUsersMealsButton.addActionListener(e -> {
             JFrame mealsFrame = new JFrame("Všechna jídla uživatele");
@@ -137,7 +135,7 @@ public class UserFrame extends JPanel {
             JTextArea textArea = new JTextArea();
             textArea.setEditable(false);
 
-            HashSet<Meal> meals = user.getCustomMeals();
+            HashSet<Meal> meals = this.user.getCustomMeals();
             if (meals != null && !meals.isEmpty()) {
                 for (Meal meal : meals) {
                     textArea.append(meal.toString() + "\n\n");
@@ -157,7 +155,7 @@ public class UserFrame extends JPanel {
             JTextArea textArea = new JTextArea();
             textArea.setEditable(false);
 
-            HashSet<Workout> workouts = user.getCustomWorkouts();
+            HashSet<Workout> workouts = this.user.getCustomWorkouts();
             if (workouts != null && !workouts.isEmpty()) {
                 for (Workout workout : workouts) {
                     textArea.append(workout.toString() + "\n\n");
@@ -170,12 +168,11 @@ public class UserFrame extends JPanel {
             mealsFrame.setVisible(true);
         });
 
-        //radek 175 help chatGPT
+
         backButtonButton.addActionListener(e -> {
-            Window window = SwingUtilities.getWindowAncestor(this);
-            MainFrame mainFrame = new MainFrame(user, userManager);
+            MainFrame mainFrame = new MainFrame(this.user, this.userManager);
             mainFrame.setVisible(true);
-            window.dispose();
+            dispose();
         });
 
 
