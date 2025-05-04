@@ -23,6 +23,8 @@ public class Workout {
         this.exercises = new ArrayList<>();
     }
 
+
+
     public Workout() {
     }
 
@@ -31,6 +33,14 @@ public class Workout {
         if (o == null || getClass() != o.getClass()) return false;
         Workout workout = (Workout) o;
         return Objects.equals(name, workout.name);
+    }
+
+    public boolean addExercise(Exercise exercise){
+        if(exercise==null){
+            return false;
+        }
+        exercises.add(exercise);
+        return true;
     }
 
     @Override

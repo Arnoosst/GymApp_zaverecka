@@ -69,7 +69,9 @@ public class WorkoutFrame extends JFrame {
         });
 
         createCustomWorkoutButton.addActionListener(e -> {
-            // TODO otevřít okno pro vytvoření vlastního tréninku
+            CreateCustomWorkoutFrame createCustomWorkoutFrame = new CreateCustomWorkoutFrame(user, userManager);
+            createCustomWorkoutFrame.setVisible(true);
+            dispose();
         });
 
         viewPresetWorkoutsButton.addActionListener(e -> {

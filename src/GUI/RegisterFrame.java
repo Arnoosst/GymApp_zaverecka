@@ -72,11 +72,11 @@ public class RegisterFrame extends JFrame {
 
         add(panel);
 
-        // Akce pro registraci
+
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText().trim();
-                String password = passwordField.getText().trim(); // Zatím nepoužíváme, můžeš uložit do mapy zvlášť
+                String password = passwordField.getText().trim();
                 String name = nameField.getText().trim();
                 int age, height, weight;
 
