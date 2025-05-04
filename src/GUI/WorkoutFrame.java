@@ -1,11 +1,13 @@
 package GUI;
 
+import Model.PreparedWorkoutLoader;
 import Model.User;
 import Model.UserManager;
 import Model.Workout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class WorkoutFrame extends JFrame {
@@ -71,7 +73,22 @@ public class WorkoutFrame extends JFrame {
         });
 
         viewPresetWorkoutsButton.addActionListener(e -> {
-            // TODO zobrazit seznam předem připravených tréninků
+            JFrame mealsFrame = new JFrame("Všechna cviceni uživatele");
+            mealsFrame.setSize(400, 300);
+            mealsFrame.setLocationRelativeTo(null);
+
+            JTextArea textArea = new JTextArea();
+            textArea.setEditable(false);
+
+            ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts("src/data/prepared_workouts.txt");
+            if (!workouts.isEmpty()) {
+                for (Workout workout : workouts) {
+                    textArea.append(workout.getName() +": "+workout.getWorkoutLevel() + "\n\n");
+                }
+            }
+
+            mealsFrame.add(new JScrollPane(textArea));
+            mealsFrame.setVisible(true);
         });
 
         viewCustomWorkoutsButton.addActionListener(e -> {
@@ -85,7 +102,7 @@ public class WorkoutFrame extends JFrame {
             HashSet<Workout> workouts = this.user.getCustomWorkouts();
             if (workouts != null && !workouts.isEmpty()) {
                 for (Workout workout : workouts) {
-                    textArea.append(workout.toString() + "\n\n");
+                    textArea.append(workout.getName() +": "+workout.getWorkoutLevel() + "\n\n");
                 }
             } else {
                 textArea.setText("Uživatel zatím nemá žádná cviceni.");

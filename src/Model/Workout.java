@@ -10,14 +10,16 @@ public class Workout {
     private int duration;
     private LocalDate date;
     private int totalVolumeLifted;
+    private WorkoutLevel workoutLevel;
     private ArrayList<Exercise> exercises;
 
-    public Workout(String name, int kcalBurned, int duration, LocalDate date, int totalVolumeLifted) {
+    public Workout(String name, int kcalBurned, int duration, LocalDate date, int totalVolumeLifted, WorkoutLevel workoutLevel) {
         this.name = name;
         this.kcalBurned = kcalBurned;
         this.duration = duration;
         this.date = date;
         this.totalVolumeLifted = totalVolumeLifted;
+        this.workoutLevel = workoutLevel;
         this.exercises = new ArrayList<>();
     }
 
@@ -82,5 +84,13 @@ public class Workout {
 
     public void setExercises(ArrayList<Exercise> exercises) {
         this.exercises = exercises;
+    }
+
+    public WorkoutLevel getWorkoutLevel() {
+        return workoutLevel;
+    }
+
+    public void setWorkoutLevel(WorkoutLevel workoutLevel) {
+        this.workoutLevel = workoutLevel;
     }
 }
