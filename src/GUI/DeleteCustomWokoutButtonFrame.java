@@ -44,16 +44,16 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
             buttonPanel.add(deleteButton);
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
-            // Add action listeners
             infoButton.addActionListener(e -> {
-                new WorkoutInfoButtonFrame(workout);
+                WorkoutInfoButtonFrame workoutInfoButtonFrame = new WorkoutInfoButtonFrame(workout);
+                workoutInfoButtonFrame.setVisible(true);
             });
 
             deleteButton.addActionListener(e -> {
                 int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this workout?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     user.removeCustomWorkoout(workout);
-                    dispose(); // Zavřít po smazání
+                    dispose();
                 }
             });
 
@@ -63,7 +63,6 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(workoutPanel);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Vytvoření spodního panelu s tlačítkem Zpět
         JPanel bottomPanel = new JPanel();
         JButton backButton = new JButton("Back");
         bottomPanel.add(backButton);

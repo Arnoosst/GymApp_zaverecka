@@ -13,7 +13,7 @@ public class ChangeUserDataFrame extends JFrame {
     private UserFrame userFrame;
 
     public ChangeUserDataFrame(User user, UserManager userManager) {
-        setTitle("Změna údajů");
+        setTitle("Change User Data");
         setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -21,14 +21,14 @@ public class ChangeUserDataFrame extends JFrame {
         JPanel panel = new JPanel(new GridLayout(6, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JButton nameButton = new JButton("Změnit jméno");
-        JButton passwordButton = new JButton("Změnit heslo");
-        JButton weightButton = new JButton("Změnit váhu");
-        JButton heightButton = new JButton("Změnit výšku");
-        JButton backButton = new JButton("Zpět");
+        JButton nameButton = new JButton("Change Name");
+        JButton passwordButton = new JButton("Change Password");
+        JButton weightButton = new JButton("Change Weight");
+        JButton heightButton = new JButton("Change Height");
+        JButton backButton = new JButton("Back");
 
         nameButton.addActionListener(e -> {
-            String newName = JOptionPane.showInputDialog(this, "Zadej nové jméno:");
+            String newName = JOptionPane.showInputDialog(this, "Enter new name:");
             if (newName != null && !newName.isEmpty()) {
                 user.setName(newName);
                 userManager.saveUsers();
@@ -36,7 +36,7 @@ public class ChangeUserDataFrame extends JFrame {
         });
 
         passwordButton.addActionListener(e -> {
-            String newPassword = JOptionPane.showInputDialog(this, "Zadej nové heslo:");
+            String newPassword = JOptionPane.showInputDialog(this, "Enter new password:");
             if (newPassword != null && !newPassword.isEmpty()) {
                 user.setPassword(newPassword);
                 userManager.saveUsers();
@@ -44,24 +44,24 @@ public class ChangeUserDataFrame extends JFrame {
         });
 
         weightButton.addActionListener(e -> {
-            String newWeight = JOptionPane.showInputDialog(this, "Zadej novou váhu (kg):");
+            String newWeight = JOptionPane.showInputDialog(this, "Enter new weight (kg):");
             try {
                 double weight = Double.parseDouble(newWeight);
                 user.setWeight(weight);
                 userManager.saveUsers();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Neplatná hodnota.");
+                JOptionPane.showMessageDialog(this, "Invalid value.");
             }
         });
 
         heightButton.addActionListener(e -> {
-            String newHeight = JOptionPane.showInputDialog(this, "Zadej novou výšku (cm):");
+            String newHeight = JOptionPane.showInputDialog(this, "Enter new height (cm):");
             try {
                 int height = Integer.parseInt(newHeight);
                 user.setHeight(height);
                 userManager.saveUsers();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Neplatná hodnota.");
+                JOptionPane.showMessageDialog(this, "Invalid value.");
             }
         });
 

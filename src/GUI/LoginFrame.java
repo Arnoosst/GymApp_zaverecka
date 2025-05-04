@@ -20,7 +20,7 @@ public class LoginFrame extends JFrame {
     public LoginFrame(UserManager userManager, User user) {
         this.userManager = userManager;
 
-        setTitle("Přihlášení");
+        setTitle("Login");
         setSize(300, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,12 +32,12 @@ public class LoginFrame extends JFrame {
 
         usernameField = new JTextField();
         passwordField = new JTextField();
-        loginButton = new JButton("Přihlásit se");
-        registerButton = new JButton("Registrovat");
+        loginButton = new JButton("Login");
+        registerButton = new JButton("Register");
 
-        panel.add(new JLabel("Uživatelské jméno:"));
+        panel.add(new JLabel("Username:"));
         panel.add(usernameField);
-        panel.add(new JLabel("Heslo:"));
+        panel.add(new JLabel("Password:"));
         panel.add(passwordField);
         panel.add(loginButton);
         panel.add(registerButton);
@@ -51,11 +51,11 @@ public class LoginFrame extends JFrame {
                 String password = passwordField.getText().trim();
                 User user = userManager.login(username, password);
                 if (user != null) {
-                    JOptionPane.showMessageDialog(LoginFrame.this, "Přihlášení úspěšné!");
+                    JOptionPane.showMessageDialog(LoginFrame.this, "Login successful!");
                     new MainFrame(user, userManager);
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(LoginFrame.this, "Uživatel nenalezen.", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(LoginFrame.this, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

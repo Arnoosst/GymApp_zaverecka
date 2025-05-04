@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ExerciseInputFrame extends JFrame {
+    private Exercise result;
     private JTextField nameField;
     private JTextField repsField;
     private JTextField setsField;
@@ -15,18 +16,20 @@ public class ExerciseInputFrame extends JFrame {
     private JComboBox<WorkoutLevel> workoutLevelBox;
     private User user;
     private UserManager userManager;
-    private Workout workout;
 
+    public Exercise getResult() {
+        return result;
+    }
 
-    public ExerciseInputFrame(User user, UserManager userManager, Workout workout) {
+    public ExerciseInputFrame(User user, UserManager userManager) {
         setTitle("Create Custom Workout");
         setSize(600, 500);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        initGUI(user, userManager, workout);
+        initGUI(user, userManager);
     }
 
-    private void initGUI(User user, UserManager userManager, Workout workout) {
+    private void initGUI(User user, UserManager userManager) {
         JPanel panel = new JPanel(new GridLayout(5, 2, 10, 5));
 
         nameField = new JTextField();
@@ -77,13 +80,11 @@ public class ExerciseInputFrame extends JFrame {
             }
 
             Exercise exercise = new Exercise(name, sets, reps, weight);
+            
 
-
-            boolean success = workout.addExercise(exercise);
-
-            if (success) {
-                JOptionPane.showMessageDialog(ExerciseInputFrame.this, "Pridani uspesne!");
-                new LoginFrame(userManager, user).setVisible(true);
+            if (exercise != null) {
+                result = exercise;
+                JOptionPane.showMessageDialog(this, "Přidání úspěšné!");
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(ExerciseInputFrame.this, "Neuspesne pridani.", "Chyba", JOptionPane.ERROR_MESSAGE);

@@ -11,6 +11,7 @@ public class CreateWorkoutFrame extends JFrame {
     private JComboBox<WorkoutLevel> levelBox;
     private JButton addExerciseButton;
     private JButton saveButton;
+    private JButton backButton;
     private ArrayList<Exercise> exerciseList = new ArrayList<>();
     private User user;
     private UserManager userManager;
@@ -26,11 +27,12 @@ public class CreateWorkoutFrame extends JFrame {
     }
 
     private void initGUI() {
-        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
         workoutNameField = new JTextField();
         levelBox = new JComboBox<>(WorkoutLevel.values());
         addExerciseButton = new JButton("Add Exercise");
         saveButton = new JButton("Save Workout");
+        backButton = new JButton("back");
 
         panel.add(new JLabel("Workout Name:"));
         panel.add(workoutNameField);
@@ -38,16 +40,22 @@ public class CreateWorkoutFrame extends JFrame {
         panel.add(levelBox);
         panel.add(addExerciseButton);
         panel.add(saveButton);
-        add(panel);
+
+        JPanel backPanel = new JPanel(new BorderLayout());
+        backPanel.add(backButton, BorderLayout.CENTER);
+
+        add(panel, BorderLayout.CENTER);
+        add(backPanel, BorderLayout.SOUTH);
 
         addExerciseButton.addActionListener(e -> {
-            ExerciseInputFrame exerciseInputFrame = new ExerciseInputFrame(user, userManager, null);
+            ExerciseInputFrame exerciseInputFrame = new ExerciseInputFrame(user, userManager);
             exerciseInputFrame.setVisible(true);
-            dispose();
+            addExerciseToWorkout(exerciseInputFrame.getResult());
         });
 
         saveButton.addActionListener(e -> {
             String name = workoutNameField.getText().trim();
+            WorkoutLevel workoutLevel = (WorkoutLevel) levelBox.getSelectedItem();
             if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Enter workout name.");
                 return;
@@ -57,10 +65,17 @@ public class CreateWorkoutFrame extends JFrame {
                 return;
             }
 
-            Workout workout = new Workout(name, 0, 0, null, 0, null);
+            Workout workout = new Workout(name, 0, 0, null, 0, workoutLevel);
             workout.setExercises(new ArrayList<>(exerciseList));
             user.addCustomWorkout(workout);
             JOptionPane.showMessageDialog(this, "Workout saved successfully!");
+            WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
+            workoutFrame.setVisible(true);
+            dispose();
+        });
+        backButton.addActionListener(e -> {
+            WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
+            workoutFrame.setVisible(true);
             dispose();
         });
     }

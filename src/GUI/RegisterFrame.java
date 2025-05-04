@@ -26,7 +26,7 @@ public class RegisterFrame extends JFrame {
     public RegisterFrame(UserManager userManager, User user) {
         this.userManager = userManager;
 
-        setTitle("Registrace");
+        setTitle("Register");
         setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,28 +43,28 @@ public class RegisterFrame extends JFrame {
         weightField = new JTextField();
         nameField = new JTextField();
         genderBox = new JComboBox<>(Gender.values());
-        registerButton = new JButton("Registrovat");
-        backButton = new JButton("Zpět");
+        registerButton = new JButton("Register");
+        backButton = new JButton("Back");
 
-        panel.add(new JLabel("Uživatelské jméno:"));
+        panel.add(new JLabel("Username:"));
         panel.add(usernameField);
 
-        panel.add(new JLabel("Jmeno:"));
+        panel.add(new JLabel("Name:"));
         panel.add(nameField);
 
-        panel.add(new JLabel("Heslo:"));
+        panel.add(new JLabel("Password:"));
         panel.add(passwordField);
 
-        panel.add(new JLabel("Věk:"));
+        panel.add(new JLabel("Age:"));
         panel.add(ageField);
 
-        panel.add(new JLabel("Výška (cm):"));
+        panel.add(new JLabel("Height (cm):"));
         panel.add(heightField);
 
-        panel.add(new JLabel("Váha (kg):"));
+        panel.add(new JLabel("Weight (kg):"));
         panel.add(weightField);
 
-        panel.add(new JLabel("Pohlaví:"));
+        panel.add(new JLabel("Gender:"));
         panel.add(genderBox);
 
         panel.add(registerButton);
@@ -86,19 +86,19 @@ public class RegisterFrame extends JFrame {
                     height = Integer.parseInt(heightField.getText().trim());
                     weight = Integer.parseInt(weightField.getText().trim());
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(RegisterFrame.this, "Zkontroluj, že věk, výška a váha jsou čísla.", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(RegisterFrame.this, "Please check that age, height and weight are valid numbers.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 Gender gender = (Gender) genderBox.getSelectedItem();
 
                 if (username.isEmpty()) {
-                    JOptionPane.showMessageDialog(RegisterFrame.this, "Zadej uživatelské jméno.", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(RegisterFrame.this, "Please enter username.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 if (password.isEmpty()) {
-                    JOptionPane.showMessageDialog(RegisterFrame.this, "Zadej heslo.", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(RegisterFrame.this, "Please enter password.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -108,11 +108,11 @@ public class RegisterFrame extends JFrame {
                 boolean success = userManager.registerUser(newUser);
 
                 if (success) {
-                    JOptionPane.showMessageDialog(RegisterFrame.this, "Registrace úspěšná!");
+                    JOptionPane.showMessageDialog(RegisterFrame.this, "Registration successful!");
                     new LoginFrame(userManager, user).setVisible(true);
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(RegisterFrame.this, "Uživatel už existuje.", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(RegisterFrame.this, "User already exists.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

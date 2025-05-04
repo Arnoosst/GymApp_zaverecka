@@ -69,15 +69,16 @@ public class WorkoutFrame extends JFrame {
         });
 
         createCustomWorkoutButton.addActionListener(e -> {
-            CreateCustomWorkoutFrame createCustomWorkoutFrame = new CreateCustomWorkoutFrame(user, userManager);
+            CreateWorkoutFrame createCustomWorkoutFrame = new CreateWorkoutFrame(user, userManager);
             createCustomWorkoutFrame.setVisible(true);
             dispose();
         });
 
         viewPresetWorkoutsButton.addActionListener(e -> {
-            JFrame mealsFrame = new JFrame("Všechna cviceni uživatele");
-            mealsFrame.setSize(400, 300);
-            mealsFrame.setLocationRelativeTo(null);
+            JFrame preLoadWorkoutFrame = new JFrame("Všechna cvičení uživatele");
+            preLoadWorkoutFrame.setSize(400, 300);
+            preLoadWorkoutFrame.setLocationRelativeTo(null);
+            preLoadWorkoutFrame.setLayout(new BorderLayout(10, 10));
 
             JTextArea textArea = new JTextArea();
             textArea.setEditable(false);
@@ -85,12 +86,16 @@ public class WorkoutFrame extends JFrame {
             ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts("src/data/prepared_workouts.txt");
             if (!workouts.isEmpty()) {
                 for (Workout workout : workouts) {
-                    textArea.append(workout.getName() +": "+workout.getWorkoutLevel() + "\n\n");
+                    textArea.append(workout.getName() + ": " + workout.getWorkoutLevel() + "\n\n");
                 }
             }
 
-            mealsFrame.add(new JScrollPane(textArea));
-            mealsFrame.setVisible(true);
+            JButton closeButton = new JButton("Zavřít");
+            closeButton.addActionListener(ev -> preLoadWorkoutFrame.dispose());
+
+            preLoadWorkoutFrame.add(new JScrollPane(textArea), BorderLayout.CENTER);
+            preLoadWorkoutFrame.add(closeButton, BorderLayout.SOUTH);
+            preLoadWorkoutFrame.setVisible(true);
         });
 
         viewCustomWorkoutsButton.addActionListener(e -> {
@@ -117,6 +122,7 @@ public class WorkoutFrame extends JFrame {
         deleteCustomWorkoutButton.addActionListener(e -> {
             DeleteCustomWokoutButtonFrame deleteCustomWokoutButtonFrame = new DeleteCustomWokoutButtonFrame(user, userManager);
             deleteCustomWokoutButtonFrame.setVisible(true);
+            dispose();
         });
 
         backButton.addActionListener(e -> {
