@@ -80,14 +80,14 @@ public class ExerciseInputFrame extends JFrame {
             }
 
             Exercise exercise = new Exercise(name, sets, reps, weight);
-            
+
 
             if (exercise != null) {
                 result = exercise;
-                JOptionPane.showMessageDialog(this, "Přidání úspěšné!");
+                JOptionPane.showMessageDialog(this, "Exercise added successfully!");
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(ExerciseInputFrame.this, "Neuspesne pridani.", "Chyba", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(ExerciseInputFrame.this, "Failed to add exercise.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 

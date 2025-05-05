@@ -37,22 +37,22 @@ public class WorkoutFrame extends JFrame {
     private void initGUI(User user, UserManager userManager) {
         setLayout(new BorderLayout(10, 10));
 
-        JLabel title = new JLabel("Workout sekce", SwingConstants.CENTER);
+        JLabel title = new JLabel("Workout Section", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 
         JPanel panel = new JPanel(new GridLayout(9, 1, 5, 5));
-        panel.setBorder(BorderFactory.createTitledBorder("Statistiky"));
-        panel.add(new JLabel("Celkový počet tréninků: " + user.getWorkoutLogs().size()));
-        panel.add(new JLabel("Celkový objem (volume) zvednuté váhy: "+user.getTotalVolumeLiftedFromLogWorkout()+" kg"));
-        panel.add(new JLabel("Celkový pocet kcal spalenych: "+user.getKcalBurned()+" kcal"));
+        panel.setBorder(BorderFactory.createTitledBorder("Statistics"));
+        panel.add(new JLabel("Total number of workouts: " + user.getWorkoutLogs().size()));
+        panel.add(new JLabel("Total volume lifted: " + user.getTotalVolumeLiftedFromLogWorkout() + " kg"));
+        panel.add(new JLabel("Total calories burned: " + user.getKcalBurned() + " kcal"));
 
-        startWorkoutButton = new JButton("Spustit trénink");
-        createCustomWorkoutButton = new JButton("Vytvořit vlastní trénink");
-        viewPresetWorkoutsButton = new JButton("Prohlédnout předem připravené tréninky");
-        viewCustomWorkoutsButton = new JButton("Prohlédnout vlastní tréninky");
-        deleteCustomWorkoutButton = new JButton("Smazat vlastní trénink");
-        backButton = new JButton("Zpět");
+        startWorkoutButton = new JButton("Start Workout");
+        createCustomWorkoutButton = new JButton("Create Custom Workout");
+        viewPresetWorkoutsButton = new JButton("View Preset Workouts");
+        viewCustomWorkoutsButton = new JButton("View Custom Workouts");
+        deleteCustomWorkoutButton = new JButton("Delete Custom Workout");
+        backButton = new JButton("Back");
 
         panel.add(startWorkoutButton);
         panel.add(createCustomWorkoutButton);
@@ -65,7 +65,7 @@ public class WorkoutFrame extends JFrame {
 
 
         startWorkoutButton.addActionListener(e -> {
-            // TODO otevřít okno pro spuštění tréninku a logování výkonu
+            // TODO open window for workout execution and performance logging
         });
 
         createCustomWorkoutButton.addActionListener(e -> {
@@ -75,7 +75,7 @@ public class WorkoutFrame extends JFrame {
         });
 
         viewPresetWorkoutsButton.addActionListener(e -> {
-            JFrame preLoadWorkoutFrame = new JFrame("Všechna cvičení uživatele");
+            JFrame preLoadWorkoutFrame = new JFrame("All Preset Workouts");
             preLoadWorkoutFrame.setSize(400, 300);
             preLoadWorkoutFrame.setLocationRelativeTo(null);
             preLoadWorkoutFrame.setLayout(new BorderLayout(10, 10));
@@ -90,7 +90,7 @@ public class WorkoutFrame extends JFrame {
                 }
             }
 
-            JButton closeButton = new JButton("Zavřít");
+            JButton closeButton = new JButton("Close");
             closeButton.addActionListener(ev -> preLoadWorkoutFrame.dispose());
 
             preLoadWorkoutFrame.add(new JScrollPane(textArea), BorderLayout.CENTER);
@@ -99,7 +99,7 @@ public class WorkoutFrame extends JFrame {
         });
 
         viewCustomWorkoutsButton.addActionListener(e -> {
-            JFrame mealsFrame = new JFrame("Všechna cviceni uživatele");
+            JFrame mealsFrame = new JFrame("All Custom Workouts");
             mealsFrame.setSize(400, 300);
             mealsFrame.setLocationRelativeTo(null);
 
@@ -109,20 +109,23 @@ public class WorkoutFrame extends JFrame {
             HashSet<Workout> workouts = this.user.getCustomWorkouts();
             if (workouts != null && !workouts.isEmpty()) {
                 for (Workout workout : workouts) {
-                    textArea.append(workout.getName() +": "+workout.getWorkoutLevel() + "\n\n");
+                    textArea.append(workout.getName() + ": " + workout.getWorkoutLevel() + "\n\n");
                 }
             } else {
-                textArea.setText("Uživatel zatím nemá žádná cviceni.");
+                textArea.setText("User has no custom workouts yet.");
             }
 
+            JButton closeButton = new JButton("Close");
+            closeButton.addActionListener(ev -> mealsFrame.dispose());
+
             mealsFrame.add(new JScrollPane(textArea));
+            mealsFrame.add(closeButton, BorderLayout.SOUTH);
             mealsFrame.setVisible(true);
         });
 
         deleteCustomWorkoutButton.addActionListener(e -> {
             DeleteCustomWokoutButtonFrame deleteCustomWokoutButtonFrame = new DeleteCustomWokoutButtonFrame(user, userManager);
             deleteCustomWokoutButtonFrame.setVisible(true);
-            dispose();
         });
 
         backButton.addActionListener(e -> {
@@ -132,4 +135,3 @@ public class WorkoutFrame extends JFrame {
         });
     }
 }
-

@@ -27,7 +27,7 @@ public class UserFrame extends JFrame {
 
         setLayout(new BorderLayout(10, 10));
         setTitle("User: " + user.getUserName() + " - Fitness App -");
-        setSize(600, 400);
+        setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         initGUI(user, userManager);
@@ -35,36 +35,35 @@ public class UserFrame extends JFrame {
 
 
     public void initGUI(User user, UserManager userManager) {
-        bmrButtonButton = new JButton("Ukázat BMR");
-        showMealLogsButton = new JButton("Zobrazit kalorické tabulky (7 dní)");
-        showWorkoutLogsButton = new JButton("Zobrazit tréninkové logy (7 dní)");
-        changeDataButtonButton = new JButton("Změna údajů");
-        showUsersMealsButton = new JButton("Zobrazit vlastni jidla");
-        showUsersWorkoutsButton = new JButton("Zobrazit vlastni treninky");
-        backButtonButton = new JButton("zpet");
+        bmrButtonButton = new JButton("Show BMR");
+        showMealLogsButton = new JButton("Show calorie logs (7 days)");
+        showWorkoutLogsButton = new JButton("Show workout logs (7 days)");
+        changeDataButtonButton = new JButton("Change details");
+        showUsersMealsButton = new JButton("Show custom meals");
+        showUsersWorkoutsButton = new JButton("Show custom workouts");
+        backButtonButton = new JButton("Back");
 
 
-        JLabel title = new JLabel("Informace o uživateli", SwingConstants.CENTER);
+        JLabel title = new JLabel("User information", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 16));
         add(title, BorderLayout.NORTH);
 
 
         JPanel panel = new JPanel(new GridLayout(10, 1, 5, 5));
-        panel.setBorder(BorderFactory.createTitledBorder("Informace o uživateli"));
-        panel.add(new JLabel("Uživatelské jméno: " + this.user.getUserName()));
-        panel.add(new JLabel("Jméno: " + this.user.getName()));
-        panel.add(new JLabel("Věk: " + this.user.getAge() + " let"));
-        panel.add(new JLabel("Výška: " + this.user.getHeight() + " cm"));
-        panel.add(new JLabel("Váha: " + this.user.getWeight() + " kg"));
-        panel.add(new JLabel("Pohlaví: " + this.user.getGender()));
-        panel.add(new JLabel("Záznamy o kaloriích: " + this.user.getMealLogs().size() + " dní"));
-        panel.add(new JLabel("Záznamy o tréninku: "+ this.user.getWorkoutLogs().size() +" dní"));
+        panel.setBorder(BorderFactory.createTitledBorder("User information"));
+        panel.add(new JLabel("Username: " + this.user.getUserName()));
+        panel.add(new JLabel("Name: " + this.user.getName()));
+        panel.add(new JLabel("Age: " + this.user.getAge() + " years"));
+        panel.add(new JLabel("Height: " + this.user.getHeight() + " cm"));
+        panel.add(new JLabel("Weight: " + this.user.getWeight() + " kg"));
+        panel.add(new JLabel("Gender: " + this.user.getGender()));
+        panel.add(new JLabel("Calorie logs: " + this.user.getMealLogs().size() + " days"));
+        panel.add(new JLabel("Workout logs: " + this.user.getWorkoutLogs().size() + " days"));
         panel.add(bmrButtonButton);
 
 
-
         JPanel panel2 = new JPanel(new GridLayout(6, 1, 5, 5));
-        panel2.setBorder(BorderFactory.createTitledBorder("Akce"));
+        panel2.setBorder(BorderFactory.createTitledBorder("Actions"));
         panel2.add(changeDataButtonButton);
         panel2.add(showMealLogsButton);
         panel2.add(showWorkoutLogsButton);
@@ -80,10 +79,10 @@ public class UserFrame extends JFrame {
 
         bmrButtonButton.addActionListener(e -> {
             double bmr = this.user.calculateBMR(this.user);
-            JOptionPane.showMessageDialog(this, "Tvůj BMR je: " + bmr, "BMR Výpočet", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Your BMR is: " + bmr, "BMR Calculation", JOptionPane.INFORMATION_MESSAGE);
         });
         showMealLogsButton.addActionListener(e -> {
-            JFrame mealFrame = new JFrame("Posledních 7 jídel");
+            JFrame mealFrame = new JFrame("Last 7 meals");
             mealFrame.setSize(400, 300);
             mealFrame.setLocationRelativeTo(null);
 
@@ -96,14 +95,18 @@ public class UserFrame extends JFrame {
                     textArea.append(meal.toString() + "\n\n");
                 }
             } else {
-                textArea.setText("Žádná jídla za posledních 7 dní.");
+                textArea.setText("No meals in the last 7 days.");
             }
 
+            JButton closeButton = new JButton("Close");
+            closeButton.addActionListener(ev -> mealFrame.dispose());
+
             mealFrame.add(new JScrollPane(textArea));
+            mealFrame.add(closeButton, BorderLayout.SOUTH);
             mealFrame.setVisible(true);
         });
         showWorkoutLogsButton.addActionListener(e -> {
-            JFrame mealFrame = new JFrame("Posledních 7 workout");
+            JFrame mealFrame = new JFrame("Last 7 workouts");
             mealFrame.setSize(400, 300);
             mealFrame.setLocationRelativeTo(null);
 
@@ -116,10 +119,14 @@ public class UserFrame extends JFrame {
                     textArea.append(workout.toString() + "\n\n");
                 }
             } else {
-                textArea.setText("Žádny workout za posledních 7 dní.");
+                textArea.setText("No workouts in the last 7 days.");
             }
 
+            JButton closeButton = new JButton("Close");
+            closeButton.addActionListener(ev -> mealFrame.dispose());
+
             mealFrame.add(new JScrollPane(textArea));
+            mealFrame.add(closeButton, BorderLayout.SOUTH);
             mealFrame.setVisible(true);
         });
 
@@ -128,7 +135,7 @@ public class UserFrame extends JFrame {
             dispose();
         });
         showUsersMealsButton.addActionListener(e -> {
-            JFrame mealsFrame = new JFrame("Všechna jídla uživatele");
+            JFrame mealsFrame = new JFrame("All user meals");
             mealsFrame.setSize(400, 300);
             mealsFrame.setLocationRelativeTo(null);
 
@@ -141,14 +148,18 @@ public class UserFrame extends JFrame {
                     textArea.append(meal.toString() + "\n\n");
                 }
             } else {
-                textArea.setText("Žádná vlastní jídla.");
+                textArea.setText("No custom meals.");
             }
 
+            JButton closeButton = new JButton("Close");
+            closeButton.addActionListener(ev -> mealsFrame.dispose());
+
             mealsFrame.add(new JScrollPane(textArea));
+            mealsFrame.add(closeButton, BorderLayout.SOUTH);
             mealsFrame.setVisible(true);
         });
         showUsersWorkoutsButton.addActionListener(e -> {
-            JFrame mealsFrame = new JFrame("Všechna cviceni uživatele");
+            JFrame mealsFrame = new JFrame("All user workouts");
             mealsFrame.setSize(400, 300);
             mealsFrame.setLocationRelativeTo(null);
 
@@ -161,10 +172,14 @@ public class UserFrame extends JFrame {
                     textArea.append(workout.toString() + "\n\n");
                 }
             } else {
-                textArea.setText("Uživatel zatím nemá žádná cviceni.");
+                textArea.setText("User has no workouts yet.");
             }
 
+            JButton closeButton = new JButton("Close");
+            closeButton.addActionListener(ev -> mealsFrame.dispose());
+
             mealsFrame.add(new JScrollPane(textArea));
+            mealsFrame.add(closeButton, BorderLayout.SOUTH);
             mealsFrame.setVisible(true);
         });
 
@@ -174,7 +189,6 @@ public class UserFrame extends JFrame {
             mainFrame.setVisible(true);
             dispose();
         });
-
 
 
         add(centerPanel, BorderLayout.CENTER);

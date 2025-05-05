@@ -13,11 +13,17 @@ public class ChangeUserDataFrame extends JFrame {
     private UserFrame userFrame;
 
     public ChangeUserDataFrame(User user, UserManager userManager) {
+        this.user = user;
+        this.userManager = userManager;
         setTitle("Change User Data");
         setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        initGUI(user, userManager);
 
+    }
+
+    public void initGUI(User user, UserManager userManager) {
         JPanel panel = new JPanel(new GridLayout(6, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
