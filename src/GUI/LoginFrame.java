@@ -21,7 +21,7 @@ public class LoginFrame extends JFrame {
         this.userManager = userManager;
 
         setTitle("Login");
-        setSize(300, 200);
+        setSize(600, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initUI(user);
@@ -29,6 +29,7 @@ public class LoginFrame extends JFrame {
 
     private void initUI(User user) {
         JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
+
 
         usernameField = new JTextField();
         passwordField = new JTextField();
@@ -41,6 +42,7 @@ public class LoginFrame extends JFrame {
         panel.add(passwordField);
         panel.add(loginButton);
         panel.add(registerButton);
+
 
         add(panel);
 

@@ -4,9 +4,11 @@ import Model.User;
 import Model.UserManager;
 import Model.Workout;
 import Model.WorkoutLevel;
+import Model.Exercise;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 
 public class MainFrame extends JFrame {
 
@@ -20,7 +22,7 @@ public class MainFrame extends JFrame {
     public MainFrame(User user, UserManager userManager) {
         this.user = user;
         setTitle("Fitness App");
-        setSize(600, 400);
+        setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -53,6 +55,19 @@ public class MainFrame extends JFrame {
         });
 
         workoutButton.addActionListener(e -> {
+            Workout upperBody = new Workout("Upper Body", 45, LocalDate.now(), WorkoutLevel.INTERMEDIATE);
+            upperBody.addExercise(new Exercise("Bench Press"));
+            upperBody.addExercise(new Exercise("Pull-ups"));
+            upperBody.addExercise(new Exercise("Shoulder Press"));
+
+            Workout lowerBody = new Workout("Lower Body", 50, LocalDate.now(), WorkoutLevel.INTERMEDIATE);
+            lowerBody.addExercise(new Exercise("Squats"));
+            lowerBody.addExercise(new Exercise("Deadlifts"));
+            lowerBody.addExercise(new Exercise("Leg Press"));
+
+            user.addCustomWorkout(upperBody);
+            user.addCustomWorkout(lowerBody);
+
             WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
             workoutFrame.setVisible(true);
             dispose();

@@ -16,7 +16,7 @@ public class ChangeUserDataFrame extends JFrame {
         this.user = user;
         this.userManager = userManager;
         setTitle("Change User Data");
-        setSize(400, 300);
+        setSize(600, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initGUI(user, userManager);

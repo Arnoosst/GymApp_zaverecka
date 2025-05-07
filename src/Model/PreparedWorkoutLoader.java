@@ -3,6 +3,8 @@ package Model;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PreparedWorkoutLoader {
 
@@ -17,26 +19,29 @@ public class PreparedWorkoutLoader {
                 line = line.trim();
 
                 if (line.startsWith("Workout:")) {
-                    String[] parts = line.substring(8).split(";");
-                    String name = parts[0];
-                    int kcal = Integer.parseInt(parts[1]);
-                    int duration = Integer.parseInt(parts[2]);
-                    LocalDate date = LocalDate.parse(parts[3]);
-                    int volume = Integer.parseInt(parts[4]);
-                    WorkoutLevel level = WorkoutLevel.valueOf(parts[5].toUpperCase());
+                    List<String> parts = Arrays.asList(line.substring(8).split(";"));
+                    String name = parts.get(0);
+                    int duration = Integer.parseInt(parts.get(1));
+                    LocalDate date = LocalDate.parse(parts.get(2));
+                    WorkoutLevel level = WorkoutLevel.valueOf(parts.get(3).toUpperCase());
 
-                    currentWorkout = new Workout(name, kcal, duration, date, volume, level  );
+                    currentWorkout = new Workout(name, duration, date, level);
                 }
 
                 else if (line.startsWith("Exercise:") && currentWorkout != null) {
-                    String[] parts = line.substring(9).split(";");
-                    String exName = parts[0];
-                    int sets = Integer.parseInt(parts[1]);
-                    int reps = Integer.parseInt(parts[2]);
-                    double weight = Double.parseDouble(parts[3]);
+                    List<String> parts = Arrays.asList(line.substring(9).split(";"));
+                    String exName = parts.get(0);
+                    int sets = Integer.parseInt(parts.get(1));
+                    int reps = Integer.parseInt(parts.get(2));
+                    double weight = Double.parseDouble(parts.get(3));
 
-                    Exercise exercise = new Exercise(exName, sets, reps, weight);
-                    currentWorkout.getExercises().add(exercise);
+                    Exercise exercise = new Exercise(exName);
+                    exercise.initializeSets(sets);
+                    for (ExerciseSets set : exercise.getSets()) {
+                        set.setReps(reps);
+                        set.setWeight(weight);
+                    }
+                    currentWorkout.addExercise(exercise);
                 }
 
                 else if (line.equals("---") && currentWorkout != null) {
@@ -50,7 +55,5 @@ public class PreparedWorkoutLoader {
         }
 
         return workouts;
-
-        // TODO Predelat ten loading lepe (subString pryc)
     }
 }

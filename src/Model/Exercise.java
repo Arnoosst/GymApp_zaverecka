@@ -1,56 +1,52 @@
+
 package Model;
 
 import java.util.ArrayList;
 
 public class Exercise {
     private String name;
-    private ArrayList<ExerciseSets> sets;
-    private int reps;
-    private double weight;
+    private ExerciseSets[] sets;
 
-    public Exercise(String name, int reps, double weight) {
+    public Exercise(String name) {
         this.name = name;
-        this.sets = new ArrayList<>();
-        this.reps = reps;
-        this.weight = weight;
+        this.sets = new ExerciseSets[0];
     }
+
     public Exercise() {
+        this.sets = new ExerciseSets[0];
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public ArrayList<ExerciseSets> getSets() {
+    public ExerciseSets[] getSets() {
+        if (sets == null) {
+            sets = new ExerciseSets[0];
+        }
         return sets;
     }
 
-    public void setSets(ArrayList<ExerciseSets> sets) {
+    public void setSets(ExerciseSets[] sets) {
         this.sets = sets;
     }
 
-    public int getReps() {
-        return reps;
+    public void initializeSets(int count) {
+        sets = new ExerciseSets[count];
+        for (int i = 0; i < count; i++) {
+            sets[i] = new ExerciseSets(1,1);
+        }
     }
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
-    public double getWeight() {
-        return weight;
-    }
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
+
     @Override
     public String toString() {
         return "Exercise{" +
                 "name='" + name + '\'' +
-                ", sets=" + sets +
-                ", reps=" + reps +
-                ", weight=" + weight +
+                ", sets=" + java.util.Arrays.toString(sets) +
                 '}';
     }
-
 }

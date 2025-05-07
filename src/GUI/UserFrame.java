@@ -27,7 +27,7 @@ public class UserFrame extends JFrame {
 
         setLayout(new BorderLayout(10, 10));
         setTitle("User: " + user.getUserName() + " - Fitness App -");
-        setSize(800, 800);
+        setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         initGUI(user, userManager);

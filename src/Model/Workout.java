@@ -6,42 +6,56 @@ import java.util.Objects;
 
 public class Workout {
     private String name;
-    private int kcalBurned;
     private int duration;
     private LocalDate date;
-    private int totalVolumeLifted;
     private WorkoutLevel workoutLevel;
     private ArrayList<Exercise> exercises;
 
-    public Workout(String name, int kcalBurned, int duration, LocalDate date, int totalVolumeLifted, WorkoutLevel workoutLevel) {
+    public Workout(String name, int duration, LocalDate date, WorkoutLevel workoutLevel) {
         this.name = name;
-        this.kcalBurned = kcalBurned;
         this.duration = duration;
         this.date = date;
-        this.totalVolumeLifted = totalVolumeLifted;
         this.workoutLevel = workoutLevel;
         this.exercises = new ArrayList<>();
     }
 
-
-
     public Workout() {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Workout workout = (Workout) o;
-        return Objects.equals(name, workout.name);
+        this.exercises = new ArrayList<>();  // Add this line
     }
 
     public boolean addExercise(Exercise exercise){
         if(exercise==null){
             return false;
         }
+        if (exercises == null) {  // Add this check
+            exercises = new ArrayList<>();
+        }
         exercises.add(exercise);
         return true;
     }
+
+    public double calculateTotalVolumeLifted() {
+        double totalVolume = 0;
+        for (Exercise exercise : exercises) {
+            for (ExerciseSets set : exercise.getSets()) {
+                totalVolume += set.getReps() * set.getWeight();
+            }
+        }
+        return totalVolume;
+    }
+
+    public int calculateKcalBurned() {
+        int kcal = 0;
+        for (Exercise exercise : exercises) {
+            for (ExerciseSets set : exercise.getSets()) {
+                kcal += (int)(0.1 * set.getReps() * set.getWeight());
+            }
+        }
+        return kcal;
+    }
+
+
+
 
     @Override
     public int hashCode() {
@@ -56,13 +70,7 @@ public class Workout {
         this.name = name;
     }
 
-    public int getKcalBurned() {
-        return kcalBurned;
-    }
 
-    public void setKcalBurned(int kcalBurned) {
-        this.kcalBurned = kcalBurned;
-    }
 
     public int getDuration() {
         return duration;
@@ -80,13 +88,7 @@ public class Workout {
         this.date = date;
     }
 
-    public int getTotalVolumeLifted() {
-        return totalVolumeLifted;
-    }
 
-    public void setTotalVolumeLifted(int totalVolumeLifted) {
-        this.totalVolumeLifted = totalVolumeLifted;
-    }
 
     public ArrayList<Exercise> getExercises() {
         return exercises;

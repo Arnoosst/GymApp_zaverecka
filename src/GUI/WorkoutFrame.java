@@ -43,11 +43,12 @@ public class WorkoutFrame extends JFrame {
         title.setFont(new Font("Arial", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 
-        JPanel panel = new JPanel(new GridLayout(9, 1, 5, 5));
+        JPanel panel = new JPanel(new GridLayout(10, 1, 5, 5));
         panel.setBorder(BorderFactory.createTitledBorder("Statistics"));
         panel.add(new JLabel("Total number of workouts: " + user.getWorkoutLogs().size()));
-        panel.add(new JLabel("Total volume lifted: " + user.getTotalVolumeLiftedFromLogWorkout() + " kg"));
-        panel.add(new JLabel("Total calories burned: " + user.getKcalBurned() + " kcal"));
+        panel.add(new JLabel("Total volume lifted: " + user.getTotalVolumeLifted() + " kg"));
+        panel.add(new JLabel("Total calories burned: " + user.getTotalCaloriesBurned() + " kcal"));
+        panel.add(new JLabel("Total time spent: " + user.getTotalWorkoutHours() + " h"));
 
         startWorkoutButton = new JButton("Start Workout");
         createCustomWorkoutButton = new JButton("Create Custom Workout");

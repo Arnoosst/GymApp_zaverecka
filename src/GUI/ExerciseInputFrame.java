@@ -23,7 +23,7 @@ public class ExerciseInputFrame extends JFrame {
 
     public ExerciseInputFrame(User user, UserManager userManager) {
         setTitle("Create Custom Workout");
-        setSize(600, 500);
+        setSize(600, 600);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         initGUI(user, userManager);
@@ -42,53 +42,50 @@ public class ExerciseInputFrame extends JFrame {
         panel.add(new JLabel("Name:"));
         panel.add(nameField);
 
-        panel.add(new JLabel("Reps:"));
-        panel.add(repsField);
-
-        panel.add(new JLabel("Sets:"));
+        panel.add(new JLabel("Number of Sets:"));
         panel.add(setsField);
 
-        panel.add(new JLabel("Weight:"));
+        panel.add(new JLabel("Reps per Set:"));
+        panel.add(repsField);
+
+        panel.add(new JLabel("Weight per Set (kg):"));
         panel.add(weightField);
 
-        
         panel.add(saveButton);
-
         panel.add(backButton);
 
         add(panel);
-        
-        
+
         saveButton.addActionListener(e -> {
             String name = nameField.getText();
 
-            int reps, sets;
+            int numberOfSets, reps;
             double weight;
             try {
+                numberOfSets = Integer.parseInt(setsField.getText().trim());
                 reps = Integer.parseInt(repsField.getText().trim());
-                sets = Integer.parseInt(setsField.getText().trim());
                 weight = Double.parseDouble(weightField.getText().trim());
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(ExerciseInputFrame.this, "Please check that reps, sets and weight are valid numbers.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-
             if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(ExerciseInputFrame.this, "Please enter exercise name.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            Exercise exercise = new Exercise(name, sets, reps, weight);
+            Exercise exercise = new Exercise(name);
+            exercise.initializeSets(numberOfSets);
 
-
-            if (exercise != null) {
-                result = exercise;
-                JOptionPane.showMessageDialog(this, "Exercise added successfully!");
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(ExerciseInputFrame.this, "Failed to add exercise.", "Error", JOptionPane.ERROR_MESSAGE);
+            for (ExerciseSets set : exercise.getSets()) {
+                set.setReps(reps);
+                set.setWeight(weight);
             }
+
+            result = exercise;
+            JOptionPane.showMessageDialog(this, "Exercise added successfully!");
+            dispose();
         });
 
         backButton.addActionListener(e -> {

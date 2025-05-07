@@ -20,7 +20,7 @@ public class StartWorkoutButtonFrame extends JFrame {
     public StartWorkoutButtonFrame(User user, UserManager userManager) {
         this.user = user;
         setTitle("Workout");
-        setSize(400, 400);
+        setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -52,8 +52,8 @@ public class StartWorkoutButtonFrame extends JFrame {
         });
 
         preSetWorkout.addActionListener(e -> {
-            SelectPreLoadWorkoutsFrame selectPreLoadWorkoutsFrame = new SelectPreLoadWorkoutsFrame(user, userManager);
-            setVisible(true);
+            SelectPreLoadWorkoutsFrame selectPreLoadWorkoutsFrame = new SelectPreLoadWorkoutsFrame(user);
+            selectPreLoadWorkoutsFrame.setVisible(true);
             dispose();
         });
         backButton.addActionListener(e ->{

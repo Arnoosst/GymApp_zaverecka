@@ -20,7 +20,7 @@ public class CreateWorkoutFrame extends JFrame {
         this.user = user;
         this.userManager = userManager;
         setTitle("New Custom Workout");
-        setSize(400, 250);
+        setSize(600, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initGUI();
@@ -65,7 +65,7 @@ public class CreateWorkoutFrame extends JFrame {
                 return;
             }
 
-            Workout workout = new Workout(name, 0, 0, null, 0, workoutLevel);
+            Workout workout = new Workout(name, 0, null, workoutLevel);
             workout.setExercises(new ArrayList<>(exerciseList));
             user.addCustomWorkout(workout);
             JOptionPane.showMessageDialog(this, "Workout saved successfully!");

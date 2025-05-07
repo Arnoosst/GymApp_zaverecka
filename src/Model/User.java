@@ -87,19 +87,28 @@ public class User implements Serializable {
         }
         return temp;
     }
-    public int getKcalBurned() {
-        int totalCaloriesBurned = 0;
-        for(Workout workout : workoutLogs){
-            totalCaloriesBurned += workout.getKcalBurned();
+    public int getTotalCaloriesBurned() {
+        int total = 0;
+        for (Workout w : workoutLogs) {
+            total += w.calculateKcalBurned();
         }
-        return totalCaloriesBurned;
+        return total;
     }
-    public int getTotalVolumeLiftedFromLogWorkout(){
-        int totalVolumeLifted = 0;
-        for(Workout workout : workoutLogs){
-            totalVolumeLifted += workout.getTotalVolumeLifted();
+
+    public double getTotalVolumeLifted() {
+        double total = 0;
+        for (Workout w : workoutLogs) {
+            total += w.calculateTotalVolumeLifted();
         }
-        return totalVolumeLifted;
+        return total;
+    }
+
+    public double getTotalWorkoutHours() {
+        double total = 0;
+        for (Workout w : workoutLogs) {
+            total += w.getDuration();
+        }
+        return total/60.0;
     }
 
 

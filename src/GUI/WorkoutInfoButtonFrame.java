@@ -10,7 +10,7 @@ class WorkoutInfoButtonFrame extends JFrame {
 
     public WorkoutInfoButtonFrame(Workout workout) {
         setTitle("Workout Info - " + workout.getName());
-        setSize(400, 300);
+        setSize(600, 600);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         initGUI(workout);

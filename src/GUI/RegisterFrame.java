@@ -27,14 +27,14 @@ public class RegisterFrame extends JFrame {
         this.userManager = userManager;
 
         setTitle("Register");
-        setSize(400, 300);
+        setSize(600, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initUI(user);
     }
 
     private void initUI(User user) {
-        JPanel panel = new JPanel(new GridLayout(9, 2, 10, 5));
+        JPanel panel = new JPanel(new GridLayout(8, 2, 10, 5));
 
         usernameField = new JTextField();
         passwordField = new JTextField();
