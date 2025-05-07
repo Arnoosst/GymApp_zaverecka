@@ -50,5 +50,7 @@ public class PreparedWorkoutLoader {
         }
 
         return workouts;
+
+        // TODO Predelat ten loading lepe (subString pryc)
     }
 }

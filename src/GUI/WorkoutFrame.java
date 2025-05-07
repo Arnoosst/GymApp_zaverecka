@@ -20,6 +20,8 @@ public class WorkoutFrame extends JFrame {
     private JButton viewCustomWorkoutsButton;
     private JButton deleteCustomWorkoutButton;
     private JButton backButton;
+    private JButton ownWorkout;
+    private JButton preSetWorkout;
 
     public WorkoutFrame(User user, UserManager userManager) {
         this.user = user;
@@ -65,7 +67,9 @@ public class WorkoutFrame extends JFrame {
 
 
         startWorkoutButton.addActionListener(e -> {
-            // TODO open window for workout execution and performance logging
+            StartWorkoutButtonFrame startWorkoutButtonFrame = new StartWorkoutButtonFrame(user, userManager);
+            startWorkoutButtonFrame.setVisible(true);
+            dispose();
         });
 
         createCustomWorkoutButton.addActionListener(e -> {

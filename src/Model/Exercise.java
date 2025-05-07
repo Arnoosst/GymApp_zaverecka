@@ -1,14 +1,16 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Exercise {
     private String name;
-    private int sets;
+    private ArrayList<ExerciseSets> sets;
     private int reps;
     private double weight;
 
-    public Exercise(String name, int sets, int reps, double weight) {
+    public Exercise(String name, int reps, double weight) {
         this.name = name;
-        this.sets = sets;
+        this.sets = new ArrayList<>();
         this.reps = reps;
         this.weight = weight;
     }
@@ -20,13 +22,15 @@ public class Exercise {
     public void setName(String name) {
         this.name = name;
     }
-    public int getSets() {
+
+    public ArrayList<ExerciseSets> getSets() {
         return sets;
     }
 
-    public void setSets(int sets) {
+    public void setSets(ArrayList<ExerciseSets> sets) {
         this.sets = sets;
     }
+
     public int getReps() {
         return reps;
     }
