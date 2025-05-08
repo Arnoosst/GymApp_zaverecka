@@ -1,5 +1,6 @@
-package GUI;
+package GUI.UserGUI;
 
+import GUI.MainFrame;
 import Model.Meal;
 import Model.User;
 import Model.UserManager;

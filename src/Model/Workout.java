@@ -105,4 +105,36 @@ public class Workout {
     public void setWorkoutLevel(WorkoutLevel workoutLevel) {
         this.workoutLevel = workoutLevel;
     }
+
+    @Override
+    public String toString() {
+        String result = "";
+        result += "Workout Detail\n\n";
+        result += "Name: " + name + "\n";
+        result += "Date: " + (date != null ? date.toString() : "N/A") + "\n";
+        result += "Duration: " + getDuration() + " min\n";
+        result += "Calories Burned: " + calculateKcalBurned() + " kcal\n";
+        result += "Total Volume Lifted: " + calculateTotalVolumeLifted() + " kg\n";
+        result += "Level: " + (workoutLevel != null ? workoutLevel.toString() : "N/A") + "\n";
+        result += "\nExercises:\n";
+
+        if (exercises != null && !exercises.isEmpty()) {
+            for (Exercise e : exercises) {
+                result += "• " + e.getName() + "\n";
+                ExerciseSets[] sets = e.getSets();
+                if (sets != null && sets.length > 0) {
+                    for (int i = 0; i < sets.length; i++) {
+                        result += "   Set " + (i + 1) + ": " + sets[i].getReps() + " reps @ " + sets[i].getWeight() + " kg\n";
+                    }
+                } else {
+                    result += "   No sets recorded.\n";
+                }
+                result += "\n";
+            }
+        } else {
+            result += "No exercises recorded.\n";
+        }
+
+        return result;
+    }
 }

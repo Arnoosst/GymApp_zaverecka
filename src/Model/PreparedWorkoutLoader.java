@@ -51,7 +51,7 @@ public class PreparedWorkoutLoader {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error loading prepared workouts");
         }
 
         return workouts;

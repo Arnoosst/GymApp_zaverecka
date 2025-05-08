@@ -1,9 +1,7 @@
-package GUI;
+package GUI.WorkoutGUI;
 
 import Model.User;
 import Model.UserManager;
-import Model.Workout;
-import Model.WorkoutLevel;
 
 import javax.swing.*;
         import java.awt.*;

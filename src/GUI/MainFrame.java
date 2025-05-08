@@ -1,5 +1,8 @@
 package GUI;
 
+import GUI.Meal.GUI.MealFrame;
+import GUI.UserGUI.UserFrame;
+import GUI.WorkoutGUI.WorkoutFrame;
 import Model.User;
 import Model.UserManager;
 import Model.Workout;
@@ -70,6 +73,12 @@ public class MainFrame extends JFrame {
 
             WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
             workoutFrame.setVisible(true);
+            dispose();
+        });
+
+        mealButton.addActionListener(e -> {
+            MealFrame mealFrame = new MealFrame(user, userManager);
+            mealFrame.setVisible(true);
             dispose();
         });
     }

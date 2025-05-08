@@ -1,0 +1,23 @@
+Chicken Breast;200;30;3;0
+Rice (100g);130;2;0;28
+Salmon Fillet;250;22;18;0
+Oatmeal (100g);370;12;7;60
+Banana;105;1;0;27
+Whole Egg;70;6;5;1
+Egg White;17;4;0;0
+Broccoli (100g);35;3;0;6
+Almonds (30g);170;6;15;6
+Greek Yogurt (150g);120;15;3;5
+Protein Shake;150;30;2;3
+Tuna in Water (100g);120;26;1;0
+Sweet Potato (150g);130;2;0;30
+Cottage Cheese (100g);98;11;4;3
+Peanut Butter (1 tbsp);90;4;8;3
+Apple;95;0;0;25
+Beef Steak (200g);400;40;28;0
+Pasta (100g cooked);155;5;1;30
+Avocado (half);120;1;10;6
+Protein Bar;220;20;8;18
+Mozzarella (50g);150;10;12;1
+Tofu (100g);140;13;9;2
+Quinoa (100g);120;4;2;21

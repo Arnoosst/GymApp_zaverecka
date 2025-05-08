@@ -1,5 +1,6 @@
-package GUI;
+package GUI.WorkoutGUI;
 
+import GUI.MainFrame;
 import Model.PreparedWorkoutLoader;
 import Model.User;
 import Model.UserManager;

@@ -1,4 +1,4 @@
-package GUI;
+package GUI.WorkoutGUI;
 
 import Model.User;
 import Model.UserManager;

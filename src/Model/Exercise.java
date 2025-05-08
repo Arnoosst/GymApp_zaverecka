@@ -24,6 +24,10 @@ public class Exercise {
         this.name = name;
     }
 
+    public ExerciseSets[] getSets2() {
+        return sets;
+    }
+
     public ExerciseSets[] getSets() {
         if (sets == null) {
             sets = new ExerciseSets[0];
@@ -49,4 +53,6 @@ public class Exercise {
                 ", sets=" + java.util.Arrays.toString(sets) +
                 '}';
     }
+
+
 }

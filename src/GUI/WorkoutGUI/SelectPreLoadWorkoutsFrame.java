@@ -1,22 +1,23 @@
-package GUI;
+package GUI.WorkoutGUI;
 
+import Model.PreparedWorkoutLoader;
 import Model.User;
 import Model.UserManager;
 import Model.Workout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class SelectUserWorkoutFrame extends JFrame {
+public class SelectPreLoadWorkoutsFrame extends JFrame {
     private User user;
     private UserManager userManager;
     private JButton infoButton;
     private JButton selectButton;
     private JButton backButton;
 
-    public SelectUserWorkoutFrame(User user, UserManager userManager) {
+    public SelectPreLoadWorkoutsFrame(User user) {
         this.user = user;
-        this.userManager = userManager;
 
 
         setLayout(new BorderLayout(10, 10));
@@ -24,15 +25,16 @@ public class SelectUserWorkoutFrame extends JFrame {
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        initGUI(user, userManager);
+        initGUI();
     }
 
-    public void initGUI(User user, UserManager userManager) {
+    public void initGUI() {
         JPanel workoutPanel = new JPanel();
         workoutPanel.setLayout(new BoxLayout(workoutPanel, BoxLayout.Y_AXIS));
+        ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts("src/data/prepared_workouts.txt");
 
 
-        for (Workout workout : user.getCustomWorkouts()) {
+        for (Workout workout : workouts) {
             JPanel singleWorkoutPanel = new JPanel(new BorderLayout());
             singleWorkoutPanel.setBorder(BorderFactory.createTitledBorder(workout.getName()));
 
@@ -52,10 +54,10 @@ public class SelectUserWorkoutFrame extends JFrame {
             selectButton.addActionListener(e -> {
                 int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to start this workout?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    // Check if the workout has exercises
+
                     if (workout.getExercises() == null || workout.getExercises().isEmpty()) {
                         JOptionPane.showMessageDialog(this, "This workout has no exercises.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                                "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     boolean cancelExercise = false;
@@ -63,7 +65,7 @@ public class SelectUserWorkoutFrame extends JFrame {
 
                         if (workout.getExercises().get(i) == null) {
                             JOptionPane.showMessageDialog(this, "Invalid exercise at position " + (i+1),
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                                    "Error", JOptionPane.ERROR_MESSAGE);
                             continue;
                         }
 
@@ -73,14 +75,14 @@ public class SelectUserWorkoutFrame extends JFrame {
                         panelForSetCount.add(setsField);
 
                         int result = JOptionPane.showConfirmDialog(this, panelForSetCount,
-                            "Set Count", JOptionPane.OK_CANCEL_OPTION);
+                                "Set Count", JOptionPane.OK_CANCEL_OPTION);
 
                         if (result == JOptionPane.OK_OPTION) {
                             try {
                                 int setCount = Integer.parseInt(setsField.getText().trim());
                                 if (setCount <= 0) {
                                     JOptionPane.showMessageDialog(this, "Please enter a positive number of sets.",
-                                        "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                                            "Invalid Input", JOptionPane.ERROR_MESSAGE);
                                     i--;
                                     continue;
                                 }
@@ -92,17 +94,20 @@ public class SelectUserWorkoutFrame extends JFrame {
 
                                 for(int j = 0; j < setCount && !cancelExercise; j++) {
 
-                                    JPanel panelForInput = new JPanel(new GridLayout(2, 2, 5, 5));
+                                    JPanel panelForInput = new JPanel(new GridLayout(3, 2, 5, 5));
+                                    JLabel exerciseLabelName = new JLabel(workout.getExercises().get(i).getName());
                                     JTextField repsField = new JTextField();
                                     JTextField weightField = new JTextField();
 
+                                    panelForInput.add(exerciseLabelName);
                                     panelForInput.add(new JLabel("Reps for set " + (j+1) + ":"));
+
                                     panelForInput.add(repsField);
                                     panelForInput.add(new JLabel("Weight (kg):"));
                                     panelForInput.add(weightField);
 
                                     result = JOptionPane.showConfirmDialog(this, panelForInput,
-                                        "Set Details", JOptionPane.OK_CANCEL_OPTION);
+                                            "Set Details", JOptionPane.OK_CANCEL_OPTION);
 
                                     if (result == JOptionPane.OK_OPTION) {
                                         try {
@@ -111,9 +116,9 @@ public class SelectUserWorkoutFrame extends JFrame {
 
                                             if (reps <= 0 || weight < 0) {
                                                 JOptionPane.showMessageDialog(this,
-                                                    "Please enter valid numbers (reps > 0, weight >= 0).",
-                                                    "Invalid Input", JOptionPane.ERROR_MESSAGE);
-                                                j--; // Retry this set
+                                                        "Please enter valid numbers (reps > 0, weight >= 0).",
+                                                        "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                                                j--;
                                                 continue;
                                             }
 
@@ -121,16 +126,16 @@ public class SelectUserWorkoutFrame extends JFrame {
                                             workout.getExercises().get(i).getSets()[j].setWeight(weight);
                                         } catch (NumberFormatException ex) {
                                             JOptionPane.showMessageDialog(this,
-                                                "Please enter valid numbers for reps and weight.",
-                                                "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                                                    "Please enter valid numbers for reps and weight.",
+                                                    "Invalid Input", JOptionPane.ERROR_MESSAGE);
                                             j--;
                                         }
                                     } else {
 
                                         int confirmCancel = JOptionPane.showConfirmDialog(this,
-                                            "Do you want to cancel this exercise?",
-                                            "Cancel Exercise",
-                                            JOptionPane.YES_NO_OPTION);
+                                                "Do you want to cancel this exercise?",
+                                                "Cancel Exercise",
+                                                JOptionPane.YES_NO_OPTION);
                                         if (confirmCancel == JOptionPane.YES_OPTION) {
                                             cancelExercise = true;
                                         } else {
@@ -138,7 +143,7 @@ public class SelectUserWorkoutFrame extends JFrame {
                                         }
                                     }
                                 }
-                                
+
                                 if (cancelExercise) {
                                     JOptionPane.showMessageDialog(this, "Workout cancelled.");
                                     WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
@@ -146,10 +151,10 @@ public class SelectUserWorkoutFrame extends JFrame {
                                     dispose();
                                     break;
                                 }
-                                
+
                             } catch (NumberFormatException ex) {
                                 JOptionPane.showMessageDialog(this, "Please enter a valid number of sets.",
-                                    "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                                        "Invalid Input", JOptionPane.ERROR_MESSAGE);
                                 i--;
                             }
                         } else {
@@ -179,8 +184,8 @@ public class SelectUserWorkoutFrame extends JFrame {
         add(bottomPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
-            workoutFrame.setVisible(true);
+            StartWorkoutButtonFrame startWorkoutButtonFrame = new StartWorkoutButtonFrame(user, userManager);
+            startWorkoutButtonFrame.setVisible(true);
             dispose();
         });
     }

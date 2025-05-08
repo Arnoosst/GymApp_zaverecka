@@ -1,4 +1,4 @@
-package GUI;
+package GUI.UserGUI;
 
 import Model.User;
 import Model.UserManager;
