@@ -1,4 +1,4 @@
-package GUI.Meal.GUI;
+package GUI.MealGUI;
 
 import GUI.MainFrame;
 import Model.*;
@@ -67,19 +67,29 @@ public class MealFrame extends JFrame {
         add(panel, BorderLayout.CENTER);
 
 
-        startLoggingMealButton.addActionListener(e -> {});
+        startLoggingMealButton.addActionListener(e -> {
+
+        });
 
 
 
 
-        deleteCustomMealButton.addActionListener(e -> {});
+        deleteCustomMealButton.addActionListener(e -> {
+            DeleteCustomMealFrame deleteCustomMealFrame = new DeleteCustomMealFrame(user, userManager);
+            deleteCustomMealFrame.setVisible(true);
+            dispose();
+        });
 
 
 
 
 
 
-        createCustomMealButton.addActionListener(e -> {});
+        createCustomMealButton.addActionListener(e -> {
+            CreateCustomMealFrame createCustomMealFrame = new CreateCustomMealFrame(user, userManager);
+            createCustomMealFrame.setVisible(true);
+            dispose();
+        });
 
 
 

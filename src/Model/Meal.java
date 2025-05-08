@@ -70,4 +70,14 @@ public class Meal {
     public int hashCode() {
         return Objects.hashCode(name);
     }
+
+    @Override
+    public String toString() {
+        return "Meal: " + name + "\n" +
+                "Kcal: " + kcal + " kcal\n" +
+                "Protein: " + protein + " g\n" +
+                "Fat: " + fat + " g\n" +
+                "Carbs: " + carbs + " g\n";
+    }
+
 }

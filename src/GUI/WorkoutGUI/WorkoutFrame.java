@@ -132,6 +132,7 @@ public class WorkoutFrame extends JFrame {
         deleteCustomWorkoutButton.addActionListener(e -> {
             DeleteCustomWokoutButtonFrame deleteCustomWokoutButtonFrame = new DeleteCustomWokoutButtonFrame(user, userManager);
             deleteCustomWokoutButtonFrame.setVisible(true);
+            dispose();
         });
 
         backButton.addActionListener(e -> {

@@ -1,13 +1,13 @@
-package GUI.WorkoutGUI;
+package GUI.MealGUI;
 
+import Model.Meal;
 import Model.User;
 import Model.UserManager;
-import Model.Workout;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class DeleteCustomWokoutButtonFrame extends JFrame {
+public class DeleteCustomMealFrame extends JFrame {
     private User user;
     private UserManager userManager;
     private JButton infoButton;
@@ -15,7 +15,7 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
     private JButton backButton;
 
 
-    public DeleteCustomWokoutButtonFrame(User user, UserManager userManager) {
+    public DeleteCustomMealFrame(User user, UserManager userManager) {
         this.user = user;
         this.userManager = userManager;
 
@@ -32,9 +32,9 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
         JPanel workoutPanel = new JPanel();
         workoutPanel.setLayout(new BoxLayout(workoutPanel, BoxLayout.Y_AXIS));
 
-        for (Workout workout : user.getCustomWorkouts()) {
+        for (Meal meal : user.getCustomMeals()) {
             JPanel singleWorkoutPanel = new JPanel(new BorderLayout());
-            singleWorkoutPanel.setBorder(BorderFactory.createTitledBorder(workout.getName()));
+            singleWorkoutPanel.setBorder(BorderFactory.createTitledBorder(meal.getName()));
 
             JPanel buttonPanel = new JPanel();
             JButton infoButton = new JButton("More Info");
@@ -45,16 +45,16 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                WorkoutInfoButtonFrame workoutInfoButtonFrame = new WorkoutInfoButtonFrame(workout);
-                workoutInfoButtonFrame.setVisible(true);
+                MealInfoFrame mealInfoFrame = new MealInfoFrame(meal);
+                mealInfoFrame.setVisible(true);
             });
 
             deleteButton.addActionListener(e -> {
-                int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this workout?", "Confirm", JOptionPane.YES_NO_OPTION);
+                int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this meal?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    user.removeCustomWorkoout(workout);
-                    DeleteCustomWokoutButtonFrame deleteCustomWokoutButtonFrame = new DeleteCustomWokoutButtonFrame(user, userManager);
-                    deleteCustomWokoutButtonFrame.setVisible(true);
+                    user.removeCustomMeal(meal);
+                    DeleteCustomMealFrame deleteCustomMealFrame = new DeleteCustomMealFrame(user, userManager);
+                    deleteCustomMealFrame.setVisible(true);
                     dispose();
                 }
             });
@@ -71,8 +71,8 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
         add(bottomPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
-            workoutFrame.setVisible(true);
+            MealFrame mealFrame = new MealFrame(user, userManager);
+            mealFrame.setVisible(true);
             dispose();
         });
     }

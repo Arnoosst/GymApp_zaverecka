@@ -1,6 +1,6 @@
 package GUI;
 
-import GUI.Meal.GUI.MealFrame;
+import GUI.MealGUI.MealFrame;
 import GUI.UserGUI.UserFrame;
 import GUI.WorkoutGUI.WorkoutFrame;
 import Model.User;
