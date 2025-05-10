@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.MealGUI.CaloriesChartMenuFrame;
 import GUI.MealGUI.MealFrame;
 import GUI.UserGUI.UserFrame;
 import GUI.WorkoutGUI.WorkoutFrame;
@@ -16,23 +17,24 @@ import java.time.LocalDate;
 public class MainFrame extends JFrame {
 
     private JButton userProfileButton;
+    private CaloriesChartMenuFrame caloriesChartMenuFrame;
     private JButton workoutButton;
     private JButton mealButton;
     private User user;
     private UserManager userManager;
 
 
-    public MainFrame(User user, UserManager userManager) {
+    public MainFrame(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
         this.user = user;
         setTitle("Fitness App");
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        initUI(user, userManager);
+        initUI(user, userManager, caloriesChartMenuFrame);
     }
 
-    private void initUI(User user, UserManager userManager) {
+    private void initUI(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
 
         JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
 
@@ -77,7 +79,7 @@ public class MainFrame extends JFrame {
         });
 
         mealButton.addActionListener(e -> {
-            MealFrame mealFrame = new MealFrame(user, userManager);
+            MealFrame mealFrame = new MealFrame(user, userManager, caloriesChartMenuFrame);
             mealFrame.setVisible(true);
             dispose();
         });

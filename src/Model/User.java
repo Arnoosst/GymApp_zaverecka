@@ -1,7 +1,9 @@
 package Model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class User implements Serializable {
@@ -14,7 +16,7 @@ public class User implements Serializable {
     private String password;
     private HashSet<Meal> customMeals = new HashSet<>();
     private HashSet<Workout> customWorkouts = new HashSet<>();
-    private ArrayList<Meal> mealLogs;
+    private HashMap<LocalDate, ArrayList<Meal>> mealLogs;
     private ArrayList<Workout> workoutLogs = new ArrayList<>();
 
     public User(String userName, int age, String name, int height, int weight, Gender gender, String password) {
@@ -27,7 +29,7 @@ public class User implements Serializable {
         this.password = password;
         this.customMeals = new HashSet<>();
         this.customWorkouts = new HashSet<>();
-        this.mealLogs = new ArrayList<>();
+        this.mealLogs = new HashMap<>();
         this.workoutLogs = new ArrayList<>();
     }
 
@@ -35,10 +37,7 @@ public class User implements Serializable {
     }
 
 
-    public boolean addMealToLog(Meal meal) {
-        mealLogs.add(meal);
-        return true;
-    }
+
 
     public boolean addWorkoutToLog(Workout workout) {
         workoutLogs.add(workout);
@@ -76,17 +75,7 @@ public class User implements Serializable {
         }
         return temp;
     }
-    public ArrayList<Meal> get7daysOldMeal() {
-        ArrayList<Meal> temp = new ArrayList<>();
-        int a = workoutLogs.size();
-        if(workoutLogs.size() < 7){
-            a = 0;
-        }
-        for(int i = a ; i < mealLogs.size(); i++){
-            temp.add(mealLogs.get(i));
-        }
-        return temp;
-    }
+
     public int getTotalCaloriesBurned() {
         int total = 0;
         for (Workout w : workoutLogs) {
@@ -178,12 +167,6 @@ public class User implements Serializable {
     }
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-    public ArrayList<Meal> getMealLogs() {
-        return mealLogs;
-    }
-    public void setMealLogs(ArrayList<Meal> mealLogs) {
-        this.mealLogs = mealLogs;
     }
     public ArrayList<Workout> getWorkoutLogs() {
         return workoutLogs;

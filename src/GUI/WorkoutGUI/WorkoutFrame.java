@@ -1,6 +1,7 @@
 package GUI.WorkoutGUI;
 
 import GUI.MainFrame;
+import GUI.MealGUI.CaloriesChartMenuFrame;
 import Model.PreparedWorkoutLoader;
 import Model.User;
 import Model.UserManager;
@@ -15,6 +16,7 @@ public class WorkoutFrame extends JFrame {
 
     private User user;
     private UserManager userManager;
+    private CaloriesChartMenuFrame caloriesChartMenuFrame;
     private JButton startWorkoutButton;
     private JButton createCustomWorkoutButton;
     private JButton viewPresetWorkoutsButton;
@@ -24,7 +26,7 @@ public class WorkoutFrame extends JFrame {
     private JButton ownWorkout;
     private JButton preSetWorkout;
 
-    public WorkoutFrame(User user, UserManager userManager) {
+    public WorkoutFrame(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
         this.user = user;
         this.userManager = userManager;
 
@@ -33,11 +35,11 @@ public class WorkoutFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        initGUI(user, userManager);
+        initGUI(user, userManager, caloriesChartMenuFrame);
         setVisible(true);
     }
 
-    private void initGUI(User user, UserManager userManager) {
+    private void initGUI(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
         setLayout(new BorderLayout(10, 10));
 
         JLabel title = new JLabel("Workout Section", SwingConstants.CENTER);
@@ -136,7 +138,7 @@ public class WorkoutFrame extends JFrame {
         });
 
         backButton.addActionListener(e -> {
-            MainFrame mainFrame = new MainFrame(user, userManager);
+            MainFrame mainFrame = new MainFrame(user, userManager, caloriesChartMenuFrame);
             mainFrame.setVisible(true);
             dispose();
         });

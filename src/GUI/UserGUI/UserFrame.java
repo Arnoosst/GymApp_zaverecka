@@ -58,7 +58,7 @@ public class UserFrame extends JFrame {
         panel.add(new JLabel("Height: " + this.user.getHeight() + " cm"));
         panel.add(new JLabel("Weight: " + this.user.getWeight() + " kg"));
         panel.add(new JLabel("Gender: " + this.user.getGender()));
-        panel.add(new JLabel("Calorie logs: " + this.user.getMealLogs().size() + " days"));
+       // panel.add(new JLabel("Calorie logs: " + this.user.getMealLogs().size() + " days"));
         panel.add(new JLabel("Workout logs: " + this.user.getWorkoutLogs().size() + " days"));
         panel.add(bmrButtonButton);
 
@@ -82,7 +82,7 @@ public class UserFrame extends JFrame {
             double bmr = this.user.calculateBMR(this.user);
             JOptionPane.showMessageDialog(this, "Your BMR is: " + bmr, "BMR Calculation", JOptionPane.INFORMATION_MESSAGE);
         });
-        showMealLogsButton.addActionListener(e -> {
+       /* showMealLogsButton.addActionListener(e -> {
             JFrame mealFrame = new JFrame("Last 7 meals");
             mealFrame.setSize(400, 300);
             mealFrame.setLocationRelativeTo(null);
@@ -105,7 +105,7 @@ public class UserFrame extends JFrame {
             mealFrame.add(new JScrollPane(textArea));
             mealFrame.add(closeButton, BorderLayout.SOUTH);
             mealFrame.setVisible(true);
-        });
+        });*/
         showWorkoutLogsButton.addActionListener(e -> {
             JFrame mealFrame = new JFrame("Last 7 workouts");
             mealFrame.setSize(400, 300);
