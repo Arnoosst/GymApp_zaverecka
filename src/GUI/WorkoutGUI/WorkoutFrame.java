@@ -16,7 +16,6 @@ public class WorkoutFrame extends JFrame {
 
     private User user;
     private UserManager userManager;
-    private CaloriesChartMenuFrame caloriesChartMenuFrame;
     private JButton startWorkoutButton;
     private JButton createCustomWorkoutButton;
     private JButton viewPresetWorkoutsButton;
@@ -26,7 +25,7 @@ public class WorkoutFrame extends JFrame {
     private JButton ownWorkout;
     private JButton preSetWorkout;
 
-    public WorkoutFrame(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
+    public WorkoutFrame(User user, UserManager userManager) {
         this.user = user;
         this.userManager = userManager;
 
@@ -35,11 +34,11 @@ public class WorkoutFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        initGUI(user, userManager, caloriesChartMenuFrame);
+        initGUI(user, userManager);
         setVisible(true);
     }
 
-    private void initGUI(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
+    private void initGUI(User user, UserManager userManager) {
         setLayout(new BorderLayout(10, 10));
 
         JLabel title = new JLabel("Workout Section", SwingConstants.CENTER);
@@ -138,7 +137,7 @@ public class WorkoutFrame extends JFrame {
         });
 
         backButton.addActionListener(e -> {
-            MainFrame mainFrame = new MainFrame(user, userManager, caloriesChartMenuFrame);
+            MainFrame mainFrame = new MainFrame(user, userManager);
             mainFrame.setVisible(true);
             dispose();
         });

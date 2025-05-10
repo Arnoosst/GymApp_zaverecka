@@ -18,6 +18,7 @@ public class User implements Serializable {
     private HashSet<Workout> customWorkouts = new HashSet<>();
     private HashMap<LocalDate, ArrayList<Meal>> mealLogs;
     private ArrayList<Workout> workoutLogs = new ArrayList<>();
+    private ArrayList<Meal> mealsToday;
 
     public User(String userName, int age, String name, int height, int weight, Gender gender, String password) {
         this.userName = userName;
@@ -31,6 +32,7 @@ public class User implements Serializable {
         this.customWorkouts = new HashSet<>();
         this.mealLogs = new HashMap<>();
         this.workoutLogs = new ArrayList<>();
+        this.mealsToday = new ArrayList<>();
     }
 
     public User() {
@@ -175,6 +177,20 @@ public class User implements Serializable {
         this.workoutLogs = workoutLogs;
     }
     public String getPassword() { return password; }
+    public boolean addMeal(Meal meal) {
+        if (meal == null) {
+            return false;
+        }
+        mealsToday.add(meal);
+        return true;
+    }
+    public ArrayList<Meal> getMealsToday() {
+        return mealsToday;
+    }
+
+    public void setMealsToday(ArrayList<Meal> mealsToday) {
+        this.mealsToday = mealsToday;
+    }
 
     public void setPassword(String password) { this.password = password; }
     @Override

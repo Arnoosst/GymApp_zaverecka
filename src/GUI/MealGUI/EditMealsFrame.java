@@ -12,13 +12,12 @@ import java.awt.*;
 public class EditMealsFrame extends JFrame{
     private User user;
     private UserManager userManager;
-    private CaloriesChartMenuFrame caloriesChartMenuFrame;
     private JButton infoButton;
     private JButton deleteButton;
     private JButton backButton;
 
 
-    public EditMealsFrame(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
+    public EditMealsFrame(User user, UserManager userManager) {
         this.user = user;
         this.userManager = userManager;
 
@@ -28,14 +27,14 @@ public class EditMealsFrame extends JFrame{
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        initGUI(user, userManager, caloriesChartMenuFrame);
+        initGUI(user, userManager);
     }
 
-    private void initGUI(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
+    private void initGUI(User user, UserManager userManager) {
         JPanel mealEditPanel = new JPanel();
         mealEditPanel.setLayout(new BoxLayout(mealEditPanel, BoxLayout.Y_AXIS));
 
-        for (Meal meal : caloriesChartMenuFrame.getMealsToday()) {
+        for (Meal meal : user.getMealsToday()) {
             JPanel singleMealButton = new JPanel(new BorderLayout());
             singleMealButton.setBorder(BorderFactory.createTitledBorder(meal.getName()));
 
@@ -55,8 +54,8 @@ public class EditMealsFrame extends JFrame{
             deleteButton.addActionListener(e -> {
                 int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this meal?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    caloriesChartMenuFrame.getMealsToday().remove(meal);
-                    EditMealsFrame editMealsFrame = new EditMealsFrame(user, userManager, caloriesChartMenuFrame);
+                    user.getMealsToday().remove(meal);
+                    EditMealsFrame editMealsFrame = new EditMealsFrame(user, userManager);
                     editMealsFrame.setVisible(true);
                     dispose();
                 }
@@ -74,7 +73,7 @@ public class EditMealsFrame extends JFrame{
         add(bottomPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager, caloriesChartMenuFrame);
+            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
             manageMealsFrame.setVisible(true);
             dispose();
         });

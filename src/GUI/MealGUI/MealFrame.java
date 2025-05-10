@@ -11,7 +11,6 @@ import java.util.HashSet;
 public class MealFrame extends JFrame {
     private User user;
     private UserManager userManager;
-    private CaloriesChartMenuFrame caloriesChartMenuFrame;
     private JButton backButton;
     private JButton createCustomMealButton;
     private JButton viewPresetMealsButton;
@@ -21,10 +20,9 @@ public class MealFrame extends JFrame {
 
 
 
-    public MealFrame(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
+    public MealFrame(User user, UserManager userManager) {
         this.user = user;
         this.userManager = userManager;
-        this.caloriesChartMenuFrame = caloriesChartMenuFrame;
 
         setTitle("Workout Frame");
         setSize(600, 600);
@@ -33,12 +31,12 @@ public class MealFrame extends JFrame {
 
 
 
-        initGUI(user, userManager, caloriesChartMenuFrame);
+        initGUI(user, userManager);
         setVisible(true);
 
     }
 
-    public void initGUI(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
+    public void initGUI(User user, UserManager userManager) {
         setLayout(new BorderLayout(10, 10));
 
         JLabel title = new JLabel("Meal Section", SwingConstants.CENTER);
@@ -71,8 +69,8 @@ public class MealFrame extends JFrame {
 
 
         startLoggingMealButton.addActionListener(e -> {
-            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager, caloriesChartMenuFrame);
-            manageMealsFrame.setVisible(true);
+            CaloriesChartMenuFrame caloriesChartMenuFrame = new CaloriesChartMenuFrame(user, userManager);
+            caloriesChartMenuFrame.setVisible(true);
             dispose();
         });
 

@@ -17,24 +17,23 @@ import java.time.LocalDate;
 public class MainFrame extends JFrame {
 
     private JButton userProfileButton;
-    private CaloriesChartMenuFrame caloriesChartMenuFrame;
     private JButton workoutButton;
     private JButton mealButton;
     private User user;
     private UserManager userManager;
 
 
-    public MainFrame(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
+    public MainFrame(User user, UserManager userManager) {
         this.user = user;
         setTitle("Fitness App");
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        initUI(user, userManager, caloriesChartMenuFrame);
+        initUI(user, userManager);
     }
 
-    private void initUI(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
+    private void initUI(User user, UserManager userManager) {
 
         JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
 
@@ -79,7 +78,7 @@ public class MainFrame extends JFrame {
         });
 
         mealButton.addActionListener(e -> {
-            MealFrame mealFrame = new MealFrame(user, userManager, caloriesChartMenuFrame);
+            MealFrame mealFrame = new MealFrame(user, userManager);
             mealFrame.setVisible(true);
             dispose();
         });

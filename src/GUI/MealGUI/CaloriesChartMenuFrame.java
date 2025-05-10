@@ -16,7 +16,6 @@ public class CaloriesChartMenuFrame extends JFrame {
     private JButton addMealButton;
     private JButton changeCaloriesGoalButton;
     private LocalDate date;
-    private ArrayList<Meal> mealsToday;
     private int caloriesGoal;
 
 
@@ -36,7 +35,7 @@ public class CaloriesChartMenuFrame extends JFrame {
 
         mainPanel.add(new JLabel("Date: " + LocalDate.now()));
         int totalKcal = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0;
-        for (Meal m : mealsToday) {
+        for (Meal m : user.getMealsToday()) {
             totalKcal += m.getKcal();
             totalProtein += m.getProtein();
             totalCarbs += m.getCarbs();
@@ -59,7 +58,7 @@ public class CaloriesChartMenuFrame extends JFrame {
 
 
         addMealButton.addActionListener(e -> {
-            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager, this);
+            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
             manageMealsFrame.setVisible(true);
             dispose();
         });
@@ -95,13 +94,7 @@ public class CaloriesChartMenuFrame extends JFrame {
 
     }
 
-    public boolean addMeal(Meal meal) {
-        if (meal == null) {
-            return false;
-        }
-        mealsToday.add(meal);
-        return true;
-    }
+
 
     public int getCaloriesGoal() {
         return caloriesGoal;
@@ -111,11 +104,5 @@ public class CaloriesChartMenuFrame extends JFrame {
         this.caloriesGoal = caloriesGoal;
     }
 
-    public ArrayList<Meal> getMealsToday() {
-        return mealsToday;
-    }
 
-    public void setMealsToday(ArrayList<Meal> mealsToday) {
-        this.mealsToday = mealsToday;
-    }
 }

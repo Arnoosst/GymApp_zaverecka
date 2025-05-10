@@ -11,27 +11,26 @@ public class ManageMealsFrame extends JFrame {
 
     private User user;
     private UserManager userManager;
-    private CaloriesChartMenuFrame caloriesChartMenuFrame;
     private JButton addMealButton;
     private JButton addMealFromPreLoadButton;
     private JButton addMealFromOwnMealsButton;
     private JButton editTodaysMealButton;
     private JButton backButton;
 
-    public ManageMealsFrame(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
+    public ManageMealsFrame(User user, UserManager userManager) {
         this.user = user;
         this.userManager = userManager;
-        this.caloriesChartMenuFrame = caloriesChartMenuFrame;
+
         setTitle("Manage Meals");
         setSize(600, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-        initGUI(user, userManager, caloriesChartMenuFrame);
+        initGUI(user, userManager);
     }
 
-    public void initGUI(User user, UserManager userManager, CaloriesChartMenuFrame caloriesChartMenuFrame) {
-        JPanel mainPanel = new JPanel(new GridLayout(3, 1, 10, 10));
+    public void initGUI(User user, UserManager userManager) {
+        JPanel mainPanel = new JPanel(new GridLayout(5, 1, 10, 10));
 
         addMealButton = new JButton("Add Meal");
         addMealFromPreLoadButton = new JButton("Add Meal From Pre-Load");
@@ -48,82 +47,28 @@ public class ManageMealsFrame extends JFrame {
 
 
         addMealButton.addActionListener(e -> {
+            AddMealFrame addMealFrame = new AddMealFrame(user, userManager);
+            addMealFrame.setVisible(true);
+            dispose();
         });
 
         addMealFromPreLoadButton.addActionListener(e -> {
-            JPanel mealAddFromPreLoadPanel = new JPanel();
-            mealAddFromPreLoadPanel.setLayout(new BoxLayout(mealAddFromPreLoadPanel, BoxLayout.Y_AXIS));
-            ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");
-
-
-            for (Meal meal : meals) {
-                JPanel singleMeal = new JPanel(new BorderLayout());
-                singleMeal.setBorder(BorderFactory.createTitledBorder(meal.getName()));
-
-                JPanel buttonPanel = new JPanel();
-                JButton infoButton = new JButton("More Info");
-                JButton selectButton = new JButton("Select");
-
-                buttonPanel.add(infoButton);
-                buttonPanel.add(selectButton);
-                singleMeal.add(buttonPanel, BorderLayout.EAST);
-
-                infoButton.addActionListener(x -> {
-                    MealInfoFrame mealInfoFrame = new MealInfoFrame(meal);
-                    mealInfoFrame.setVisible(true);
-                });
-
-                selectButton.addActionListener(x -> {
-                    boolean added = caloriesChartMenuFrame.addMeal(meal);
-                    if (added) {
-                        JOptionPane.showMessageDialog(null, "Meal added successfully to today’s log.");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Meal could not be added.",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-                    }
-                });
-
-            }
+            AddMealFromPreLoadFrame addMealFromPreLoadFrame = new AddMealFromPreLoadFrame(user, userManager);
+            addMealFromPreLoadFrame.setVisible(true);
+            dispose();
         });
 
         addMealFromOwnMealsButton.addActionListener(e -> {
-            JPanel mealAddFromMyOwnMeal = new JPanel();
-            mealAddFromMyOwnMeal.setLayout(new BoxLayout(mealAddFromMyOwnMeal, BoxLayout.Y_AXIS));
-            HashSet<Meal> meals = user.getCustomMeals();
-
-
-            for (Meal meal : meals) {
-                JPanel singleMeal = new JPanel(new BorderLayout());
-                singleMeal.setBorder(BorderFactory.createTitledBorder(meal.getName()));
-
-                JPanel buttonPanel = new JPanel();
-                JButton infoButton = new JButton("More Info");
-                JButton selectButton = new JButton("Select");
-
-                buttonPanel.add(infoButton);
-                buttonPanel.add(selectButton);
-                singleMeal.add(buttonPanel, BorderLayout.EAST);
-
-                infoButton.addActionListener(x -> {
-                    MealInfoFrame mealInfoFrame = new MealInfoFrame(meal);
-                    mealInfoFrame.setVisible(true);
-                });
-
-                selectButton.addActionListener(x -> {
-                    boolean added = caloriesChartMenuFrame.addMeal(meal);
-                    if (added) {
-                        JOptionPane.showMessageDialog(null, "Meal added successfully to today’s log.");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Meal could not be added.",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-                    }
-                });
-            }
+            AddMealFromOwnFrame addMealFromOwnFrame = new AddMealFromOwnFrame(user, userManager);
+            addMealFromOwnFrame.setVisible(true);
+            dispose();
         });
 
+
         editTodaysMealButton.addActionListener(e -> {
-            EditMealsFrame editMealsFrame = new EditMealsFrame(user, userManager, caloriesChartMenuFrame);
+            EditMealsFrame editMealsFrame = new EditMealsFrame(user, userManager);
             editMealsFrame.setVisible(true);
+            dispose();
         });
 
         backButton.addActionListener(e -> {
