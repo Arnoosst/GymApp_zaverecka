@@ -11,50 +11,68 @@ import java.util.ArrayList;
 
 public class CaloriesChartMenuFrame extends JFrame {
     private JButton backButton;
+    private JButton editTodaysMealButton;
     private User user;
     private UserManager userManager;
     private JButton addMealButton;
     private JButton changeCaloriesGoalButton;
     private LocalDate date;
-    private int caloriesGoal;
+    private double caloriesGoal;
+    private JLabel caloriesLabel;
+    private int totalKcal;
 
 
     public CaloriesChartMenuFrame(User user, UserManager userManager) {
         this.user = user;
         this.userManager = userManager;
+        this.caloriesGoal = user.calculateBMR(user);
         setTitle("Calories Chart");
         setSize(600, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setVisible(true);
+
         initGUI(user, userManager);
+        setVisible(true);
     }
 
     public void initGUI(User user, UserManager userManager) {
-        JPanel mainPanel = new JPanel(new GridLayout(3, 1, 10, 10));
+        setLayout(new BorderLayout(10, 10));
+        JLabel title = new JLabel("Calories chart menu", SwingConstants.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 18));
+        add(title, BorderLayout.NORTH);
+
+        JPanel mainPanel = new JPanel(new GridLayout(7, 1, 10, 10));
 
         mainPanel.add(new JLabel("Date: " + LocalDate.now()));
-        int totalKcal = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0;
-        for (Meal m : user.getMealsToday()) {
+        totalKcal = 0;
+        int totalProtein = 0, totalCarbs = 0, totalFat = 0;
+
+        ArrayList<Meal> mealsToday = user.getMealLogs().getOrDefault(LocalDate.now(), new ArrayList<>());
+
+        for (Meal m : mealsToday) {
             totalKcal += m.getKcal();
             totalProtein += m.getProtein();
             totalCarbs += m.getCarbs();
             totalFat += m.getFat();
         }
         mainPanel.add(new JLabel("Nutrients: Protein: " + totalProtein + "g, Carbs: " + totalCarbs + "g, Fat: " + totalFat + "g"));
-        mainPanel.add(new JLabel("Calories: " + totalKcal + " / " + user.calculateBMR(user) + " kcal"));
-        add(mainPanel, BorderLayout.NORTH);
-        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 10, 10));
+
+        caloriesLabel = new JLabel("Calories: " + totalKcal + " / " + caloriesGoal + " kcal");
+        mainPanel.add(caloriesLabel);
+
         backButton = new JButton("Back");
         addMealButton = new JButton("Add Meal");
+        editTodaysMealButton = new JButton("Edit Todays Meal");
         changeCaloriesGoalButton = new JButton("Change Calories Goal");
 
 
-        buttonPanel.add(addMealButton);
-        buttonPanel.add(changeCaloriesGoalButton);
-        buttonPanel.add(backButton);
 
-        add(buttonPanel, BorderLayout.CENTER);
+        mainPanel.add(addMealButton);
+        mainPanel.add(changeCaloriesGoalButton);
+        mainPanel.add(editTodaysMealButton);
+        mainPanel.add(backButton);
+
+        add(mainPanel, BorderLayout.CENTER);
 
 
         addMealButton.addActionListener(e -> {
@@ -65,21 +83,29 @@ public class CaloriesChartMenuFrame extends JFrame {
 
 
         changeCaloriesGoalButton.addActionListener(e -> {
-            String input = JOptionPane.showInputDialog(null, "Enter new calorie goal:", "Change Calorie Goal", JOptionPane.PLAIN_MESSAGE);
-
+            String input = JOptionPane.showInputDialog(this, "Enter new calorie goal:", (int) caloriesGoal);
             if (input != null) {
                 try {
                     int newGoal = Integer.parseInt(input);
                     if (newGoal > 0) {
                         setCaloriesGoal(newGoal);
-                        JOptionPane.showMessageDialog(null, "Calorie goal updated to " + newGoal + " kcal.");
+                        caloriesLabel.setText("Calories: " + totalKcal + " / " + caloriesGoal + " kcal");
+                        JOptionPane.showMessageDialog(this, "Calorie goal updated to " + newGoal + " kcal.");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Calorie goal must be a positive number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Please enter a positive number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Invalid number format.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
+        });
+
+
+
+        editTodaysMealButton.addActionListener(e -> {
+            EditMealsFrame editMealsFrame = new EditMealsFrame(user, userManager);
+            editMealsFrame.setVisible(true);
+            dispose();
         });
 
 
@@ -96,7 +122,7 @@ public class CaloriesChartMenuFrame extends JFrame {
 
 
 
-    public int getCaloriesGoal() {
+    public double getCaloriesGoal() {
         return caloriesGoal;
     }
 

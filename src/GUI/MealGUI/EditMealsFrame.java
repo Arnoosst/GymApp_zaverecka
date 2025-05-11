@@ -73,8 +73,8 @@ public class EditMealsFrame extends JFrame{
         add(bottomPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
-            manageMealsFrame.setVisible(true);
+            CaloriesChartMenuFrame caloriesChartMenuFrame = new CaloriesChartMenuFrame(user, userManager);
+            caloriesChartMenuFrame.setVisible(true);
             dispose();
         });
     }

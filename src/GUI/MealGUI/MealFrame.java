@@ -45,7 +45,7 @@ public class MealFrame extends JFrame {
 
         JPanel panel = new JPanel(new GridLayout(8, 1, 5, 5));
         panel.setBorder(BorderFactory.createTitledBorder("Statistics"));
-        //panel.add(new JLabel("Total number of days u logged: " + user.getMealLogs().size() + " days"));
+        panel.add(new JLabel("Total number of days u logged: " + user.getMealLogs().size() + " days"));
         panel.add(new JLabel("Total calories burned: " + user.getTotalCaloriesBurned() + " kcal"));
 
 

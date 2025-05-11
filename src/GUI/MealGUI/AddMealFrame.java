@@ -45,7 +45,6 @@ public class AddMealFrame extends JFrame {
 
         JButton addButton = new JButton("Add Meal");
         JButton backButton = new JButton("back");
-        panel.add(new JLabel());
         panel.add(backButton);
         panel.add(addButton);
 
@@ -63,6 +62,7 @@ public class AddMealFrame extends JFrame {
 
                 if (added) {
                     JOptionPane.showMessageDialog(this, "Meal successfully added!");
+                    user.addMealToLog(meal);
                     ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
                     manageMealsFrame.setVisible(true);
                     dispose();
@@ -85,7 +85,7 @@ public class AddMealFrame extends JFrame {
         });
 
 
-        getContentPane().add(panel);
+        add(panel);
     }
 }
 

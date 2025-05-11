@@ -8,7 +8,9 @@ import Model.Workout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class UserFrame extends JFrame {
@@ -37,8 +39,8 @@ public class UserFrame extends JFrame {
 
     public void initGUI(User user, UserManager userManager) {
         bmrButtonButton = new JButton("Show BMR");
-        showMealLogsButton = new JButton("Show calorie logs (7 days)");
-        showWorkoutLogsButton = new JButton("Show workout logs (7 days)");
+        showMealLogsButton = new JButton("Show calorie logs");
+        showWorkoutLogsButton = new JButton("Show workout logs");
         changeDataButtonButton = new JButton("Change details");
         showUsersMealsButton = new JButton("Show custom meals");
         showUsersWorkoutsButton = new JButton("Show custom workouts");
@@ -58,7 +60,7 @@ public class UserFrame extends JFrame {
         panel.add(new JLabel("Height: " + this.user.getHeight() + " cm"));
         panel.add(new JLabel("Weight: " + this.user.getWeight() + " kg"));
         panel.add(new JLabel("Gender: " + this.user.getGender()));
-       // panel.add(new JLabel("Calorie logs: " + this.user.getMealLogs().size() + " days"));
+        panel.add(new JLabel("Calorie logs: " + this.user.getMealLogs().size() + " days"));
         panel.add(new JLabel("Workout logs: " + this.user.getWorkoutLogs().size() + " days"));
         panel.add(bmrButtonButton);
 
@@ -82,21 +84,23 @@ public class UserFrame extends JFrame {
             double bmr = this.user.calculateBMR(this.user);
             JOptionPane.showMessageDialog(this, "Your BMR is: " + bmr, "BMR Calculation", JOptionPane.INFORMATION_MESSAGE);
         });
-       /* showMealLogsButton.addActionListener(e -> {
-            JFrame mealFrame = new JFrame("Last 7 meals");
+        showMealLogsButton.addActionListener(e -> {
+            JFrame mealFrame = new JFrame("meals");
             mealFrame.setSize(400, 300);
             mealFrame.setLocationRelativeTo(null);
 
             JTextArea textArea = new JTextArea();
             textArea.setEditable(false);
 
-            ArrayList<Meal> meals = this.user.get7daysOldMeal();
+            HashMap<LocalDate, ArrayList<Meal>> meals = this.user.getMealLogs();
             if (meals != null && !meals.isEmpty()) {
-                for (Meal meal : meals) {
-                    textArea.append(meal.toString() + "\n\n");
+                for (ArrayList<Meal> mealList : meals.values()) {
+                    for (Meal meal : mealList) {
+                        textArea.append(meal.toString() + "\n\n");
+                    }
                 }
             } else {
-                textArea.setText("No meals in the last 7 days.");
+                textArea.setText("No meals.");
             }
 
             JButton closeButton = new JButton("Close");
@@ -105,22 +109,23 @@ public class UserFrame extends JFrame {
             mealFrame.add(new JScrollPane(textArea));
             mealFrame.add(closeButton, BorderLayout.SOUTH);
             mealFrame.setVisible(true);
-        });*/
+        });
+
         showWorkoutLogsButton.addActionListener(e -> {
-            JFrame mealFrame = new JFrame("Last 7 workouts");
+            JFrame mealFrame = new JFrame("workouts");
             mealFrame.setSize(400, 300);
             mealFrame.setLocationRelativeTo(null);
 
             JTextArea textArea = new JTextArea();
             textArea.setEditable(false);
 
-            ArrayList<Workout> workouts = this.user.get7daysOldWorkout();
+            ArrayList<Workout> workouts = this.user.getWorkoutLogs();
             if (workouts != null && !workouts.isEmpty()) {
                 for (Workout workout : workouts) {
                     textArea.append(workout.toString() + "\n\n");
                 }
             } else {
-                textArea.setText("No workouts in the last 7 days.");
+                textArea.setText("No workouts");
             }
 
             JButton closeButton = new JButton("Close");

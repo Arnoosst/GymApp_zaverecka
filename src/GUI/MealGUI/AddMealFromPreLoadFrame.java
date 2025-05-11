@@ -49,6 +49,7 @@ public class AddMealFromPreLoadFrame extends JFrame {
                 boolean added = user.addMeal(meal);
                 if (added) {
                     JOptionPane.showMessageDialog(this, "Meal added successfully to today’s log.");
+                    user.addMealToLog(meal);
                 } else {
                     JOptionPane.showMessageDialog(this, "Meal could not be added.",
                             "Warning", JOptionPane.WARNING_MESSAGE);

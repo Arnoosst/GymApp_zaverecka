@@ -40,6 +40,14 @@ public class User implements Serializable {
 
 
 
+    public boolean addMealToLog(Meal meal) {
+        if (meal == null) return false;
+
+        LocalDate today = LocalDate.now();
+        mealLogs.computeIfAbsent(today, k -> new ArrayList<>()).add(meal);
+        return true;
+    }
+
 
     public boolean addWorkoutToLog(Workout workout) {
         workoutLogs.add(workout);
@@ -66,17 +74,7 @@ public class User implements Serializable {
         return bmr;
     }
 
-    public ArrayList<Workout> get7daysOldWorkout() {
-        ArrayList<Workout> temp = new ArrayList<>();
-        int a = workoutLogs.size();
-        if(workoutLogs.size() < 7){
-            a = 0;
-        }
-        for(int i = a; i < workoutLogs.size(); i++){
-            temp.add(workoutLogs.get(i));
-        }
-        return temp;
-    }
+
 
     public int getTotalCaloriesBurned() {
         int total = 0;
@@ -185,11 +183,19 @@ public class User implements Serializable {
         return true;
     }
     public ArrayList<Meal> getMealsToday() {
-        return mealsToday;
+        return mealLogs.getOrDefault(LocalDate.now(), new ArrayList<>());
     }
 
     public void setMealsToday(ArrayList<Meal> mealsToday) {
         this.mealsToday = mealsToday;
+    }
+
+    public HashMap<LocalDate, ArrayList<Meal>> getMealLogs() { 
+        return mealLogs;
+    }
+
+    public void setMealLogs(HashMap<LocalDate, ArrayList<Meal>> mealLogs) {
+        this.mealLogs = mealLogs;
     }
 
     public void setPassword(String password) { this.password = password; }
