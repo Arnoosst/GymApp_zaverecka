@@ -25,7 +25,7 @@ public class CaloriesChartMenuFrame extends JFrame {
     public CaloriesChartMenuFrame(User user, UserManager userManager) {
         this.user = user;
         this.userManager = userManager;
-        this.caloriesGoal = user.calculateBMR(user);
+        user.setCaloriesGoal(user.calculateBMR(user));
         setTitle("Calories Chart");
         setSize(600, 600);
         setLocationRelativeTo(null);
@@ -57,7 +57,7 @@ public class CaloriesChartMenuFrame extends JFrame {
         }
         mainPanel.add(new JLabel("Nutrients: Protein: " + totalProtein + "g, Carbs: " + totalCarbs + "g, Fat: " + totalFat + "g"));
 
-        caloriesLabel = new JLabel("Calories: " + totalKcal + " / " + caloriesGoal + " kcal");
+        caloriesLabel = new JLabel("Calories: " + totalKcal + " / " + user.getCaloriesGoal() + " kcal");
         mainPanel.add(caloriesLabel);
 
         backButton = new JButton("Back");
@@ -83,13 +83,14 @@ public class CaloriesChartMenuFrame extends JFrame {
 
 
         changeCaloriesGoalButton.addActionListener(e -> {
-            String input = JOptionPane.showInputDialog(this, "Enter new calorie goal:", (int) caloriesGoal);
+            String input = JOptionPane.showInputDialog(this, "Enter new calorie goal:", (int) user.getCaloriesGoal());
             if (input != null) {
                 try {
                     int newGoal = Integer.parseInt(input);
                     if (newGoal > 0) {
-                        setCaloriesGoal(newGoal);
-                        caloriesLabel.setText("Calories: " + totalKcal + " / " + caloriesGoal + " kcal");
+                        user.setCaloriesGoal(newGoal);
+                        userManager.saveUsers();
+                        caloriesLabel.setText("Calories: " + totalKcal + " / " + user.getCaloriesGoal() + " kcal");
                         JOptionPane.showMessageDialog(this, "Calorie goal updated to " + newGoal + " kcal.");
                     } else {
                         JOptionPane.showMessageDialog(this, "Please enter a positive number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
@@ -118,16 +119,6 @@ public class CaloriesChartMenuFrame extends JFrame {
         });
         
 
-    }
-
-
-
-    public double getCaloriesGoal() {
-        return caloriesGoal;
-    }
-
-    public void setCaloriesGoal(int caloriesGoal) {
-        this.caloriesGoal = caloriesGoal;
     }
 
 

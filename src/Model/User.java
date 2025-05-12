@@ -14,11 +14,11 @@ public class User implements Serializable {
     private double weight;
     private Gender gender;
     private String password;
+    private double caloriesGoal;
     private HashSet<Meal> customMeals = new HashSet<>();
     private HashSet<Workout> customWorkouts = new HashSet<>();
     private HashMap<LocalDate, ArrayList<Meal>> mealLogs;
     private ArrayList<Workout> workoutLogs = new ArrayList<>();
-    private ArrayList<Meal> mealsToday;
 
     public User(String userName, int age, String name, int height, int weight, Gender gender, String password) {
         this.userName = userName;
@@ -32,7 +32,6 @@ public class User implements Serializable {
         this.customWorkouts = new HashSet<>();
         this.mealLogs = new HashMap<>();
         this.workoutLogs = new ArrayList<>();
-        this.mealsToday = new ArrayList<>();
     }
 
     public User() {
@@ -47,6 +46,7 @@ public class User implements Serializable {
         mealLogs.computeIfAbsent(today, k -> new ArrayList<>()).add(meal);
         return true;
     }
+
 
 
     public boolean addWorkoutToLog(Workout workout) {
@@ -175,22 +175,19 @@ public class User implements Serializable {
         this.workoutLogs = workoutLogs;
     }
     public String getPassword() { return password; }
-    public boolean addMeal(Meal meal) {
-        if (meal == null) {
-            return false;
-        }
-        mealsToday.add(meal);
-        return true;
-    }
     public ArrayList<Meal> getMealsToday() {
         return mealLogs.getOrDefault(LocalDate.now(), new ArrayList<>());
     }
 
-    public void setMealsToday(ArrayList<Meal> mealsToday) {
-        this.mealsToday = mealsToday;
+    public double getCaloriesGoal() {
+        return caloriesGoal;
     }
 
-    public HashMap<LocalDate, ArrayList<Meal>> getMealLogs() { 
+    public void setCaloriesGoal(double caloriesGoal) {
+        this.caloriesGoal = caloriesGoal;
+    }
+
+    public HashMap<LocalDate, ArrayList<Meal>> getMealLogs() {
         return mealLogs;
     }
 

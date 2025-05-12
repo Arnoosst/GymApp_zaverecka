@@ -47,10 +47,10 @@ public class AddMealFromOwnFrame extends JFrame {
             });
 
             selectButton.addActionListener(e -> {
-                boolean added = user.addMeal(meal);
+                boolean added = user.addMealToLog(meal);
                 if (added) {
+                    userManager.saveUsers();
                     JOptionPane.showMessageDialog(this, "Meal added successfully to today’s log.");
-                    user.addMealToLog(meal);
                 } else {
                     JOptionPane.showMessageDialog(this, "Meal could not be added.",
                             "Warning", JOptionPane.WARNING_MESSAGE);

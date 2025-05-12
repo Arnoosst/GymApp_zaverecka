@@ -72,6 +72,7 @@ public class CreateCustomMealFrame extends JFrame{
 
 
                 user.addCustomMeal(customMeal);
+                userManager.saveUsers();
                 JOptionPane.showMessageDialog(this, "Meal added successfully!");
                 MealFrame mealFrame = new MealFrame(user, userManager);
                 mealFrame.setVisible(true);

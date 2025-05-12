@@ -53,6 +53,7 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
                 int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this workout?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     user.removeCustomWorkoout(workout);
+                    userManager.saveUsers();
                     DeleteCustomWokoutButtonFrame deleteCustomWokoutButtonFrame = new DeleteCustomWokoutButtonFrame(user, userManager);
                     deleteCustomWokoutButtonFrame.setVisible(true);
                     dispose();

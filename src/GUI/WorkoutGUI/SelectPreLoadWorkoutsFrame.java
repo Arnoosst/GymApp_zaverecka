@@ -163,6 +163,7 @@ public class SelectPreLoadWorkoutsFrame extends JFrame {
                     }
                     if(!cancelExercise) {
                         user.addWorkoutToLog(workout);
+                        userManager.saveUsers();
                         JOptionPane.showMessageDialog(this, "Workout completed!",
                                 "Success", JOptionPane.INFORMATION_MESSAGE);
                         WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);

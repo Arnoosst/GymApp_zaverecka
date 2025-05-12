@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Meal {
+public class Meal implements Serializable {
     private String name;
     private int kcal;
     private int protein, fat, carbs;

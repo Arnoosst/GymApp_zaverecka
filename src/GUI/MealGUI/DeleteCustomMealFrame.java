@@ -53,6 +53,7 @@ public class DeleteCustomMealFrame extends JFrame {
                 int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this meal?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     user.removeCustomMeal(meal);
+                    userManager.saveUsers();
                     DeleteCustomMealFrame deleteCustomMealFrame = new DeleteCustomMealFrame(user, userManager);
                     deleteCustomMealFrame.setVisible(true);
                     dispose();

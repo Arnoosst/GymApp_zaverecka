@@ -137,7 +137,8 @@ public class UserFrame extends JFrame {
         });
 
         changeDataButtonButton.addActionListener(e -> {
-            new ChangeUserDataFrame(this.user, this.userManager);
+            ChangeUserDataFrame changeUserDataFrame = new ChangeUserDataFrame(user, userManager);
+            changeUserDataFrame.setVisible(true);
             dispose();
         });
         showUsersMealsButton.addActionListener(e -> {

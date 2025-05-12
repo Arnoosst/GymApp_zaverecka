@@ -69,6 +69,7 @@ public class CreateWorkoutFrame extends JFrame {
             workout.setExercises(new ArrayList<>(exerciseList));
             user.addCustomWorkout(workout);
             JOptionPane.showMessageDialog(this, "Workout saved successfully!");
+            userManager.saveUsers();
             WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
             workoutFrame.setVisible(true);
             dispose();

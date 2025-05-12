@@ -49,7 +49,6 @@ public class UserManager implements Serializable {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
             return (HashMap<String, User>) in.readObject();
         } catch (InvalidClassException e) {
-            // If there's a version mismatch, delete the file and start fresh
             file.delete();
             return new HashMap<>();
         } catch (IOException | ClassNotFoundException e) {

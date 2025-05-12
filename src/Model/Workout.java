@@ -1,10 +1,11 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Workout {
+public class Workout implements Serializable {
     private String name;
     private int duration;
     private LocalDate date;

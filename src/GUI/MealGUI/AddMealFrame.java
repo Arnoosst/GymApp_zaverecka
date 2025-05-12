@@ -58,11 +58,11 @@ public class AddMealFrame extends JFrame {
                 int fat = Integer.parseInt(fatField.getText().trim());
 
                 Meal meal = new Meal(name, kcal, protein, carbs, fat);
-                boolean added = user.addMeal(meal);
+                boolean added = user.addMealToLog(meal);
 
                 if (added) {
+                    userManager.saveUsers();
                     JOptionPane.showMessageDialog(this, "Meal successfully added!");
-                    user.addMealToLog(meal);
                     ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
                     manageMealsFrame.setVisible(true);
                     dispose();

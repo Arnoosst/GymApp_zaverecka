@@ -85,6 +85,7 @@ public class ExerciseInputFrame extends JFrame {
 
             result = exercise;
             JOptionPane.showMessageDialog(this, "Exercise added successfully!");
+            userManager.saveUsers();
             dispose();
         });
 

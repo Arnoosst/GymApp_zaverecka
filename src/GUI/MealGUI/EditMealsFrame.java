@@ -8,6 +8,8 @@ import Model.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class EditMealsFrame extends JFrame{
     private User user;
@@ -34,34 +36,41 @@ public class EditMealsFrame extends JFrame{
         JPanel mealEditPanel = new JPanel();
         mealEditPanel.setLayout(new BoxLayout(mealEditPanel, BoxLayout.Y_AXIS));
 
-        for (Meal meal : user.getMealsToday()) {
-            JPanel singleMealButton = new JPanel(new BorderLayout());
-            singleMealButton.setBorder(BorderFactory.createTitledBorder(meal.getName()));
+        ArrayList<Meal> todayMeals = user.getMealLogs().get(LocalDate.now());
 
-            JPanel buttonPanel = new JPanel();
-            JButton infoButton = new JButton("More Info");
-            JButton deleteButton = new JButton("Delete");
+        if (todayMeals != null) {
+            for (Meal meal : todayMeals) {
+                JPanel singleMealButton = new JPanel(new BorderLayout());
+                singleMealButton.setBorder(BorderFactory.createTitledBorder(meal.getName()));
 
-            buttonPanel.add(infoButton);
-            buttonPanel.add(deleteButton);
-            singleMealButton.add(buttonPanel, BorderLayout.EAST);
+                JPanel buttonPanel = new JPanel();
+                JButton infoButton = new JButton("More Info");
+                JButton deleteButton = new JButton("Delete");
 
-            infoButton.addActionListener(e -> {
-                MealInfoFrame mealInfoFrame = new MealInfoFrame(meal);
-                mealInfoFrame.setVisible(true);
-            });
+                buttonPanel.add(infoButton);
+                buttonPanel.add(deleteButton);
+                singleMealButton.add(buttonPanel, BorderLayout.EAST);
 
-            deleteButton.addActionListener(e -> {
-                int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this meal?", "Confirm", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION) {
-                    user.getMealsToday().remove(meal);
-                    EditMealsFrame editMealsFrame = new EditMealsFrame(user, userManager);
-                    editMealsFrame.setVisible(true);
-                    dispose();
-                }
-            });
+                infoButton.addActionListener(e -> {
+                    MealInfoFrame mealInfoFrame = new MealInfoFrame(meal);
+                    mealInfoFrame.setVisible(true);
+                });
 
-            mealEditPanel.add(singleMealButton);
+                deleteButton.addActionListener(e -> {
+                    int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this meal?", "Confirm", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        user.getMealLogs().get(LocalDate.now()).remove(meal);
+                        userManager.saveUsers();
+                        EditMealsFrame editMealsFrame = new EditMealsFrame(user, userManager);
+                        editMealsFrame.setVisible(true);
+                        dispose();
+                    }
+                });
+
+                mealEditPanel.add(singleMealButton);
+            }
+        } else {
+            mealEditPanel.add(new JLabel("No meals logged for today."));
         }
 
         JScrollPane scrollPane = new JScrollPane(mealEditPanel);
