@@ -1,6 +1,5 @@
 package GUI.WorkoutGUI;
 
-import GUI.MainFrame;
 import GUI.MealGUI.CaloriesChartMenuFrame;
 import Model.PreparedWorkoutLoader;
 import Model.User;
