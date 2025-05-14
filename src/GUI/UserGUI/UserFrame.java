@@ -1,6 +1,8 @@
 package GUI.UserGUI;
 
 import GUI.MainFrame;
+import GUI.MealGUI.ViewCustomMealPanel;
+import GUI.WorkoutGUI.ViewCustomWorkoutPanel;
 import Model.Meal;
 import Model.User;
 import Model.UserManager;
@@ -85,55 +87,13 @@ public class UserFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Your BMR is: " + bmr, "BMR Calculation", JOptionPane.INFORMATION_MESSAGE);
         });
         showMealLogsButton.addActionListener(e -> {
-            JFrame mealFrame = new JFrame("meals");
-            mealFrame.setSize(400, 300);
-            mealFrame.setLocationRelativeTo(null);
-
-            JTextArea textArea = new JTextArea();
-            textArea.setEditable(false);
-
-            HashMap<LocalDate, ArrayList<Meal>> meals = this.user.getMealLogs();
-            if (meals != null && !meals.isEmpty()) {
-                for (ArrayList<Meal> mealList : meals.values()) {
-                    for (Meal meal : mealList) {
-                        textArea.append(meal.toString() + "\n\n");
-                    }
-                }
-            } else {
-                textArea.setText("No meals.");
-            }
-
-            JButton closeButton = new JButton("Close");
-            closeButton.addActionListener(ev -> mealFrame.dispose());
-
-            mealFrame.add(new JScrollPane(textArea));
-            mealFrame.add(closeButton, BorderLayout.SOUTH);
-            mealFrame.setVisible(true);
+            ViewMealLogsPanel...
+            //ukazujem meallogs.
         });
 
         showWorkoutLogsButton.addActionListener(e -> {
-            JFrame mealFrame = new JFrame("workouts");
-            mealFrame.setSize(400, 300);
-            mealFrame.setLocationRelativeTo(null);
-
-            JTextArea textArea = new JTextArea();
-            textArea.setEditable(false);
-
-            ArrayList<Workout> workouts = this.user.getWorkoutLogs();
-            if (workouts != null && !workouts.isEmpty()) {
-                for (Workout workout : workouts) {
-                    textArea.append(workout.toString() + "\n\n");
-                }
-            } else {
-                textArea.setText("No workouts");
-            }
-
-            JButton closeButton = new JButton("Close");
-            closeButton.addActionListener(ev -> mealFrame.dispose());
-
-            mealFrame.add(new JScrollPane(textArea));
-            mealFrame.add(closeButton, BorderLayout.SOUTH);
-            mealFrame.setVisible(true);
+            ViewWorkoutLogsPanel..
+            //ukazuje workoutlogy
         });
 
         changeDataButtonButton.addActionListener(e -> {
@@ -142,52 +102,12 @@ public class UserFrame extends JFrame {
             dispose();
         });
         showUsersMealsButton.addActionListener(e -> {
-            JFrame mealsFrame = new JFrame("All user meals");
-            mealsFrame.setSize(400, 300);
-            mealsFrame.setLocationRelativeTo(null);
-
-            JTextArea textArea = new JTextArea();
-            textArea.setEditable(false);
-
-            HashSet<Meal> meals = this.user.getCustomMeals();
-            if (meals != null && !meals.isEmpty()) {
-                for (Meal meal : meals) {
-                    textArea.append(meal.toString() + "\n\n");
-                }
-            } else {
-                textArea.setText("No custom meals.");
-            }
-
-            JButton closeButton = new JButton("Close");
-            closeButton.addActionListener(ev -> mealsFrame.dispose());
-
-            mealsFrame.add(new JScrollPane(textArea));
-            mealsFrame.add(closeButton, BorderLayout.SOUTH);
-            mealsFrame.setVisible(true);
+            ViewCustomMealPanel...
+            //Klasika dodealt cardlayout prikaz
         });
         showUsersWorkoutsButton.addActionListener(e -> {
-            JFrame mealsFrame = new JFrame("All user workouts");
-            mealsFrame.setSize(400, 300);
-            mealsFrame.setLocationRelativeTo(null);
-
-            JTextArea textArea = new JTextArea();
-            textArea.setEditable(false);
-
-            HashSet<Workout> workouts = this.user.getCustomWorkouts();
-            if (workouts != null && !workouts.isEmpty()) {
-                for (Workout workout : workouts) {
-                    textArea.append(workout.toString() + "\n\n");
-                }
-            } else {
-                textArea.setText("User has no workouts yet.");
-            }
-
-            JButton closeButton = new JButton("Close");
-            closeButton.addActionListener(ev -> mealsFrame.dispose());
-
-            mealsFrame.add(new JScrollPane(textArea));
-            mealsFrame.add(closeButton, BorderLayout.SOUTH);
-            mealsFrame.setVisible(true);
+            ViewCustomWorkoutPanel..
+            //stejny ja ve workoutGUI
         });
 
 

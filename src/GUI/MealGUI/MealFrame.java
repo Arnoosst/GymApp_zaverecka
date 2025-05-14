@@ -100,52 +100,14 @@ public class MealFrame extends JFrame {
 
 
         viewPresetMealsButton.addActionListener(e -> {
-            JFrame preLoadMealsFrame = new JFrame("All Preset Meals");
-            preLoadMealsFrame.setSize(400, 300);
-            preLoadMealsFrame.setLocationRelativeTo(null);
-            preLoadMealsFrame.setLayout(new BorderLayout(10, 10));
-
-            JTextArea textArea = new JTextArea();
-            textArea.setEditable(false);
-
-            ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");
-            if (!meals.isEmpty()) {
-                for (Meal meal : meals) {
-                    textArea.append(meal.getName() + ": " + meal.getKcal() +" kcal" + "\n\n");
-                }
-            }
-
-            JButton closeButton = new JButton("Close");
-            closeButton.addActionListener(ev -> preLoadMealsFrame.dispose());
-
-            preLoadMealsFrame.add(new JScrollPane(textArea), BorderLayout.CENTER);
-            preLoadMealsFrame.add(closeButton, BorderLayout.SOUTH);
-            preLoadMealsFrame.setVisible(true);});
+            ViewPresetMealPanel..
+            //zase klasika dodelat to tady
+        });
 
 
         viewCustomMealsButton.addActionListener(e -> {
-            JFrame mealsFrame = new JFrame("All user meals");
-            mealsFrame.setSize(400, 300);
-            mealsFrame.setLocationRelativeTo(null);
-
-            JTextArea textArea = new JTextArea();
-            textArea.setEditable(false);
-
-            HashSet<Meal> meals = this.user.getCustomMeals();
-            if (meals != null && !meals.isEmpty()) {
-                for (Meal meal : meals) {
-                    textArea.append(meal.toString() + "\n\n");
-                }
-            } else {
-                textArea.setText("No custom meals.");
-            }
-
-            JButton closeButton = new JButton("Close");
-            closeButton.addActionListener(ev -> mealsFrame.dispose());
-
-            mealsFrame.add(new JScrollPane(textArea));
-            mealsFrame.add(closeButton, BorderLayout.SOUTH);
-            mealsFrame.setVisible(true);
+            ViewCustomMealPanel..
+            //zase klasika dodelat to tady
         });
 
         backButton.addActionListener(e -> {

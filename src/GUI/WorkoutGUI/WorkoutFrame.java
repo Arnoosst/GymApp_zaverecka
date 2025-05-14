@@ -78,67 +78,29 @@ public class WorkoutFrame extends JFrame {
             CreateWorkoutFrame createCustomWorkoutFrame = new CreateWorkoutFrame(user, userManager);
             createCustomWorkoutFrame.setVisible(true);
             dispose();
+
         });
 
         viewPresetWorkoutsButton.addActionListener(e -> {
-            JFrame preLoadWorkoutFrame = new JFrame("All Preset Workouts");
-            preLoadWorkoutFrame.setSize(400, 300);
-            preLoadWorkoutFrame.setLocationRelativeTo(null);
-            preLoadWorkoutFrame.setLayout(new BorderLayout(10, 10));
-
-            JTextArea textArea = new JTextArea();
-            textArea.setEditable(false);
-
-            ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts("src/data/prepared_workouts.txt");
-            if (!workouts.isEmpty()) {
-                for (Workout workout : workouts) {
-                    textArea.append(workout.getName() + ": " + workout.getWorkoutLevel() + "\n\n");
-                }
-            }
-
-            JButton closeButton = new JButton("Close");
-            closeButton.addActionListener(ev -> preLoadWorkoutFrame.dispose());
-
-            preLoadWorkoutFrame.add(new JScrollPane(textArea), BorderLayout.CENTER);
-            preLoadWorkoutFrame.add(closeButton, BorderLayout.SOUTH);
-            preLoadWorkoutFrame.setVisible(true);
+            ViewPresetWorkoutsPanel viewPresetWorkoutsPanel = new ViewPresetWorkoutsPanel();
+                    //uz to mam jen to pak dopsat tady spravne jako tu tridu myslim, ma jit do view pre set workouts panel
         });
 
         viewCustomWorkoutsButton.addActionListener(e -> {
-            JFrame mealsFrame = new JFrame("All Custom Workouts");
-            mealsFrame.setSize(400, 300);
-            mealsFrame.setLocationRelativeTo(null);
-
-            JTextArea textArea = new JTextArea();
-            textArea.setEditable(false);
-
-            HashSet<Workout> workouts = this.user.getCustomWorkouts();
-            if (workouts != null && !workouts.isEmpty()) {
-                for (Workout workout : workouts) {
-                    textArea.append(workout.getName() + ": " + workout.getWorkoutLevel() + "\n\n");
-                }
-            } else {
-                textArea.setText("User has no custom workouts yet.");
-            }
-
-            JButton closeButton = new JButton("Close");
-            closeButton.addActionListener(ev -> mealsFrame.dispose());
-
-            mealsFrame.add(new JScrollPane(textArea));
-            mealsFrame.add(closeButton, BorderLayout.SOUTH);
-            mealsFrame.setVisible(true);
+            ViewCustomWorkoutPanel viewCustomWorkoutPanel = new ViewCustomWorkoutPanel();
+            //to stejne jen to tam pridat jak to ma byt, ma jit do viewcustompanle
         });
 
         deleteCustomWorkoutButton.addActionListener(e -> {
             DeleteCustomWokoutButtonFrame deleteCustomWokoutButtonFrame = new DeleteCustomWokoutButtonFrame(user, userManager);
             deleteCustomWokoutButtonFrame.setVisible(true);
             dispose();
+
+            //tady ma jit do deleteworkoutPanel
         });
 
         backButton.addActionListener(e -> {
-            MainFrame mainFrame = new MainFrame(user, userManager);
-            mainFrame.setVisible(true);
-            dispose();
+            //tady ma jit zpet do mainmenu
         });
     }
 }
