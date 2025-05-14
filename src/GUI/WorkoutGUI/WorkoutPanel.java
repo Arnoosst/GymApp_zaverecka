@@ -11,33 +11,19 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class WorkoutFrame extends JFrame {
+import javax.swing.*;
+import java.awt.*;
 
-    private User user;
-    private UserManager userManager;
+public class WorkoutPanel extends JPanel {
+
     private JButton startWorkoutButton;
     private JButton createCustomWorkoutButton;
     private JButton viewPresetWorkoutsButton;
     private JButton viewCustomWorkoutsButton;
     private JButton deleteCustomWorkoutButton;
     private JButton backButton;
-    private JButton ownWorkout;
-    private JButton preSetWorkout;
 
-    public WorkoutFrame(User user, UserManager userManager) {
-        this.user = user;
-        this.userManager = userManager;
-
-        setTitle("Workout Frame");
-        setSize(600, 600);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        initGUI(user, userManager);
-        setVisible(true);
-    }
-
-    private void initGUI(User user, UserManager userManager) {
+    public WorkoutPanel(User user, JPanel parentPanel, CardLayout cardLayout) {
         setLayout(new BorderLayout(10, 10));
 
         JLabel title = new JLabel("Workout Section", SwingConstants.CENTER);
@@ -68,39 +54,29 @@ public class WorkoutFrame extends JFrame {
         add(panel, BorderLayout.CENTER);
 
 
+
         startWorkoutButton.addActionListener(e -> {
-            StartWorkoutButtonFrame startWorkoutButtonFrame = new StartWorkoutButtonFrame(user, userManager);
-            startWorkoutButtonFrame.setVisible(true);
-            dispose();
+            // Např.: cardLayout.show(parentPanel, "startWorkoutPanel");
         });
 
         createCustomWorkoutButton.addActionListener(e -> {
-            CreateWorkoutFrame createCustomWorkoutFrame = new CreateWorkoutFrame(user, userManager);
-            createCustomWorkoutFrame.setVisible(true);
-            dispose();
-
+            // Např.: cardLayout.show(parentPanel, "createWorkoutPanel");
         });
 
         viewPresetWorkoutsButton.addActionListener(e -> {
-            ViewPresetWorkoutsPanel viewPresetWorkoutsPanel = new ViewPresetWorkoutsPanel();
-                    //uz to mam jen to pak dopsat tady spravne jako tu tridu myslim, ma jit do view pre set workouts panel
+            // Např.: cardLayout.show(parentPanel, "viewPresetWorkoutsPanel");
         });
 
         viewCustomWorkoutsButton.addActionListener(e -> {
-            ViewCustomWorkoutPanel viewCustomWorkoutPanel = new ViewCustomWorkoutPanel();
-            //to stejne jen to tam pridat jak to ma byt, ma jit do viewcustompanle
+            // Např.: cardLayout.show(parentPanel, "viewCustomWorkoutsPanel");
         });
 
         deleteCustomWorkoutButton.addActionListener(e -> {
-            DeleteCustomWokoutButtonFrame deleteCustomWokoutButtonFrame = new DeleteCustomWokoutButtonFrame(user, userManager);
-            deleteCustomWokoutButtonFrame.setVisible(true);
-            dispose();
-
-            //tady ma jit do deleteworkoutPanel
+            // Např.: cardLayout.show(parentPanel, "deleteWorkoutPanel");
         });
 
         backButton.addActionListener(e -> {
-            //tady ma jit zpet do mainmenu
+            // Např.: cardLayout.show(parentPanel, "mainMenuPanel");
         });
     }
 }
