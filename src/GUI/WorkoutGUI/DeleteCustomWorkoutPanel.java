@@ -7,28 +7,24 @@ import Model.Workout;
 import javax.swing.*;
 import java.awt.*;
 
-public class DeleteCustomWokoutButtonFrame extends JFrame {
+public class DeleteCustomWorkoutPanel extends JPanel {
+
     private User user;
     private UserManager userManager;
-    private JButton infoButton;
-    private JButton deleteButton;
-    private JButton backButton;
+    private JPanel parentPanel;
+    private CardLayout cardLayout;
 
-
-    public DeleteCustomWokoutButtonFrame(User user, UserManager userManager) {
+    public DeleteCustomWorkoutPanel(User user, UserManager userManager, JPanel parentPanel, CardLayout cardLayout) {
         this.user = user;
         this.userManager = userManager;
-
+        this.parentPanel = parentPanel;
+        this.cardLayout = cardLayout;
 
         setLayout(new BorderLayout(10, 10));
-        setTitle("User: " + user.getUserName() + " - Fitness App -");
-        setSize(600, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        initGUI(user, userManager);
+        initGUI();
     }
 
-    private void initGUI(User user, UserManager userManager) {
+    private void initGUI() {
         JPanel workoutPanel = new JPanel();
         workoutPanel.setLayout(new BoxLayout(workoutPanel, BoxLayout.Y_AXIS));
 
@@ -45,8 +41,7 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                WorkoutInfoButtonFrame workoutInfoButtonFrame = new WorkoutInfoButtonFrame(workout);
-                workoutInfoButtonFrame.setVisible(true);
+                //TODO klasika info button
             });
 
             deleteButton.addActionListener(e -> {
@@ -54,9 +49,11 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
                 if (confirm == JOptionPane.YES_OPTION) {
                     user.removeCustomWorkoout(workout);
                     userManager.saveUsers();
-                    DeleteCustomWokoutButtonFrame deleteCustomWokoutButtonFrame = new DeleteCustomWokoutButtonFrame(user, userManager);
-                    deleteCustomWokoutButtonFrame.setVisible(true);
-                    dispose();
+
+                    parentPanel.remove(this);
+                    DeleteCustomWorkoutPanel newPanel = new DeleteCustomWorkoutPanel(user, userManager, parentPanel, cardLayout);
+                    parentPanel.add(newPanel, "deleteWorkout");
+                    cardLayout.show(parentPanel, "deleteWorkout");
                 }
             });
 
@@ -72,10 +69,7 @@ public class DeleteCustomWokoutButtonFrame extends JFrame {
         add(bottomPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
-            workoutFrame.setVisible(true);
-            dispose();
+            cardLayout.show(parentPanel, "workoutMenu");
         });
     }
-
 }

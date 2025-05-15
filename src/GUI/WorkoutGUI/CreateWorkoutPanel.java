@@ -6,7 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CreateWorkoutFrame extends JFrame {
+public class CreateWorkoutPanel extends JPanel {
+
     private JTextField workoutNameField;
     private JComboBox<WorkoutLevel> levelBox;
     private JButton addExerciseButton;
@@ -15,14 +16,16 @@ public class CreateWorkoutFrame extends JFrame {
     private ArrayList<Exercise> exerciseList = new ArrayList<>();
     private User user;
     private UserManager userManager;
+    private JPanel parentPanel;
+    private CardLayout cardLayout;
 
-    public CreateWorkoutFrame(User user, UserManager userManager) {
+    public CreateWorkoutPanel(User user, UserManager userManager, JPanel parentPanel, CardLayout cardLayout) {
         this.user = user;
         this.userManager = userManager;
-        setTitle("New Custom Workout");
-        setSize(600, 600);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.parentPanel = parentPanel;
+        this.cardLayout = cardLayout;
+
+        setLayout(new BorderLayout(10, 10));
         initGUI();
     }
 
@@ -32,7 +35,7 @@ public class CreateWorkoutFrame extends JFrame {
         levelBox = new JComboBox<>(WorkoutLevel.values());
         addExerciseButton = new JButton("Add Exercise");
         saveButton = new JButton("Save Workout");
-        backButton = new JButton("back");
+        backButton = new JButton("Back");
 
         panel.add(new JLabel("Workout Name:"));
         panel.add(workoutNameField);
@@ -48,41 +51,43 @@ public class CreateWorkoutFrame extends JFrame {
         add(backPanel, BorderLayout.SOUTH);
 
         addExerciseButton.addActionListener(e -> {
-            ExerciseInputFrame exerciseInputFrame = new ExerciseInputFrame(user, userManager);
-            exerciseInputFrame.setVisible(true);
-            addExerciseToWorkout(exerciseInputFrame.getResult());
+            ExerciseInputPanel exerciseInputPanel = new ExerciseInputPanel(user, userManager, parentPanel, cardLayout, this);
+            parentPanel.add(exerciseInputPanel, "exerciseInput");
+            cardLayout.show(parentPanel, "exerciseInput");
         });
 
         saveButton.addActionListener(e -> {
             String name = workoutNameField.getText().trim();
-            WorkoutLevel workoutLevel = (WorkoutLevel) levelBox.getSelectedItem();
+            WorkoutLevel level = (WorkoutLevel) levelBox.getSelectedItem();
+
             if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Enter workout name.");
                 return;
             }
+
             if (exerciseList.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Add at least one exercise.");
                 return;
             }
 
-            Workout workout = new Workout(name, 0, null, workoutLevel);
+            Workout workout = new Workout(name, 0, null, level);
             workout.setExercises(new ArrayList<>(exerciseList));
             user.addCustomWorkout(workout);
-            JOptionPane.showMessageDialog(this, "Workout saved successfully!");
             userManager.saveUsers();
-            WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
-            workoutFrame.setVisible(true);
-            dispose();
-        });
-        backButton.addActionListener(e -> {
-            WorkoutFrame workoutFrame = new WorkoutFrame(user, userManager);
-            workoutFrame.setVisible(true);
-            dispose();
-        });
-    }
 
+            JOptionPane.showMessageDialog(this, "Workout saved successfully!");
+            cardLayout.show(parentPanel, "workoutMenu");
+        });
+
+        backButton.addActionListener(e -> {
+            cardLayout.show(parentPanel, "workoutMenu");
+        });
+
+
+    }
     public void addExerciseToWorkout(Exercise ex) {
         exerciseList.add(ex);
+        JOptionPane.showMessageDialog(this, "Exercise \"" + ex.getName() + "\" added.");
     }
 }
 

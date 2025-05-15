@@ -7,11 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ViewWorkoutLogsPanel extends JPanel{
+public class ViewWorkoutLogsPanel extends JPanel {
 
-    public ViewWorkoutLogsPanel(User user, CardLayout cardLayout, JPanel parentPanel){
+    public ViewWorkoutLogsPanel(User user, CardLayout cardLayout, JPanel parentPanel) {
         setLayout(new BorderLayout());
-
 
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
@@ -27,12 +26,11 @@ public class ViewWorkoutLogsPanel extends JPanel{
 
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(ev -> {
-            //TODO vrac zpet do user panelu/frame
+            cardLayout.show(parentPanel, "userMenu");
         });
 
-        add(new JScrollPane(textArea));
+        add(new JScrollPane(textArea), BorderLayout.CENTER);
         add(closeButton, BorderLayout.SOUTH);
-
-
     }
 }
+

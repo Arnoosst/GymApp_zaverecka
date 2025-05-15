@@ -7,51 +7,56 @@ import Model.Workout;
 import javax.swing.*;
 import java.awt.*;
 
-public class SelectUserWorkoutFrame extends JFrame {
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+
+public class SelectUserWorkoutPanel extends JPanel {
+
     private User user;
     private UserManager userManager;
-    private JButton infoButton;
-    private JButton selectButton;
-    private JButton backButton;
+    private JPanel parentPanel;
+    private CardLayout cardLayout;
 
-    public SelectUserWorkoutFrame(User user, UserManager userManager) {
+    public SelectUserWorkoutPanel(User user, UserManager userManager, JPanel parentPanel, CardLayout cardLayout) {
         this.user = user;
         this.userManager = userManager;
-
+        this.parentPanel = parentPanel;
+        this.cardLayout = cardLayout;
 
         setLayout(new BorderLayout(10, 10));
-        setTitle("User: " + user.getUserName() + " - Fitness App -");
-        setSize(600, 600);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        initGUI(user, userManager);
+        initGUI();
     }
 
-    public void initGUI(User user, UserManager userManager) {
+    private void initGUI() {
         JPanel workoutPanel = new JPanel();
         workoutPanel.setLayout(new BoxLayout(workoutPanel, BoxLayout.Y_AXIS));
 
+        HashSet<Workout> customWorkouts = user.getCustomWorkouts();
 
-        for (Workout workout : user.getCustomWorkouts()) {
+        for (Workout workout : customWorkouts) {
             JPanel singleWorkoutPanel = new JPanel(new BorderLayout());
             singleWorkoutPanel.setBorder(BorderFactory.createTitledBorder(workout.getName()));
 
             JPanel buttonPanel = new JPanel();
-            infoButton = new JButton("More Info");
-            selectButton = new JButton("Select");
+            JButton infoButton = new JButton("More Info");
+            JButton selectButton = new JButton("Select");
 
             buttonPanel.add(infoButton);
             buttonPanel.add(selectButton);
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                WorkoutInfoButtonFrame workoutInfoButtonFrame = new WorkoutInfoButtonFrame(workout);
-                workoutInfoButtonFrame.setVisible(true);
+                //TODO switch na ifo button
             });
 
             selectButton.addActionListener(e -> {
-                SelectWorkoutPanel...
-                //TO DO dodelat tady ten odkaz na to, musi mu tam nejak prijit ten workout
+                // TODO: Přepnout na SelectWorkoutPanel s daným workoutem
+                // Např.:
+                // SelectWorkoutPanel selectWorkoutPanel = new SelectWorkoutPanel(workout, user, userManager, parentPanel, cardLayout);
+                // parentPanel.add(selectWorkoutPanel, "selectWorkout");
+                // cardLayout.show(parentPanel, "selectWorkout");
             });
 
             workoutPanel.add(singleWorkoutPanel);
@@ -61,15 +66,12 @@ public class SelectUserWorkoutFrame extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
 
         JPanel bottomPanel = new JPanel();
-        backButton = new JButton("Back");
+        JButton backButton = new JButton("Back");
         bottomPanel.add(backButton);
         add(bottomPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            StartWorkoutButtonFrame startWorkoutButtonFrame = new StartWorkoutButtonFrame(user, userManager);
-            startWorkoutButtonFrame.setVisible(true);
-            dispose();
+            cardLayout.show(parentPanel, "startWorkout");
         });
     }
-
 }

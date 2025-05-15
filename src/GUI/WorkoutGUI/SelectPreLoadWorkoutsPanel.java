@@ -9,30 +9,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class SelectPreLoadWorkoutsFrame extends JFrame {
+
+public class SelectPreLoadWorkoutsPanel extends JPanel {
+
     private User user;
     private UserManager userManager;
-    private JButton infoButton;
-    private JButton selectButton;
-    private JButton backButton;
+    private JPanel parentPanel;
+    private CardLayout cardLayout;
 
-    public SelectPreLoadWorkoutsFrame(User user) {
+    public SelectPreLoadWorkoutsPanel(User user, UserManager userManager, JPanel parentPanel, CardLayout cardLayout) {
         this.user = user;
-
+        this.userManager = userManager;
+        this.parentPanel = parentPanel;
+        this.cardLayout = cardLayout;
 
         setLayout(new BorderLayout(10, 10));
-        setTitle("User: " + user.getUserName() + " - Fitness App -");
-        setSize(600, 600);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
         initGUI();
     }
 
-    public void initGUI() {
+    private void initGUI() {
         JPanel workoutPanel = new JPanel();
         workoutPanel.setLayout(new BoxLayout(workoutPanel, BoxLayout.Y_AXIS));
-        ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts("src/data/prepared_workouts.txt");
 
+        ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts("src/data/prepared_workouts.txt");
 
         for (Workout workout : workouts) {
             JPanel singleWorkoutPanel = new JPanel(new BorderLayout());
@@ -47,13 +46,15 @@ public class SelectPreLoadWorkoutsFrame extends JFrame {
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                WorkoutInfoButtonFrame workoutInfoButtonFrame = new WorkoutInfoButtonFrame(workout);
-                workoutInfoButtonFrame.setVisible(true);
+                //TODO zas odkaz na ifobutto
             });
 
             selectButton.addActionListener(e -> {
-                SelectWorkoutPanel...
-                //TO DO dodelat tady ten odkaz na to, musi mu tam nejak prijit ten workout
+                // TODO: Přepnout na SelectWorkoutPanel s daným workoutem
+                // Např.:
+                // SelectWorkoutPanel selectWorkoutPanel = new SelectWorkoutPanel(workout, user, userManager, parentPanel, cardLayout);
+                // parentPanel.add(selectWorkoutPanel, "selectWorkout");
+                // cardLayout.show(parentPanel, "selectWorkout");
             });
 
             workoutPanel.add(singleWorkoutPanel);
@@ -68,10 +69,8 @@ public class SelectPreLoadWorkoutsFrame extends JFrame {
         add(bottomPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            StartWorkoutButtonFrame startWorkoutButtonFrame = new StartWorkoutButtonFrame(user, userManager);
-            startWorkoutButtonFrame.setVisible(true);
-            dispose();
+            cardLayout.show(parentPanel, "startWorkout");
         });
     }
-
 }
+
