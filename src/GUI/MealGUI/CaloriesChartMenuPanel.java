@@ -9,34 +9,15 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class CaloriesChartMenuFrame extends JFrame {
-    private JButton backButton;
-    private JButton editTodaysMealButton;
-    private User user;
-    private UserManager userManager;
-    private JButton addMealButton;
-    private JButton changeCaloriesGoalButton;
-    private LocalDate date;
-    private double caloriesGoal;
+public class CaloriesChartMenuPanel extends JPanel {
+
     private JLabel caloriesLabel;
     private int totalKcal;
 
-
-    public CaloriesChartMenuFrame(User user, UserManager userManager) {
-        this.user = user;
-        this.userManager = userManager;
-        user.setCaloriesGoal(user.calculateBMR(user));
-        setTitle("Calories Chart");
-        setSize(600, 600);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        initGUI(user, userManager);
-        setVisible(true);
-    }
-
-    public void initGUI(User user, UserManager userManager) {
+    public CaloriesChartMenuPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         setLayout(new BorderLayout(10, 10));
+        user.setCaloriesGoal(user.calculateBMR(user)); // Nastaví goal při spuštění
+
         JLabel title = new JLabel("Calories chart menu", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
@@ -55,17 +36,16 @@ public class CaloriesChartMenuFrame extends JFrame {
             totalCarbs += m.getCarbs();
             totalFat += m.getFat();
         }
+
         mainPanel.add(new JLabel("Nutrients: Protein: " + totalProtein + "g, Carbs: " + totalCarbs + "g, Fat: " + totalFat + "g"));
 
         caloriesLabel = new JLabel("Calories: " + totalKcal + " / " + user.getCaloriesGoal() + " kcal");
         mainPanel.add(caloriesLabel);
 
-        backButton = new JButton("Back");
-        addMealButton = new JButton("Add Meal");
-        editTodaysMealButton = new JButton("Edit Todays Meal");
-        changeCaloriesGoalButton = new JButton("Change Calories Goal");
-
-
+        JButton addMealButton = new JButton("Add Meal");
+        JButton changeCaloriesGoalButton = new JButton("Change Calories Goal");
+        JButton editTodaysMealButton = new JButton("Edit Todays Meal");
+        JButton backButton = new JButton("Back");
 
         mainPanel.add(addMealButton);
         mainPanel.add(changeCaloriesGoalButton);
@@ -74,13 +54,10 @@ public class CaloriesChartMenuFrame extends JFrame {
 
         add(mainPanel, BorderLayout.CENTER);
 
-
         addMealButton.addActionListener(e -> {
-            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
-            manageMealsFrame.setVisible(true);
-            dispose();
+            parentPanel.add(new ManageMealsPanel(user, userManager, cardLayout, parentPanel), "manageMeals");
+            cardLayout.show(parentPanel, "manageMeals");
         });
-
 
         changeCaloriesGoalButton.addActionListener(e -> {
             String input = JOptionPane.showInputDialog(this, "Enter new calorie goal:", (int) user.getCaloriesGoal());
@@ -101,25 +78,15 @@ public class CaloriesChartMenuFrame extends JFrame {
             }
         });
 
-
-
         editTodaysMealButton.addActionListener(e -> {
-            EditMealsFrame editMealsFrame = new EditMealsFrame(user, userManager);
-            editMealsFrame.setVisible(true);
-            dispose();
+            parentPanel.add(new EditMealsPanel(user, userManager, cardLayout, parentPanel), "editMeals");
+            cardLayout.show(parentPanel, "editMeals");
         });
-
-
-
 
         backButton.addActionListener(e -> {
-            MealFrame mealFrame = new MealFrame(user, userManager);
-            mealFrame.setVisible(true);
-            dispose();
+            parentPanel.add(new MealPanel(user, userManager, cardLayout, parentPanel), "mealMenu");
+            cardLayout.show(parentPanel, "mealMenu");
         });
-        
-
     }
-
-
 }
+

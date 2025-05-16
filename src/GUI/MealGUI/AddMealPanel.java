@@ -8,21 +8,11 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 
-public class AddMealFrame extends JFrame {
-    private User user;
-    private UserManager userManager;
+public class AddMealPanel extends JPanel {
 
-    public AddMealFrame(User user, UserManager userManager) {
-        this.user = user;
-        this.userManager = userManager;
-        setTitle("Add New Meal");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(400, 400);
-        setLocationRelativeTo(null);
-        initGUI(user, userManager);
-    }
+    public AddMealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+        setLayout(new BorderLayout());
 
-    private void initGUI(User user, UserManager userManager) {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(6, 2, 10, 10));
 
@@ -43,11 +33,12 @@ public class AddMealFrame extends JFrame {
         panel.add(new JLabel("Fat (g):"));
         panel.add(fatField);
 
+        JButton backButton = new JButton("Back");
         JButton addButton = new JButton("Add Meal");
-        JButton backButton = new JButton("back");
         panel.add(backButton);
         panel.add(addButton);
 
+        add(panel, BorderLayout.CENTER);
 
         addButton.addActionListener(e -> {
             try {
@@ -63,9 +54,8 @@ public class AddMealFrame extends JFrame {
                 if (added) {
                     userManager.saveUsers();
                     JOptionPane.showMessageDialog(this, "Meal successfully added!");
-                    ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
-                    manageMealsFrame.setVisible(true);
-                    dispose();
+                    parentPanel.add(new ManageMealsPanel(user, userManager, cardLayout, parentPanel), "manageMeals");
+                    cardLayout.show(parentPanel, "manageMeals");
                 } else {
                     JOptionPane.showMessageDialog(this, "Meal could not be added.",
                             "Warning", JOptionPane.WARNING_MESSAGE);
@@ -76,16 +66,10 @@ public class AddMealFrame extends JFrame {
             }
         });
 
-
-
         backButton.addActionListener(e -> {
-            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
-            manageMealsFrame.setVisible(true);
-            dispose();
+            parentPanel.add(new ManageMealsPanel(user, userManager, cardLayout, parentPanel), "manageMeals");
+            cardLayout.show(parentPanel, "manageMeals");
         });
-
-
-        add(panel);
     }
 }
 

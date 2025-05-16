@@ -1,32 +1,21 @@
 package GUI.MealGUI;
 
 import Model.Meal;
-import Model.PreparedMealLoader;
 import Model.User;
 import Model.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.HashSet;
 
-public class AddMealFromPreLoadFrame extends JFrame {
-    private User user;
-    private UserManager userManager;
+public class AddMealFromOwnPanel extends JPanel {
 
-    public AddMealFromPreLoadFrame(User user, UserManager userManager) {
-        this.user = user;
-        this.userManager = userManager;
-        setTitle("Add Meal from Preloaded");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(500, 600);
-        setLocationRelativeTo(null);
-        initGUI(user, userManager);
-    }
+    public AddMealFromOwnPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+        setLayout(new BorderLayout());
 
-    private void initGUI(User user, UserManager userManager) {
-        JPanel mealAddFromPreLoadPanel = new JPanel();
-        mealAddFromPreLoadPanel.setLayout(new BoxLayout(mealAddFromPreLoadPanel, BoxLayout.Y_AXIS));
-        ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");
+        JPanel mealAddFromOwnPanel = new JPanel();
+        mealAddFromOwnPanel.setLayout(new BoxLayout(mealAddFromOwnPanel, BoxLayout.Y_AXIS));
+        HashSet<Meal> meals = user.getCustomMeals();
 
         for (Meal meal : meals) {
             JPanel singleMeal = new JPanel(new BorderLayout());
@@ -41,8 +30,7 @@ public class AddMealFromPreLoadFrame extends JFrame {
             singleMeal.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                MealInfoFrame mealInfoFrame = new MealInfoFrame(meal);
-                mealInfoFrame.setVisible(true);
+
             });
 
             selectButton.addActionListener(e -> {
@@ -56,25 +44,21 @@ public class AddMealFromPreLoadFrame extends JFrame {
                 }
             });
 
-            mealAddFromPreLoadPanel.add(singleMeal);
+            mealAddFromOwnPanel.add(singleMeal);
         }
 
-        JScrollPane scrollPane = new JScrollPane(mealAddFromPreLoadPanel);
+        JScrollPane scrollPane = new JScrollPane(mealAddFromOwnPanel);
 
         JPanel bottomPanel = new JPanel();
         JButton backButton = new JButton("Back");
         bottomPanel.add(backButton);
 
         backButton.addActionListener(e -> {
-            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
-            manageMealsFrame.setVisible(true);
-            dispose();
+            parentPanel.add(new ManageMealsPanel(user, userManager, cardLayout, parentPanel), "manageMeals");
+            cardLayout.show(parentPanel, "manageMeals");
         });
 
-
-        getContentPane().setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
     }
 }
-

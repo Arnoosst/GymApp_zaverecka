@@ -8,26 +8,15 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 
-public class AddMealFromOwnFrame extends JFrame {
-    private UserManager userManager;
-    private User user;
+public class AddMealFromPreLoadPanel extends JPanel {
 
-    public AddMealFromOwnFrame(User user, UserManager userManager) {
-        this.user = user;
-        this.userManager = userManager;
-        setTitle("Add Meal from Own");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(500, 600);
-        setLocationRelativeTo(null);
-        initGUI(user, userManager);
-    }
+    public AddMealFromPreLoadPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+        setLayout(new BorderLayout());
 
-    private void initGUI(User user, UserManager userManager) {
         JPanel mealAddFromPreLoadPanel = new JPanel();
         mealAddFromPreLoadPanel.setLayout(new BoxLayout(mealAddFromPreLoadPanel, BoxLayout.Y_AXIS));
-        HashSet<Meal> meals = user.getCustomMeals();
+        ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");
 
         for (Meal meal : meals) {
             JPanel singleMeal = new JPanel(new BorderLayout());
@@ -42,8 +31,8 @@ public class AddMealFromOwnFrame extends JFrame {
             singleMeal.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                MealInfoFrame mealInfoFrame = new MealInfoFrame(meal);
-                mealInfoFrame.setVisible(true);
+                MealInfoDialog dialog = new MealInfoDialog((JFrame) SwingUtilities.getWindowAncestor(this), meal);
+                dialog.setVisible(true);
             });
 
             selectButton.addActionListener(e -> {
@@ -66,14 +55,11 @@ public class AddMealFromOwnFrame extends JFrame {
         JButton backButton = new JButton("Back");
         bottomPanel.add(backButton);
 
-        backButton.addActionListener(e ->{
-            ManageMealsFrame manageMealsFrame = new ManageMealsFrame(user, userManager);
-            manageMealsFrame.setVisible(true);
-            dispose();
+        backButton.addActionListener(e -> {
+            parentPanel.add(new ManageMealsPanel(user, userManager, cardLayout, parentPanel), "manageMeals");
+            cardLayout.show(parentPanel, "manageMeals");
         });
 
-
-        getContentPane().setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
     }

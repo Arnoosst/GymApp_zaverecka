@@ -1,6 +1,6 @@
 package GUI.WorkoutGUI;
 
-import GUI.MealGUI.CaloriesChartMenuFrame;
+
 import Model.PreparedWorkoutLoader;
 import Model.User;
 import Model.UserManager;
@@ -56,27 +56,27 @@ public class WorkoutPanel extends JPanel {
 
 
         startWorkoutButton.addActionListener(e -> {
-            // Např.: cardLayout.show(parentPanel, "startWorkoutPanel");
+            cardLayout.show(parentPanel, "startWorkout");
         });
 
         createCustomWorkoutButton.addActionListener(e -> {
-            // Např.: cardLayout.show(parentPanel, "createWorkoutPanel");
+            cardLayout.show(parentPanel, "createWorkout");
         });
 
         viewPresetWorkoutsButton.addActionListener(e -> {
-            // Např.: cardLayout.show(parentPanel, "viewPresetWorkoutsPanel");
+            cardLayout.show(parentPanel, "viewPresetWorkouts");
         });
 
         viewCustomWorkoutsButton.addActionListener(e -> {
-            // Např.: cardLayout.show(parentPanel, "viewCustomWorkoutsPanel");
+            cardLayout.show(parentPanel, "viewCustomWorkouts");
         });
 
         deleteCustomWorkoutButton.addActionListener(e -> {
-            // Např.: cardLayout.show(parentPanel, "deleteWorkoutPanel");
+            cardLayout.show(parentPanel, "deleteWorkout");
         });
 
         backButton.addActionListener(e -> {
-            // Např.: cardLayout.show(parentPanel, "mainMenuPanel");
+            cardLayout.show(parentPanel, "mainMenu");
         });
     }
 }

@@ -46,15 +46,15 @@ public class SelectPreLoadWorkoutsPanel extends JPanel {
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                //TODO zas odkaz na ifobutto
+                WorkoutInfoDialog dialog = new WorkoutInfoDialog(
+                        (JFrame) SwingUtilities.getWindowAncestor(this), workout);
+                dialog.setVisible(true);
             });
 
             selectButton.addActionListener(e -> {
-                // TODO: Přepnout na SelectWorkoutPanel s daným workoutem
-                // Např.:
-                // SelectWorkoutPanel selectWorkoutPanel = new SelectWorkoutPanel(workout, user, userManager, parentPanel, cardLayout);
-                // parentPanel.add(selectWorkoutPanel, "selectWorkout");
-                // cardLayout.show(parentPanel, "selectWorkout");
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                WorkoutExecutionDialog dialog = new WorkoutExecutionDialog(parentFrame, workout, user, userManager);
+                dialog.setVisible(true);
             });
 
             workoutPanel.add(singleWorkoutPanel);

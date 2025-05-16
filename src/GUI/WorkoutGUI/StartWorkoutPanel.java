@@ -26,15 +26,15 @@ public class StartWorkoutPanel extends JPanel {
 
 
         ownWorkout.addActionListener(e -> {
-            // cardLayout.show(parentPanel, "selectUserWorkout");
+            cardLayout.show(parentPanel, "selectUserWorkout");
         });
 
         preSetWorkout.addActionListener(e -> {
-            // cardLayout.show(parentPanel, "selectPreSetWorkout");
+            cardLayout.show(parentPanel, "selectPreLoadWorkout");
         });
 
         backButton.addActionListener(e -> {
-            // cardLayout.show(parentPanel, "workoutPanel");
+            cardLayout.show(parentPanel, "workout");
         });
     }
 }

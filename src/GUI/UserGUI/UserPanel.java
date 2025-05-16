@@ -1,6 +1,5 @@
 package GUI.UserGUI;
 
-import GUI.MainFrame;
 import GUI.MainMenuPanel;
 import GUI.MealGUI.ViewCustomMealPanel;
 import GUI.WorkoutGUI.ViewCustomWorkoutPanel;
@@ -50,38 +49,32 @@ public class UserPanel extends JPanel {
 
         JButton changeDataButton = new JButton("Change details");
         changeDataButton.addActionListener(e -> {
-            parentPanel.add(new ChangeUserDataPanel(user, userManager, cardLayout, parentPanel), "changeUserData");
             cardLayout.show(parentPanel, "changeUserData");
         });
 
         JButton showMealLogsButton = new JButton("Show calorie logs");
         showMealLogsButton.addActionListener(e -> {
-            parentPanel.add(new ViewMealLogsPanel(user, cardLayout, parentPanel), "viewMealLogs");
             cardLayout.show(parentPanel, "viewMealLogs");
         });
 
         JButton showWorkoutLogsButton = new JButton("Show workout logs");
         showWorkoutLogsButton.addActionListener(e -> {
-            parentPanel.add(new ViewWorkoutLogsPanel(user, cardLayout, parentPanel), "viewWorkoutLogs");
             cardLayout.show(parentPanel, "viewWorkoutLogs");
         });
 
         JButton showUsersMealsButton = new JButton("Show custom meals");
         showUsersMealsButton.addActionListener(e -> {
-            parentPanel.add(new ViewCustomMealPanel(user, cardLayout, parentPanel), "viewCustomMeals");
             cardLayout.show(parentPanel, "viewCustomMeals");
         });
 
         JButton showUsersWorkoutsButton = new JButton("Show custom workouts");
         showUsersWorkoutsButton.addActionListener(e -> {
-            parentPanel.add(new ViewCustomWorkoutPanel(user, cardLayout, parentPanel), "viewCustomWorkouts");
             cardLayout.show(parentPanel, "viewCustomWorkouts");
         });
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
-            parentPanel.add(new MainMenuPanel(user, userManager, cardLayout, parentPanel), "main");
-            cardLayout.show(parentPanel, "main");
+            cardLayout.show(parentPanel, "mainMenu");
         });
 
         actionsPanel.add(changeDataButton);

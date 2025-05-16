@@ -6,24 +6,17 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 
-public class ChangeUserDataFrame extends JFrame {
 
+public class ChangeUserDataPanel extends JPanel {
     private User user;
     private UserManager userManager;
-    private UserFrame userFrame;
 
-    public ChangeUserDataFrame(User user, UserManager userManager) {
+    public ChangeUserDataPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         this.user = user;
         this.userManager = userManager;
-        setTitle("Change User Data");
-        setSize(600, 600);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        initGUI(user, userManager);
 
-    }
+        setLayout(new BorderLayout());
 
-    public void initGUI(User user, UserManager userManager) {
         JPanel panel = new JPanel(new GridLayout(6, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -35,17 +28,19 @@ public class ChangeUserDataFrame extends JFrame {
 
         nameButton.addActionListener(e -> {
             String newName = JOptionPane.showInputDialog(this, "Enter new name:");
-            if (newName != null && !newName.isEmpty()) {
-                user.setName(newName);
+            if (newName != null && !newName.trim().isEmpty()) {
+                user.setName(newName.trim());
                 userManager.saveUsers();
+                JOptionPane.showMessageDialog(this, "Name updated.");
             }
         });
 
         passwordButton.addActionListener(e -> {
             String newPassword = JOptionPane.showInputDialog(this, "Enter new password:");
-            if (newPassword != null && !newPassword.isEmpty()) {
-                user.setPassword(newPassword);
+            if (newPassword != null && !newPassword.trim().isEmpty()) {
+                user.setPassword(newPassword.trim());
                 userManager.saveUsers();
+                JOptionPane.showMessageDialog(this, "Password updated.");
             }
         });
 
@@ -55,6 +50,7 @@ public class ChangeUserDataFrame extends JFrame {
                 double weight = Double.parseDouble(newWeight);
                 user.setWeight(weight);
                 userManager.saveUsers();
+                JOptionPane.showMessageDialog(this, "Weight updated.");
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Invalid value.");
             }
@@ -66,15 +62,14 @@ public class ChangeUserDataFrame extends JFrame {
                 int height = Integer.parseInt(newHeight);
                 user.setHeight(height);
                 userManager.saveUsers();
+                JOptionPane.showMessageDialog(this, "Height updated.");
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Invalid value.");
             }
         });
 
         backButton.addActionListener(e -> {
-            UserFrame userFrame = new UserFrame(user, userManager);
-            userFrame.setVisible(true);
-            dispose();
+            cardLayout.show(parentPanel, "user");
         });
 
         panel.add(nameButton);
@@ -83,7 +78,6 @@ public class ChangeUserDataFrame extends JFrame {
         panel.add(heightButton);
         panel.add(backButton);
 
-        add(panel);
-        setVisible(true);
+        add(panel, BorderLayout.CENTER);
     }
 }

@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+
 public class CreateWorkoutPanel extends JPanel {
 
     private JTextField workoutNameField;
@@ -51,9 +55,14 @@ public class CreateWorkoutPanel extends JPanel {
         add(backPanel, BorderLayout.SOUTH);
 
         addExerciseButton.addActionListener(e -> {
-            ExerciseInputPanel exerciseInputPanel = new ExerciseInputPanel(user, userManager, parentPanel, cardLayout, this);
-            parentPanel.add(exerciseInputPanel, "exerciseInput");
-            cardLayout.show(parentPanel, "exerciseInput");
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Exercise exercise = ExerciseInputDialog.showDialog(frame);
+
+            if (exercise != null) {
+                exerciseList.add(exercise);
+                JOptionPane.showMessageDialog(this, "Exercise \"" + exercise.getName() + "\" added.");
+                userManager.saveUsers();
+            }
         });
 
         saveButton.addActionListener(e -> {
@@ -76,18 +85,12 @@ public class CreateWorkoutPanel extends JPanel {
             userManager.saveUsers();
 
             JOptionPane.showMessageDialog(this, "Workout saved successfully!");
-            cardLayout.show(parentPanel, "workoutMenu");
+            cardLayout.show(parentPanel, "workout");
         });
 
         backButton.addActionListener(e -> {
-            cardLayout.show(parentPanel, "workoutMenu");
+            cardLayout.show(parentPanel, "workout");
         });
-
-
-    }
-    public void addExerciseToWorkout(Exercise ex) {
-        exerciseList.add(ex);
-        JOptionPane.showMessageDialog(this, "Exercise \"" + ex.getName() + "\" added.");
     }
 }
 

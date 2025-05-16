@@ -41,7 +41,9 @@ public class DeleteCustomWorkoutPanel extends JPanel {
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                //TODO klasika info button
+                WorkoutInfoDialog dialog = new WorkoutInfoDialog(
+                        (JFrame) SwingUtilities.getWindowAncestor(this), workout);
+                dialog.setVisible(true);
             });
 
             deleteButton.addActionListener(e -> {

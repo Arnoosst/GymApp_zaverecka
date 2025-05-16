@@ -25,7 +25,7 @@ public class ViewPresetWorkoutsPanel extends JPanel {
 
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(ev ->{
-            cardLayout.show(parentPanel, "workoutMainPanel");
+            cardLayout.show(parentPanel, "workout");
         });
 
         add(new JScrollPane(textArea), BorderLayout.CENTER);

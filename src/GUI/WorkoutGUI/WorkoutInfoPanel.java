@@ -21,7 +21,7 @@ public class WorkoutInfoPanel extends JPanel {
         add(backButton, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            cardLayout.show(parentPanel, "workoutList"); // nebo název, který používáš pro předchozí panel
+            cardLayout.show(parentPanel, "workoutList");
         });
     }
 }

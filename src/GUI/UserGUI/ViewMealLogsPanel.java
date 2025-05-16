@@ -31,7 +31,7 @@ public class ViewMealLogsPanel extends JPanel{
 
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(ev -> {
-            // TODO vracime zpet do UserFramu
+            cardLayout.show(parentPanel, "user");
         });
 
         add(new JScrollPane(textArea));

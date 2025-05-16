@@ -26,7 +26,7 @@ public class ViewWorkoutLogsPanel extends JPanel {
 
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(ev -> {
-            cardLayout.show(parentPanel, "userMenu");
+            cardLayout.show(parentPanel, "user");
         });
 
         add(new JScrollPane(textArea), BorderLayout.CENTER);

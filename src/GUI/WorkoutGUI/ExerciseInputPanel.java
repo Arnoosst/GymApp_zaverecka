@@ -1,4 +1,4 @@
-package GUI.WorkoutGUI;
+/*package GUI.WorkoutGUI;
 
 import Model.*;
 
@@ -100,4 +100,4 @@ public class ExerciseInputPanel extends JPanel {
     public Exercise getResult() {
         return result;
     }
-}
+}*/
