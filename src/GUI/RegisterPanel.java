@@ -27,23 +27,69 @@ public class RegisterPanel extends JPanel {
         registerButton = new JButton("Register");
         backButton = new JButton("Back");
 
-        add(new JLabel("Username:")); add(usernameField);
-        add(new JLabel("Name:")); add(nameField);
-        add(new JLabel("Password:")); add(passwordField);
-        add(new JLabel("Age:")); add(ageField);
-        add(new JLabel("Height (cm):")); add(heightField);
-        add(new JLabel("Weight (kg):")); add(weightField);
-        add(new JLabel("Gender:")); add(genderBox);
-        add(registerButton); add(backButton);
+        add(new JLabel("Username:"));
+        add(usernameField);
+        add(new JLabel("Name:"));
+        add(nameField);
+        add(new JLabel("Password:"));
+        add(passwordField);
+        add(new JLabel("Age:"));
+        add(ageField);
+        add(new JLabel("Height (cm):"));
+        add(heightField);
+        add(new JLabel("Weight (kg):"));
+        add(weightField);
+        add(new JLabel("Gender:"));
+        add(genderBox);
+        add(registerButton);
+        add(backButton);
 
-        registerButton.addActionListener(e -> {
-            // validace + registrace
-            // přepnout panel
-            cardLayout.show(parentPanel, "loginPanel");
+        registerButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText().trim();
+                String password = passwordField.getText().trim();
+                String name = nameField.getText().trim();
+                int age, height, weight;
+
+                try {
+
+                    age = Integer.parseInt(ageField.getText().trim());
+                    height = Integer.parseInt(heightField.getText().trim());
+                    weight = Integer.parseInt(weightField.getText().trim());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please check that age, height and weight are valid numbers.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Gender gender = (Gender) genderBox.getSelectedItem();
+
+                if (username.isEmpty()) {
+                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please enter username.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (password.isEmpty()) {
+                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please enter password.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                User newUser = new User(username, age,name, height,weight, gender, password);
+
+
+                boolean success = userManager.registerUser(newUser);
+
+                if (success) {
+                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Registration successful!");
+                    cardLayout.show(parentPanel, "login");
+                } else {
+                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "User already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         });
 
         backButton.addActionListener(e -> {
-            cardLayout.show(parentPanel, "loginPanel");
+            cardLayout.show(parentPanel, "login");
         });
     }
 }

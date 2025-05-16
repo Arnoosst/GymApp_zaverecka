@@ -37,7 +37,6 @@ public class DeleteCustomMealPanel extends JPanel {
                 if (confirm == JOptionPane.YES_OPTION) {
                     user.removeCustomMeal(meal);
                     userManager.saveUsers();
-                    parentPanel.add(new DeleteCustomMealPanel(user, userManager, cardLayout, parentPanel), "deleteCustomMeal");
                     cardLayout.show(parentPanel, "deleteCustomMeal");
                 }
             });
@@ -54,8 +53,7 @@ public class DeleteCustomMealPanel extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            parentPanel.add(new MealPanel(user, userManager, cardLayout, parentPanel), "mealMenu");
-            cardLayout.show(parentPanel, "mealMenu");
+            cardLayout.show(parentPanel, "meal");
         });
     }
 }

@@ -56,7 +56,6 @@ public class AddMealFromPreLoadPanel extends JPanel {
         bottomPanel.add(backButton);
 
         backButton.addActionListener(e -> {
-            parentPanel.add(new ManageMealsPanel(user, userManager, cardLayout, parentPanel), "manageMeals");
             cardLayout.show(parentPanel, "manageMeals");
         });
 

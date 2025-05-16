@@ -25,7 +25,7 @@ public class ViewCustomMealPanel extends JPanel {
 
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(ev -> {
-            //TODO klasika dodelat tady vraci zpet do mealframe/panelu
+            cardLayout.show(parentPanel, "meal");
         });
 
         add(new JScrollPane(textArea));

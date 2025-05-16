@@ -41,7 +41,6 @@ public class LoginPanel extends JPanel {
         });
 
         registerButton.addActionListener(e -> {
-            parentPanel.add(new RegisterPanel(userManager, cardLayout, parentPanel), "register");
             cardLayout.show(parentPanel, "register");
         });
     }

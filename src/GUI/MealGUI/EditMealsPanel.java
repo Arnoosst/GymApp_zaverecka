@@ -18,7 +18,13 @@ public class EditMealsPanel extends JPanel {
         JPanel mealEditPanel = new JPanel();
         mealEditPanel.setLayout(new BoxLayout(mealEditPanel, BoxLayout.Y_AXIS));
 
-        ArrayList<Meal> todayMeals = user.getMealLogs().get(LocalDate.now());
+        ArrayList<Meal> todayMeals;
+        if (user.getMealLogs() == null || user.getMealLogs().isEmpty()) {
+            todayMeals = new ArrayList<>();
+        } else {
+            todayMeals = user.getMealLogs().get(LocalDate.now());
+        }
+
 
         if (todayMeals != null && !todayMeals.isEmpty()) {
             for (Meal meal : new ArrayList<>(todayMeals)) {
@@ -43,7 +49,6 @@ public class EditMealsPanel extends JPanel {
                     if (confirm == JOptionPane.YES_OPTION) {
                         todayMeals.remove(meal);
                         userManager.saveUsers();
-                        parentPanel.add(new EditMealsPanel(user, userManager, cardLayout, parentPanel), "editMeals");
                         cardLayout.show(parentPanel, "editMeals");
                     }
                 });
@@ -63,8 +68,7 @@ public class EditMealsPanel extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(e -> {
-            parentPanel.add(new CaloriesChartMenuPanel(user, userManager, cardLayout, parentPanel), "caloriesChart");
-            cardLayout.show(parentPanel, "caloriesChart");
+            cardLayout.show(parentPanel, "caloriesChartMenu");
         });
     }
 }

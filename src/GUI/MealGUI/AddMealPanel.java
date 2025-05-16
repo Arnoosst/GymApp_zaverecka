@@ -54,7 +54,6 @@ public class AddMealPanel extends JPanel {
                 if (added) {
                     userManager.saveUsers();
                     JOptionPane.showMessageDialog(this, "Meal successfully added!");
-                    parentPanel.add(new ManageMealsPanel(user, userManager, cardLayout, parentPanel), "manageMeals");
                     cardLayout.show(parentPanel, "manageMeals");
                 } else {
                     JOptionPane.showMessageDialog(this, "Meal could not be added.",
@@ -67,7 +66,6 @@ public class AddMealPanel extends JPanel {
         });
 
         backButton.addActionListener(e -> {
-            parentPanel.add(new ManageMealsPanel(user, userManager, cardLayout, parentPanel), "manageMeals");
             cardLayout.show(parentPanel, "manageMeals");
         });
     }

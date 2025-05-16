@@ -87,7 +87,7 @@ public class ExerciseInputPanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Exercise added successfully!");
             userManager.saveUsers();
 
-            returnPanel.addExerciseToWorkout(exercise); // pošleme zpět výsledek
+            returnPanel.addExerciseToWorkout(exercise);
             cardLayout.show(parentPanel, "createWorkout");
         });
 

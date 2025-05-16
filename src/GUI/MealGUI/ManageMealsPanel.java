@@ -26,23 +26,19 @@ public class ManageMealsPanel extends JPanel {
         add(mainPanel, BorderLayout.CENTER);
 
         addMealButton.addActionListener(e -> {
-            parentPanel.add(new AddMealPanel(user, userManager, cardLayout, parentPanel), "addMeal");
             cardLayout.show(parentPanel, "addMeal");
         });
 
         addMealFromPreLoadButton.addActionListener(e -> {
-            parentPanel.add(new AddMealFromPreLoadPanel(user, userManager, cardLayout, parentPanel), "addPreLoadMeal");
-            cardLayout.show(parentPanel, "addPreLoadMeal");
+            cardLayout.show(parentPanel, "addMealFromPreLoad");
         });
 
         addMealFromOwnMealsButton.addActionListener(e -> {
-            parentPanel.add(new AddMealFromOwnPanel(user, userManager, cardLayout, parentPanel), "addOwnMeal");
-            cardLayout.show(parentPanel, "addOwnMeal");
+            cardLayout.show(parentPanel, "addMealFromOwn");
         });
 
         backButton.addActionListener(e -> {
-            parentPanel.add(new CaloriesChartMenuPanel(user, userManager, cardLayout, parentPanel), "caloriesChart");
-            cardLayout.show(parentPanel, "caloriesChart");
+            cardLayout.show(parentPanel, "caloriesChartMenu");
         });
     }
 }

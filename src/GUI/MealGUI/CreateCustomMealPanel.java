@@ -61,8 +61,7 @@ public class CreateCustomMealPanel extends JPanel {
                 userManager.saveUsers();
 
                 JOptionPane.showMessageDialog(this, "Meal added successfully!");
-                parentPanel.add(new MealPanel(user, userManager, cardLayout, parentPanel), "mealMenu");
-                cardLayout.show(parentPanel, "mealMenu");
+                cardLayout.show(parentPanel, "meal");
 
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Please enter valid numbers.");
@@ -70,8 +69,7 @@ public class CreateCustomMealPanel extends JPanel {
         });
 
         backButton.addActionListener(ev -> {
-            parentPanel.add(new MealPanel(user, userManager, cardLayout, parentPanel), "mealMenu");
-            cardLayout.show(parentPanel, "mealMenu");
+            cardLayout.show(parentPanel, "meal");
         });
     }
 }

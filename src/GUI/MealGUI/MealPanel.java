@@ -16,7 +16,12 @@ public class MealPanel extends JPanel {
 
         JPanel panel = new JPanel(new GridLayout(8, 1, 5, 5));
         panel.setBorder(BorderFactory.createTitledBorder("Statistics"));
-        panel.add(new JLabel("Total number of days you logged: " + user.getMealLogs().size() + " days"));
+        if(user.getMealLogs()== null){
+            panel.add(new JLabel("Total number of days you logged: 0 days"));
+        }else{
+            panel.add(new JLabel("Total number of days you logged: " + user.getMealLogs().size() + " days"));
+        }
+
         panel.add(new JLabel("Total calories burned: " + user.getTotalCaloriesBurned() + " kcal"));
 
         JButton startLoggingMealButton = new JButton("Start Logging Meal");
@@ -36,32 +41,26 @@ public class MealPanel extends JPanel {
         add(panel, BorderLayout.CENTER);
 
         startLoggingMealButton.addActionListener(e -> {
-            parentPanel.add(new CaloriesChartMenuPanel(user, userManager, cardLayout, parentPanel), "caloriesChart");
-            cardLayout.show(parentPanel, "caloriesChart");
+            cardLayout.show(parentPanel, "caloriesChartMenu");
         });
 
         deleteCustomMealButton.addActionListener(e -> {
-            parentPanel.add(new DeleteCustomMealPanel(user, userManager, cardLayout, parentPanel), "deleteCustomMeal");
             cardLayout.show(parentPanel, "deleteCustomMeal");
         });
 
         createCustomMealButton.addActionListener(e -> {
-            parentPanel.add(new CreateCustomMealPanel(user, userManager, cardLayout, parentPanel), "createCustomMeal");
             cardLayout.show(parentPanel, "createCustomMeal");
         });
 
         viewPresetMealsButton.addActionListener(e -> {
-            parentPanel.add(new ViewPresetMealPanel(user, userManager, cardLayout, parentPanel), "viewPresetMeals");
-            cardLayout.show(parentPanel, "viewPresetMeals");
+            cardLayout.show(parentPanel, "viewPresetMeal");
         });
 
         viewCustomMealsButton.addActionListener(e -> {
-            parentPanel.add(new ViewCustomMealPanel(user, userManager, cardLayout, parentPanel), "viewCustomMeals");
-            cardLayout.show(parentPanel, "viewCustomMeals");
+            cardLayout.show(parentPanel, "viewCustomMeal");
         });
 
         backButton.addActionListener(e -> {
-            parentPanel.add(new MainMenuPanel(user, userManager, cardLayout, parentPanel), "mainMenu");
             cardLayout.show(parentPanel, "mainMenu");
         });
     }

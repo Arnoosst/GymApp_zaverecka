@@ -1,4 +1,4 @@
-package GUI.MealGUI;
+/*package GUI.MealGUI;
 
 import Model.Meal;
 
@@ -15,9 +15,11 @@ public class MealInfoPanel extends JPanel {
         infoArea.setText(meal.toString());
 
         JButton backButton = new JButton("Back");
-        backButton.addActionListener(e -> cardLayout.previous(parentPanel));
+        backButton.addActionListener(e -> {
+            cardLayout.show(parentPanel, "meal");
+        });
 
         add(new JScrollPane(infoArea), BorderLayout.CENTER);
         add(backButton, BorderLayout.SOUTH);
     }
-}
+}*/

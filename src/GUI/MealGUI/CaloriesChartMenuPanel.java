@@ -16,7 +16,7 @@ public class CaloriesChartMenuPanel extends JPanel {
 
     public CaloriesChartMenuPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         setLayout(new BorderLayout(10, 10));
-        user.setCaloriesGoal(user.calculateBMR(user)); // Nastaví goal při spuštění
+        user.setCaloriesGoal(user.calculateBMR(user));
 
         JLabel title = new JLabel("Calories chart menu", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
@@ -28,7 +28,7 @@ public class CaloriesChartMenuPanel extends JPanel {
         totalKcal = 0;
         int totalProtein = 0, totalCarbs = 0, totalFat = 0;
 
-        ArrayList<Meal> mealsToday = user.getMealLogs().getOrDefault(LocalDate.now(), new ArrayList<>());
+        ArrayList<Meal> mealsToday = user.getMealLogs() != null ? user.getMealLogs().getOrDefault(LocalDate.now(), new ArrayList<>()) : new ArrayList<>();
 
         for (Meal m : mealsToday) {
             totalKcal += m.getKcal();
@@ -55,7 +55,6 @@ public class CaloriesChartMenuPanel extends JPanel {
         add(mainPanel, BorderLayout.CENTER);
 
         addMealButton.addActionListener(e -> {
-            parentPanel.add(new ManageMealsPanel(user, userManager, cardLayout, parentPanel), "manageMeals");
             cardLayout.show(parentPanel, "manageMeals");
         });
 
@@ -79,14 +78,11 @@ public class CaloriesChartMenuPanel extends JPanel {
         });
 
         editTodaysMealButton.addActionListener(e -> {
-            parentPanel.add(new EditMealsPanel(user, userManager, cardLayout, parentPanel), "editMeals");
             cardLayout.show(parentPanel, "editMeals");
         });
 
         backButton.addActionListener(e -> {
-            parentPanel.add(new MealPanel(user, userManager, cardLayout, parentPanel), "mealMenu");
-            cardLayout.show(parentPanel, "mealMenu");
+            cardLayout.show(parentPanel, "meal");
         });
     }
 }
-

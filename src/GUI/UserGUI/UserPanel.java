@@ -19,12 +19,10 @@ public class UserPanel extends JPanel {
 
         setLayout(new BorderLayout(10, 10));
 
-        // Horní nadpis
         JLabel title = new JLabel("User: " + user.getUserName(), SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 16));
         add(title, BorderLayout.NORTH);
 
-        // Panel s informacemi o uživateli
         JPanel infoPanel = new JPanel(new GridLayout(10, 1, 5, 5));
         infoPanel.setBorder(BorderFactory.createTitledBorder("User Information"));
         infoPanel.add(new JLabel("Username: " + user.getUserName()));
@@ -33,7 +31,12 @@ public class UserPanel extends JPanel {
         infoPanel.add(new JLabel("Height: " + user.getHeight() + " cm"));
         infoPanel.add(new JLabel("Weight: " + user.getWeight() + " kg"));
         infoPanel.add(new JLabel("Gender: " + user.getGender()));
-        infoPanel.add(new JLabel("Calorie logs: " + user.getMealLogs().size() + " days"));
+        if(user.getMealLogs()== null){
+            infoPanel.add(new JLabel("Calorie logs: 0 days"));
+        }else{
+            infoPanel.add(new JLabel("Calorie logs: " + user.getMealLogs().size() + " days"));
+        }
+
         infoPanel.add(new JLabel("Workout logs: " + user.getWorkoutLogs().size() + " days"));
 
         JButton bmrButton = new JButton("Show BMR");
@@ -43,7 +46,6 @@ public class UserPanel extends JPanel {
         });
         infoPanel.add(bmrButton);
 
-        // Panel s akčními tlačítky
         JPanel actionsPanel = new JPanel(new GridLayout(6, 1, 5, 5));
         actionsPanel.setBorder(BorderFactory.createTitledBorder("Actions"));
 
@@ -84,7 +86,6 @@ public class UserPanel extends JPanel {
         actionsPanel.add(showUsersWorkoutsButton);
         actionsPanel.add(backButton);
 
-        // Spojení obou do jednoho prostředního panelu
         JPanel centerPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         centerPanel.add(infoPanel);
         centerPanel.add(actionsPanel);

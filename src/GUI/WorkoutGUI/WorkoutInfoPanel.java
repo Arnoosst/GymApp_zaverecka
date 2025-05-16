@@ -1,4 +1,4 @@
-package GUI.WorkoutGUI;
+/*package GUI.WorkoutGUI;
 
 import Model.Workout;
 
@@ -24,5 +24,5 @@ public class WorkoutInfoPanel extends JPanel {
             cardLayout.show(parentPanel, "workoutList");
         });
     }
-}
+}*/
 
