@@ -7,8 +7,10 @@ import javax.swing.*;
         import java.awt.*;
 
 public class StartWorkoutPanel extends JPanel {
+    private SelectUserWorkoutPanel selectUserWorkoutPanel;
 
-    public StartWorkoutPanel(User user, CardLayout cardLayout, JPanel parentPanel) {
+    public StartWorkoutPanel(User user, CardLayout cardLayout, JPanel parentPanel, SelectUserWorkoutPanel selectUserWorkoutPanel) {
+        this.selectUserWorkoutPanel = selectUserWorkoutPanel;
         setLayout(new BorderLayout());
 
         JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
@@ -26,6 +28,7 @@ public class StartWorkoutPanel extends JPanel {
 
 
         ownWorkout.addActionListener(e -> {
+            selectUserWorkoutPanel.refresh();
             cardLayout.show(parentPanel, "selectUserWorkout");
         });
 

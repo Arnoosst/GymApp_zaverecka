@@ -22,8 +22,12 @@ public class WorkoutPanel extends JPanel {
     private JButton viewCustomWorkoutsButton;
     private JButton deleteCustomWorkoutButton;
     private JButton backButton;
+    private ViewCustomWorkoutPanel viewCustomWorkoutPanel;
+    private DeleteCustomWorkoutPanel deleteCustomWorkoutPanel;
 
-    public WorkoutPanel(User user, JPanel parentPanel, CardLayout cardLayout) {
+    public WorkoutPanel(User user, JPanel parentPanel, CardLayout cardLayout, ViewCustomWorkoutPanel viewCustomWorkoutPanel, DeleteCustomWorkoutPanel deleteCustomWorkoutPanel) {
+        this.viewCustomWorkoutPanel = viewCustomWorkoutPanel;
+        this.deleteCustomWorkoutPanel = deleteCustomWorkoutPanel;
         setLayout(new BorderLayout(10, 10));
 
         JLabel title = new JLabel("Workout Section", SwingConstants.CENTER);
@@ -68,10 +72,12 @@ public class WorkoutPanel extends JPanel {
         });
 
         viewCustomWorkoutsButton.addActionListener(e -> {
+            viewCustomWorkoutPanel.refresh();
             cardLayout.show(parentPanel, "viewCustomWorkouts");
         });
 
         deleteCustomWorkoutButton.addActionListener(e -> {
+            deleteCustomWorkoutPanel.refresh();
             cardLayout.show(parentPanel, "deleteWorkout");
         });
 

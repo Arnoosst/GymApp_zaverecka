@@ -1,6 +1,8 @@
 package Model;
 
-public class ExerciseSets {
+import java.io.Serializable;
+
+public class ExerciseSets implements Serializable {
     private int reps;
     private double weight;
 

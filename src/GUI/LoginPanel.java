@@ -5,13 +5,19 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginPanel extends JPanel {
-    private JTextField usernameField;
-    private JTextField passwordField;
-    private JButton loginButton;
-    private JButton registerButton;
+import javax.swing.*;
+import java.awt.*;
 
-    public LoginPanel(UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+public class LoginPanel extends JPanel {
+    private final JTextField usernameField;
+    private final JTextField passwordField;
+    private final JButton loginButton;
+    private final JButton registerButton;
+    private final AppFrame appFrame;
+
+    public LoginPanel(UserManager userManager, CardLayout cardLayout, JPanel parentPanel, AppFrame appFrame) {
+        this.appFrame = appFrame;
+
         setLayout(new GridLayout(3, 2, 10, 10));
 
         usernameField = new JTextField();
@@ -33,7 +39,7 @@ public class LoginPanel extends JPanel {
 
             if (user != null) {
                 JOptionPane.showMessageDialog(this, "Login successful!");
-                parentPanel.add(new MainMenuPanel(user, userManager, cardLayout, parentPanel), "mainMenu");
+                appFrame.initializeUserPanels(user);  // aktualizace dynamických panelů
                 cardLayout.show(parentPanel, "mainMenu");
             } else {
                 JOptionPane.showMessageDialog(this, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);

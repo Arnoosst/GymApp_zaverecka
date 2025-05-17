@@ -48,8 +48,7 @@ public class SelectUserWorkoutPanel extends JPanel {
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                WorkoutInfoDialog dialog = new WorkoutInfoDialog(
-                        (JFrame) SwingUtilities.getWindowAncestor(this), workout);
+                WorkoutInfoDialog dialog = new WorkoutInfoDialog((JFrame) SwingUtilities.getWindowAncestor(this), workout);
                 dialog.setVisible(true);
             });
 
@@ -73,5 +72,12 @@ public class SelectUserWorkoutPanel extends JPanel {
         backButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "startWorkout");
         });
+    }
+
+    public void refresh() {
+        removeAll();
+        initGUI();
+        revalidate();
+        repaint();
     }
 }

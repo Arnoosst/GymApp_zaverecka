@@ -54,7 +54,7 @@ public class UserPanel extends JPanel {
             cardLayout.show(parentPanel, "changeUserData");
         });
 
-        JButton showMealLogsButton = new JButton("Show calorie logs");
+        JButton showMealLogsButton = new JButton("Show meal logs");
         showMealLogsButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "viewMealLogs");
         });
@@ -64,7 +64,7 @@ public class UserPanel extends JPanel {
             cardLayout.show(parentPanel, "viewWorkoutLogs");
         });
 
-        JButton showUsersMealsButton = new JButton("Show custom meals");
+       /* JButton showUsersMealsButton = new JButton("Show custom meals");
         showUsersMealsButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "viewCustomMeals");
         });
@@ -72,7 +72,7 @@ public class UserPanel extends JPanel {
         JButton showUsersWorkoutsButton = new JButton("Show custom workouts");
         showUsersWorkoutsButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "viewCustomWorkouts");
-        });
+        }); */
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
@@ -82,8 +82,8 @@ public class UserPanel extends JPanel {
         actionsPanel.add(changeDataButton);
         actionsPanel.add(showMealLogsButton);
         actionsPanel.add(showWorkoutLogsButton);
-        actionsPanel.add(showUsersMealsButton);
-        actionsPanel.add(showUsersWorkoutsButton);
+       // actionsPanel.add(showUsersMealsButton);
+       // actionsPanel.add(showUsersWorkoutsButton);
         actionsPanel.add(backButton);
 
         JPanel centerPanel = new JPanel(new GridLayout(2, 1, 10, 10));

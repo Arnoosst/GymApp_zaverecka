@@ -16,19 +16,26 @@ public class WorkoutExecutionDialog extends JDialog {
         setLocationRelativeTo(parent);
 
         if (workout.getExercises() == null || workout.getExercises().isEmpty()) {
-            JOptionPane.showMessageDialog(parent, "This workout has no exercises.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "This workout has no exercises.", "Error", JOptionPane.ERROR_MESSAGE);
+            dispose();
             return;
         }
 
-        int confirm = JOptionPane.showConfirmDialog(parent, "Start this workout?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION) return;
+        int confirm = JOptionPane.showConfirmDialog(this, "Start this workout?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            dispose();
+            return;
+        }
 
-        for (int i = 0; i < workout.getExercises().size(); i++) {
-            Exercise exercise = workout.getExercises().get(i);
+        for (Exercise exercise : workout.getExercises()) {
             if (exercise == null) continue;
 
             int setCount = askSetCount(exercise.getName());
-            if (setCount <= 0) return;
+            if (setCount <= 0) {
+                dispose();
+                return;
+            }
+
             exercise.initializeSets(setCount);
 
             for (int j = 0; j < setCount; j++) {
@@ -44,7 +51,10 @@ public class WorkoutExecutionDialog extends JDialog {
                     inputPanel.add(weightField);
 
                     int res = JOptionPane.showConfirmDialog(this, inputPanel, exercise.getName(), JOptionPane.OK_CANCEL_OPTION);
-                    if (res != JOptionPane.OK_OPTION) return;
+                    if (res != JOptionPane.OK_OPTION) {
+                        dispose();
+                        return;
+                    }
 
                     try {
                         int reps = Integer.parseInt(repsField.getText().trim());
@@ -64,7 +74,12 @@ public class WorkoutExecutionDialog extends JDialog {
 
         user.addWorkoutToLog(workout);
         userManager.saveUsers();
-        JOptionPane.showMessageDialog(this, "Workout completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        // Zobraz úspěšnou zprávu a pak uzavři okno ve správném vlákně
+        SwingUtilities.invokeLater(() -> {
+            JOptionPane.showMessageDialog(this, "Workout completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        });
     }
 
     private int askSetCount(String exerciseName) {
