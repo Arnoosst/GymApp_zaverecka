@@ -8,8 +8,6 @@ public class Main {
         new AppFrame(userManager);
     }
 
-        //TODO Neukladaj se nejake jidla do mellogu
-
 
         //TODO Predelat exeinputdialog back na jframe
 

@@ -8,10 +8,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ViewWorkoutLogsPanel extends JPanel {
-
+    private User user;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
     public ViewWorkoutLogsPanel(User user, CardLayout cardLayout, JPanel parentPanel) {
+        this.user = user;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
         setLayout(new BorderLayout());
+        initGUI();
+    }
 
+    private void initGUI() {
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
 
@@ -31,6 +39,13 @@ public class ViewWorkoutLogsPanel extends JPanel {
 
         add(new JScrollPane(textArea), BorderLayout.CENTER);
         add(closeButton, BorderLayout.SOUTH);
+    }
+
+    public void refresh() {
+        removeAll();
+        initGUI();
+        revalidate();
+        repaint();
     }
 }
 

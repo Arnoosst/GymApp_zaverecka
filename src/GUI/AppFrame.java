@@ -28,6 +28,9 @@ public class AppFrame extends JFrame {
     private ViewCustomMealPanel viewCustomMealPanel;
     private DeleteCustomMealPanel deleteCustomMealPanel;
     private CaloriesChartMenuPanel caloriesChartMenuPanel;
+    private EditMealsPanel editMealsPanel;
+    private ViewMealLogsPanel viewMealLogsPanel;
+    private ViewWorkoutLogsPanel viewWorkoutLogsPanel;
 
     public AppFrame(UserManager userManager) {
         this.userManager = userManager;
@@ -54,16 +57,18 @@ public class AppFrame extends JFrame {
         this.user = user;
 
         viewCustomWorkoutPanel = new ViewCustomWorkoutPanel(user, layout, cards);
-
+        viewWorkoutLogsPanel = new ViewWorkoutLogsPanel(user, layout,cards);
+        viewMealLogsPanel = new ViewMealLogsPanel(user, layout,cards);
         deleteCustomWorkoutPanel = new DeleteCustomWorkoutPanel(user, userManager, cards, layout);
         workoutPanel = new WorkoutPanel(user, cards, layout, viewCustomWorkoutPanel, deleteCustomWorkoutPanel);
 
-        userPanel = new UserPanel(user, userManager, layout, cards);
+        userPanel = new UserPanel(user, userManager, layout, cards, viewMealLogsPanel, viewWorkoutLogsPanel);
         selectUserWorkoutPanel = new SelectUserWorkoutPanel(user, userManager, cards, layout, workoutPanel);
 
         viewCustomMealPanel = new ViewCustomMealPanel(user, layout, cards);
         deleteCustomMealPanel = new DeleteCustomMealPanel(user, userManager, layout, cards);
-        caloriesChartMenuPanel = new CaloriesChartMenuPanel(user, userManager, layout, cards);
+        editMealsPanel = new EditMealsPanel(user, userManager, layout, cards);
+        caloriesChartMenuPanel = new CaloriesChartMenuPanel(user, userManager, layout, cards, editMealsPanel);
 
 
         cards.add(new MainMenuPanel(user, userManager, layout, cards), "mainMenu");
@@ -75,8 +80,8 @@ public class AppFrame extends JFrame {
         cards.add(new StartWorkoutPanel(user, layout, cards, selectUserWorkoutPanel), "startWorkout");
         cards.add(new SelectPreLoadWorkoutsPanel(user, userManager, cards, layout, workoutPanel), "selectPreLoadWorkout");
         cards.add(new CreateWorkoutPanel(user, userManager, cards, layout), "createWorkout");
-        cards.add(new ViewWorkoutLogsPanel(user, layout, cards), "viewWorkoutLogs");
-        cards.add(new ViewMealLogsPanel(user, layout, cards), "viewMealLogs");
+        cards.add(viewWorkoutLogsPanel, "viewWorkoutLogs");
+        cards.add(viewMealLogsPanel, "viewMealLogs");
         cards.add(userPanel, "user");
         cards.add(new ChangeUserDataPanel(user, userManager, layout, cards, userPanel), "changeUserData");
 
@@ -84,7 +89,7 @@ public class AppFrame extends JFrame {
         cards.add(viewCustomMealPanel, "viewCustomMeal");
         cards.add(new MealPanel(user, userManager, layout, cards, viewCustomMealPanel, deleteCustomMealPanel), "meal");
         cards.add(new ManageMealsPanel(user, userManager, layout, cards, caloriesChartMenuPanel), "manageMeals");
-        cards.add(new EditMealsPanel(user, userManager, layout, cards), "editMeals");
+        cards.add(editMealsPanel, "editMeals");
         cards.add(deleteCustomMealPanel, "deleteCustomMeal");
         cards.add(new CreateCustomMealPanel(user, userManager, layout, cards), "createCustomMeal");
         cards.add(caloriesChartMenuPanel, "caloriesChartMenu");

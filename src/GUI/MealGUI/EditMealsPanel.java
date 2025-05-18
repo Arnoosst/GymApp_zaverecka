@@ -12,9 +12,23 @@ import java.util.ArrayList;
 
 public class EditMealsPanel extends JPanel {
 
+    private UserManager userManager;
+    private User user;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
+
+
     public EditMealsPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+        this.userManager = userManager;
+        this.user = user;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
         setLayout(new BorderLayout(10, 10));
 
+        initGUI();
+    }
+
+    private void initGUI(){
         JPanel mealEditPanel = new JPanel();
         mealEditPanel.setLayout(new BoxLayout(mealEditPanel, BoxLayout.Y_AXIS));
 
@@ -48,6 +62,7 @@ public class EditMealsPanel extends JPanel {
                     if (confirm == JOptionPane.YES_OPTION) {
                         todayMeals.remove(meal);
                         userManager.saveUsers();
+                        refresh();
                         cardLayout.show(parentPanel, "editMeals");
                     }
                 });
@@ -69,5 +84,12 @@ public class EditMealsPanel extends JPanel {
         backButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "caloriesChartMenu");
         });
+    }
+
+    public void refresh() {
+        removeAll();
+        initGUI();
+        revalidate();
+        repaint();
     }
 }

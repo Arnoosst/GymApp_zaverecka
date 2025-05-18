@@ -14,10 +14,14 @@ public class UserPanel extends JPanel {
     private UserManager userManager;
     private JPanel infoPanel;
     private JPanel centerPanel;
+    private ViewMealLogsPanel viewMealLogsPanel;
+    private ViewWorkoutLogsPanel viewWorkoutLogsPanel;
 
-    public UserPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+    public UserPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, ViewMealLogsPanel viewMealLogsPanel, ViewWorkoutLogsPanel viewWorkoutLogsPanel) {
         this.user = user;
         this.userManager = userManager;
+        this.viewWorkoutLogsPanel = viewWorkoutLogsPanel;
+        this.viewMealLogsPanel = viewMealLogsPanel;
 
 
         setLayout(new BorderLayout(10, 10));
@@ -59,23 +63,15 @@ public class UserPanel extends JPanel {
 
         JButton showMealLogsButton = new JButton("Show meal logs");
         showMealLogsButton.addActionListener(e -> {
+            viewMealLogsPanel.refresh();
             cardLayout.show(parentPanel, "viewMealLogs");
         });
 
         JButton showWorkoutLogsButton = new JButton("Show workout logs");
         showWorkoutLogsButton.addActionListener(e -> {
+            viewWorkoutLogsPanel.refresh();
             cardLayout.show(parentPanel, "viewWorkoutLogs");
         });
-
-       /* JButton showUsersMealsButton = new JButton("Show custom meals");
-        showUsersMealsButton.addActionListener(e -> {
-            cardLayout.show(parentPanel, "viewCustomMeals");
-        });
-
-        JButton showUsersWorkoutsButton = new JButton("Show custom workouts");
-        showUsersWorkoutsButton.addActionListener(e -> {
-            cardLayout.show(parentPanel, "viewCustomWorkouts");
-        }); */
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
@@ -85,8 +81,6 @@ public class UserPanel extends JPanel {
         actionsPanel.add(changeDataButton);
         actionsPanel.add(showMealLogsButton);
         actionsPanel.add(showWorkoutLogsButton);
-       // actionsPanel.add(showUsersMealsButton);
-       // actionsPanel.add(showUsersWorkoutsButton);
         actionsPanel.add(backButton);
 
         this.centerPanel = new JPanel(new GridLayout(2, 1, 10, 10));
