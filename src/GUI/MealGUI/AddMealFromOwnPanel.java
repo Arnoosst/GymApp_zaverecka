@@ -30,8 +30,7 @@ public class AddMealFromOwnPanel extends JPanel {
             singleMeal.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                MealInfoDialog dialog = new MealInfoDialog((JFrame) SwingUtilities.getWindowAncestor(this), meal);
-                dialog.setVisible(true);
+                MealInfoFrame mealInfoFrame = new MealInfoFrame(meal);
             });
 
             selectButton.addActionListener(e -> {

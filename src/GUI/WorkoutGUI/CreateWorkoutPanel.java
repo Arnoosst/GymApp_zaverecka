@@ -6,10 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-
 public class CreateWorkoutPanel extends JPanel {
 
     private JTextField workoutNameField;
@@ -55,8 +51,9 @@ public class CreateWorkoutPanel extends JPanel {
         add(backPanel, BorderLayout.SOUTH);
 
         addExerciseButton.addActionListener(e -> {
-            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            Exercise exercise = ExerciseInputDialog.showDialog(frame);
+            ExerciseInputPanel exerciseInputPanel = new ExerciseInputPanel(user, userManager, parentPanel, cardLayout, this);
+            parentPanel.add(exerciseInputPanel, "exerciseInput");
+            Exercise exercise = exerciseInputPanel.getResult();
 
             if (exercise != null) {
                 exerciseList.add(exercise);

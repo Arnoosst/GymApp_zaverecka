@@ -30,7 +30,7 @@ public class WorkoutPanel extends JPanel {
         title.setFont(new Font("Arial", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 
-        infoPanel = new JPanel(new GridLayout(6, 1, 5, 5));
+        infoPanel = new JPanel(new GridLayout(4, 1, 5, 5));
         buttonPanel = new JPanel(new GridLayout(6, 1, 5, 5));
         infoPanel.setBorder(BorderFactory.createTitledBorder("Statistics"));
         infoPanel.add(new JLabel("Total number of workouts: " + user.getWorkoutLogs().size()));

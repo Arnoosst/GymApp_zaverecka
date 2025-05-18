@@ -7,22 +7,25 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MealPanel extends JPanel {
+    private User user;
+    private JPanel infoPanel;
     public MealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+        this.user = user;
         setLayout(new BorderLayout(10, 10));
 
         JLabel title = new JLabel("Meal Section", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 
-        JPanel panel = new JPanel(new GridLayout(8, 1, 5, 5));
-        panel.setBorder(BorderFactory.createTitledBorder("Statistics"));
+        infoPanel = new JPanel(new GridLayout(3, 1, 5, 5));
+        infoPanel.setBorder(BorderFactory.createTitledBorder("Statistics"));
         if(user.getMealLogs()== null){
-            panel.add(new JLabel("Total number of days you logged: 0 days"));
+            infoPanel.add(new JLabel("Total number of days you logged: 0 days"));
         }else{
-            panel.add(new JLabel("Total number of days you logged: " + user.getMealLogs().size() + " days"));
+            infoPanel.add(new JLabel("Total number of days you logged: " + user.getMealLogs().size() + " days"));
         }
 
-        panel.add(new JLabel("Total calories burned: " + user.getTotalCaloriesBurned() + " kcal"));
+        infoPanel.add(new JLabel("Total calories burned: " + user.getTotalCaloriesBurned() + " kcal"));
 
         JButton startLoggingMealButton = new JButton("Start Logging Meal");
         JButton deleteCustomMealButton = new JButton("Delete Custom Meal");
@@ -31,14 +34,16 @@ public class MealPanel extends JPanel {
         JButton viewCustomMealsButton = new JButton("View Custom Meals");
         JButton backButton = new JButton("Back");
 
-        panel.add(startLoggingMealButton);
-        panel.add(deleteCustomMealButton);
-        panel.add(createCustomMealButton);
-        panel.add(viewPresetMealsButton);
-        panel.add(viewCustomMealsButton);
-        panel.add(backButton);
+        JPanel buttonPanel = new JPanel(new GridLayout(6, 1, 5, 5));
+        buttonPanel.add(startLoggingMealButton);
+        buttonPanel.add(deleteCustomMealButton);
+        buttonPanel.add(createCustomMealButton);
+        buttonPanel.add(viewPresetMealsButton);
+        buttonPanel.add(viewCustomMealsButton);
+        buttonPanel.add(backButton);
 
-        add(panel, BorderLayout.CENTER);
+        add(infoPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
 
         startLoggingMealButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "caloriesChartMenu");
@@ -63,5 +68,26 @@ public class MealPanel extends JPanel {
         backButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "mainMenu");
         });
+    }
+
+    private JPanel createInfoPanel(){
+        JPanel newPanel = new JPanel(new GridLayout(3, 1, 5, 5));
+        newPanel.setBorder(BorderFactory.createTitledBorder("Statistics"));
+        if(user.getMealLogs()== null){
+            newPanel.add(new JLabel("Total number of days you logged: 0 days"));
+        }else{
+            newPanel.add(new JLabel("Total number of days you logged: " + user.getMealLogs().size() + " days"));
+        }
+
+        newPanel.add(new JLabel("Total calories burned: " + user.getTotalCaloriesBurned() + " kcal"));
+        return newPanel;
+    }
+
+    public void refresh(){
+        remove(infoPanel);
+        infoPanel = createInfoPanel();
+        add(infoPanel, BorderLayout.CENTER);
+        repaint();
+        revalidate();
     }
 }
