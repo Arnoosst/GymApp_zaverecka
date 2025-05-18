@@ -7,28 +7,44 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 public class CaloriesChartMenuPanel extends JPanel {
 
     private JLabel caloriesLabel;
     private int totalKcal;
+    private User user;
+    private UserManager userManager;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
 
     public CaloriesChartMenuPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+        this.user = user;
+        this.userManager = userManager;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
+
         setLayout(new BorderLayout(10, 10));
         user.setCaloriesGoal(user.calculateBMR(user));
 
+        initGUI();
+    }
+
+    private void initGUI() {
         JLabel title = new JLabel("Calories chart menu", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 
         JPanel mainPanel = new JPanel(new GridLayout(7, 1, 10, 10));
-
         mainPanel.add(new JLabel("Date: " + LocalDate.now()));
+
         totalKcal = 0;
         int totalProtein = 0, totalCarbs = 0, totalFat = 0;
 
-        ArrayList<Meal> mealsToday = user.getMealLogs() != null ? user.getMealLogs().getOrDefault(LocalDate.now(), new ArrayList<>()) : new ArrayList<>();
+        ArrayList<Meal> mealsToday = user.getMealLogs() != null
+                ? user.getMealLogs().getOrDefault(LocalDate.now(), new ArrayList<>())
+                : new ArrayList<>();
 
         for (Meal m : mealsToday) {
             totalKcal += m.getKcal();
@@ -54,9 +70,7 @@ public class CaloriesChartMenuPanel extends JPanel {
 
         add(mainPanel, BorderLayout.CENTER);
 
-        addMealButton.addActionListener(e -> {
-            cardLayout.show(parentPanel, "manageMeals");
-        });
+        addMealButton.addActionListener(e -> cardLayout.show(parentPanel, "manageMeals"));
 
         changeCaloriesGoalButton.addActionListener(e -> {
             String input = JOptionPane.showInputDialog(this, "Enter new calorie goal:", (int) user.getCaloriesGoal());
@@ -77,12 +91,16 @@ public class CaloriesChartMenuPanel extends JPanel {
             }
         });
 
-        editTodaysMealButton.addActionListener(e -> {
-            cardLayout.show(parentPanel, "editMeals");
-        });
+        editTodaysMealButton.addActionListener(e -> cardLayout.show(parentPanel, "editMeals"));
 
-        backButton.addActionListener(e -> {
-            cardLayout.show(parentPanel, "meal");
-        });
+        backButton.addActionListener(e -> cardLayout.show(parentPanel, "meal"));
+    }
+
+
+    public void refresh() {
+        removeAll();
+        initGUI();
+        revalidate();
+        repaint();
     }
 }

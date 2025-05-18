@@ -25,6 +25,9 @@ public class AppFrame extends JFrame {
     private DeleteCustomWorkoutPanel deleteCustomWorkoutPanel;
     private UserPanel userPanel;
     private WorkoutPanel workoutPanel;
+    private ViewCustomMealPanel viewCustomMealPanel;
+    private DeleteCustomMealPanel deleteCustomMealPanel;
+    private CaloriesChartMenuPanel caloriesChartMenuPanel;
 
     public AppFrame(UserManager userManager) {
         this.userManager = userManager;
@@ -58,6 +61,10 @@ public class AppFrame extends JFrame {
         userPanel = new UserPanel(user, userManager, layout, cards);
         selectUserWorkoutPanel = new SelectUserWorkoutPanel(user, userManager, cards, layout, workoutPanel);
 
+        viewCustomMealPanel = new ViewCustomMealPanel(user, layout, cards);
+        deleteCustomMealPanel = new DeleteCustomMealPanel(user, userManager, layout, cards);
+        caloriesChartMenuPanel = new CaloriesChartMenuPanel(user, userManager, layout, cards);
+
 
         cards.add(new MainMenuPanel(user, userManager, layout, cards), "mainMenu");
         cards.add(new ViewPresetWorkoutsPanel(layout, cards), "viewPresetWorkouts");
@@ -74,13 +81,13 @@ public class AppFrame extends JFrame {
         cards.add(new ChangeUserDataPanel(user, userManager, layout, cards, userPanel), "changeUserData");
 
         cards.add(new ViewPresetMealPanel(layout, cards), "viewPresetMeal");
-        cards.add(new ViewCustomMealPanel(user, layout, cards), "viewCustomMeal");
-        cards.add(new MealPanel(user, userManager, layout, cards), "meal");
-        cards.add(new ManageMealsPanel(user, userManager, layout, cards), "manageMeals");
+        cards.add(viewCustomMealPanel, "viewCustomMeal");
+        cards.add(new MealPanel(user, userManager, layout, cards, viewCustomMealPanel, deleteCustomMealPanel), "meal");
+        cards.add(new ManageMealsPanel(user, userManager, layout, cards, caloriesChartMenuPanel), "manageMeals");
         cards.add(new EditMealsPanel(user, userManager, layout, cards), "editMeals");
-        cards.add(new DeleteCustomMealPanel(user, userManager, layout, cards), "deleteCustomMeal");
+        cards.add(deleteCustomMealPanel, "deleteCustomMeal");
         cards.add(new CreateCustomMealPanel(user, userManager, layout, cards), "createCustomMeal");
-        cards.add(new CaloriesChartMenuPanel(user, userManager, layout, cards), "caloriesChartMenu");
+        cards.add(caloriesChartMenuPanel, "caloriesChartMenu");
         cards.add(new AddMealPanel(user, userManager, layout, cards), "addMeal");
         cards.add(new AddMealFromOwnPanel(user, userManager, layout, cards), "addMealFromOwn");
         cards.add(new AddMealFromPreLoadPanel(user, userManager, layout, cards), "addMealFromPreLoad");

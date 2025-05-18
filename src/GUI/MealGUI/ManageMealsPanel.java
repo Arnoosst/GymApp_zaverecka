@@ -6,8 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ManageMealsPanel extends JPanel {
+    private CaloriesChartMenuPanel caloriesChartMenuPanel;
 
-    public ManageMealsPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+    public ManageMealsPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, CaloriesChartMenuPanel caloriesChartMenuPanel) {
+        this.caloriesChartMenuPanel = caloriesChartMenuPanel;
         setLayout(new BorderLayout());
 
         JPanel mainPanel = new JPanel(new GridLayout(4, 1, 10, 10));
@@ -38,6 +40,7 @@ public class ManageMealsPanel extends JPanel {
         });
 
         backButton.addActionListener(e -> {
+            caloriesChartMenuPanel.refresh();
             cardLayout.show(parentPanel, "caloriesChartMenu");
         });
     }

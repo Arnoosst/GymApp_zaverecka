@@ -8,10 +8,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DeleteCustomMealPanel extends JPanel {
+    private User user;
+    private UserManager userManager;
+    private JPanel parentPanel;
+    private CardLayout cardLayout;
 
     public DeleteCustomMealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+        this.user = user;
+        this.userManager = userManager;
+        this.parentPanel = parentPanel;
+        this.cardLayout = cardLayout;
         setLayout(new BorderLayout(10, 10));
+        initGUI();
+    }
 
+    public void initGUI() {
         JPanel mealsPanel = new JPanel();
         mealsPanel.setLayout(new BoxLayout(mealsPanel, BoxLayout.Y_AXIS));
 
@@ -36,6 +47,7 @@ public class DeleteCustomMealPanel extends JPanel {
                 if (confirm == JOptionPane.YES_OPTION) {
                     user.removeCustomMeal(meal);
                     userManager.saveUsers();
+                    refresh();
                     cardLayout.show(parentPanel, "deleteCustomMeal");
                 }
             });
@@ -54,5 +66,13 @@ public class DeleteCustomMealPanel extends JPanel {
         backButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "meal");
         });
+    }
+
+
+    public void refresh() {
+        removeAll();
+        initGUI();
+        revalidate();
+        repaint();
     }
 }

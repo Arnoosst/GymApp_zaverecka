@@ -9,15 +9,19 @@ import java.awt.*;
 public class MealPanel extends JPanel {
     private User user;
     private JPanel infoPanel;
-    public MealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+    private ViewCustomMealPanel viewCustomMealPanel;
+    private DeleteCustomMealPanel deleteCustomMealPanel;
+    public MealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, ViewCustomMealPanel viewCustomMealPanel, DeleteCustomMealPanel deleteCustomMealPanel) {
         this.user = user;
+        this.viewCustomMealPanel = viewCustomMealPanel;
+        this.deleteCustomMealPanel = deleteCustomMealPanel;
         setLayout(new BorderLayout(10, 10));
 
         JLabel title = new JLabel("Meal Section", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 
-        infoPanel = new JPanel(new GridLayout(3, 1, 5, 5));
+        infoPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         infoPanel.setBorder(BorderFactory.createTitledBorder("Statistics"));
         if(user.getMealLogs()== null){
             infoPanel.add(new JLabel("Total number of days you logged: 0 days"));
@@ -50,6 +54,7 @@ public class MealPanel extends JPanel {
         });
 
         deleteCustomMealButton.addActionListener(e -> {
+            deleteCustomMealPanel.refresh();
             cardLayout.show(parentPanel, "deleteCustomMeal");
         });
 
@@ -62,6 +67,7 @@ public class MealPanel extends JPanel {
         });
 
         viewCustomMealsButton.addActionListener(e -> {
+            viewCustomMealPanel.refresh();
             cardLayout.show(parentPanel, "viewCustomMeal");
         });
 
@@ -71,7 +77,7 @@ public class MealPanel extends JPanel {
     }
 
     private JPanel createInfoPanel(){
-        JPanel newPanel = new JPanel(new GridLayout(3, 1, 5, 5));
+        JPanel newPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         newPanel.setBorder(BorderFactory.createTitledBorder("Statistics"));
         if(user.getMealLogs()== null){
             newPanel.add(new JLabel("Total number of days you logged: 0 days"));
