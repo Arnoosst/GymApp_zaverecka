@@ -7,9 +7,7 @@ import Model.Workout;
 import javax.swing.*;
 import java.awt.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 
 public class SelectUserWorkoutPanel extends JPanel {
@@ -18,18 +16,20 @@ public class SelectUserWorkoutPanel extends JPanel {
     private UserManager userManager;
     private JPanel parentPanel;
     private CardLayout cardLayout;
+    private WorkoutPanel workoutPanel2;
 
-    public SelectUserWorkoutPanel(User user, UserManager userManager, JPanel parentPanel, CardLayout cardLayout) {
+    public SelectUserWorkoutPanel(User user, UserManager userManager, JPanel parentPanel, CardLayout cardLayout, WorkoutPanel workoutPanel2) {
         this.user = user;
         this.userManager = userManager;
         this.parentPanel = parentPanel;
         this.cardLayout = cardLayout;
+        this.workoutPanel2 = workoutPanel2;
 
         setLayout(new BorderLayout(10, 10));
-        initGUI();
+        initGUI(workoutPanel2);
     }
 
-    private void initGUI() {
+    private void initGUI(WorkoutPanel workoutPanel2) {
         JPanel workoutPanel = new JPanel();
         workoutPanel.setLayout(new BoxLayout(workoutPanel, BoxLayout.Y_AXIS));
 
@@ -48,14 +48,12 @@ public class SelectUserWorkoutPanel extends JPanel {
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                WorkoutInfoDialog dialog = new WorkoutInfoDialog((JFrame) SwingUtilities.getWindowAncestor(this), workout);
-                dialog.setVisible(true);
+                WorkoutInfoFrame workoutInfoFrame = new WorkoutInfoFrame(workout);
+                workoutInfoFrame.setVisible(true);
             });
 
             selectButton.addActionListener(e -> {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                WorkoutExecutionDialog dialog = new WorkoutExecutionDialog(parentFrame, workout, user, userManager);
-                dialog.setVisible(true);
+                WorkoutExecutionFrame workoutExecutionFrame = new WorkoutExecutionFrame(user, userManager, workout, workoutPanel2);
             });
 
             workoutPanel.add(singleWorkoutPanel);
@@ -76,7 +74,7 @@ public class SelectUserWorkoutPanel extends JPanel {
 
     public void refresh() {
         removeAll();
-        initGUI();
+        initGUI(workoutPanel2);
         revalidate();
         repaint();
     }

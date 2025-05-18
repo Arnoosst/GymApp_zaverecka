@@ -10,10 +10,12 @@ import java.awt.*;
 public class ChangeUserDataPanel extends JPanel {
     private User user;
     private UserManager userManager;
+    private UserPanel userPanel;
 
-    public ChangeUserDataPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
+    public ChangeUserDataPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, UserPanel userPanel) {
         this.user = user;
         this.userManager = userManager;
+        this.userPanel = userPanel;
 
         setLayout(new BorderLayout());
 
@@ -69,6 +71,7 @@ public class ChangeUserDataPanel extends JPanel {
         });
 
         backButton.addActionListener(e -> {
+            userPanel.refresh();
             cardLayout.show(parentPanel, "user");
         });
 

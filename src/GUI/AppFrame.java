@@ -6,16 +6,8 @@ import GUI.UserGUI.UserPanel;
 import GUI.UserGUI.ViewMealLogsPanel;
 import GUI.UserGUI.ViewWorkoutLogsPanel;
 import GUI.WorkoutGUI.*;
-import Model.Meal;
 import Model.User;
 import Model.UserManager;
-import Model.Workout;
-
-import javax.swing.*;
-import java.awt.*;
-
-import javax.swing.*;
-import java.awt.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,10 +19,12 @@ public class AppFrame extends JFrame {
 
     private User user;
 
-    // Panely závislé na přihlášeném uživateli
+
     private ViewCustomWorkoutPanel viewCustomWorkoutPanel;
     private SelectUserWorkoutPanel selectUserWorkoutPanel;
     private DeleteCustomWorkoutPanel deleteCustomWorkoutPanel;
+    private UserPanel userPanel;
+    private WorkoutPanel workoutPanel;
 
     public AppFrame(UserManager userManager) {
         this.userManager = userManager;
@@ -42,7 +36,7 @@ public class AppFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Panely dostupné i bez přihlášení
+
         cards.add(new LoginPanel(userManager, layout, cards, this), "login");
         cards.add(new RegisterPanel(userManager, layout, cards), "register");
 
@@ -52,31 +46,32 @@ public class AppFrame extends JFrame {
         setVisible(true);
     }
 
-    /**
-     * Inicializuje všechny panely závislé na přihlášeném uživateli.
-     * Volá se po úspěšném přihlášení.
-     */
+
     public void initializeUserPanels(User user) {
         this.user = user;
 
         viewCustomWorkoutPanel = new ViewCustomWorkoutPanel(user, layout, cards);
-        selectUserWorkoutPanel = new SelectUserWorkoutPanel(user, userManager, cards, layout);
-        deleteCustomWorkoutPanel = new DeleteCustomWorkoutPanel(user, userManager, cards, layout);
 
-        // Hlavní menu a panely s jídelníčkem
+        deleteCustomWorkoutPanel = new DeleteCustomWorkoutPanel(user, userManager, cards, layout);
+        workoutPanel = new WorkoutPanel(user, cards, layout, viewCustomWorkoutPanel, deleteCustomWorkoutPanel);
+
+        userPanel = new UserPanel(user, userManager, layout, cards);
+        selectUserWorkoutPanel = new SelectUserWorkoutPanel(user, userManager, cards, layout, workoutPanel);
+
+
         cards.add(new MainMenuPanel(user, userManager, layout, cards), "mainMenu");
         cards.add(new ViewPresetWorkoutsPanel(layout, cards), "viewPresetWorkouts");
         cards.add(viewCustomWorkoutPanel, "viewCustomWorkouts");
         cards.add(deleteCustomWorkoutPanel, "deleteWorkout");
         cards.add(selectUserWorkoutPanel, "selectUserWorkout");
-        cards.add(new WorkoutPanel(user, cards, layout, viewCustomWorkoutPanel, deleteCustomWorkoutPanel), "workout");
+        cards.add(workoutPanel, "workout");
         cards.add(new StartWorkoutPanel(user, layout, cards, selectUserWorkoutPanel), "startWorkout");
-        cards.add(new SelectPreLoadWorkoutsPanel(user, userManager, cards, layout), "selectPreLoadWorkout");
+        cards.add(new SelectPreLoadWorkoutsPanel(user, userManager, cards, layout, workoutPanel), "selectPreLoadWorkout");
         cards.add(new CreateWorkoutPanel(user, userManager, cards, layout), "createWorkout");
         cards.add(new ViewWorkoutLogsPanel(user, layout, cards), "viewWorkoutLogs");
         cards.add(new ViewMealLogsPanel(user, layout, cards), "viewMealLogs");
-        cards.add(new UserPanel(user, userManager, layout, cards), "user");
-        cards.add(new ChangeUserDataPanel(user, userManager, layout, cards), "changeUserData");
+        cards.add(userPanel, "user");
+        cards.add(new ChangeUserDataPanel(user, userManager, layout, cards, userPanel), "changeUserData");
 
         cards.add(new ViewPresetMealPanel(layout, cards), "viewPresetMeal");
         cards.add(new ViewCustomMealPanel(user, layout, cards), "viewCustomMeal");

@@ -41,8 +41,7 @@ public class DeleteCustomWorkoutPanel extends JPanel {
             singleWorkoutPanel.add(buttonPanel, BorderLayout.EAST);
 
             infoButton.addActionListener(e -> {
-                WorkoutInfoDialog dialog = new WorkoutInfoDialog((JFrame) SwingUtilities.getWindowAncestor(this), workout);
-                dialog.setVisible(true);
+                WorkoutInfoFrame workoutInfoFrame = new WorkoutInfoFrame(workout);
             });
 
             deleteButton.addActionListener(e -> {
@@ -51,7 +50,7 @@ public class DeleteCustomWorkoutPanel extends JPanel {
                     user.removeCustomWorkoout(workout);
                     userManager.saveUsers();
 
-
+                    refresh();
                     cardLayout.show(parentPanel, "deleteWorkout");
                 }
             });
