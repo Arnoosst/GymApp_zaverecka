@@ -11,14 +11,21 @@ public class ChangeUserDataPanel extends JPanel {
     private User user;
     private UserManager userManager;
     private UserPanel userPanel;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
 
     public ChangeUserDataPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, UserPanel userPanel) {
         this.user = user;
         this.userManager = userManager;
         this.userPanel = userPanel;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
 
         setLayout(new BorderLayout());
+        initGUI();
+    }
 
+    private void initGUI() {
         JPanel panel = new JPanel(new GridLayout(6, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 

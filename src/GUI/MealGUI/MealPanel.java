@@ -11,12 +11,22 @@ public class MealPanel extends JPanel {
     private JPanel infoPanel;
     private ViewCustomMealPanel viewCustomMealPanel;
     private DeleteCustomMealPanel deleteCustomMealPanel;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
+
+
     public MealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, ViewCustomMealPanel viewCustomMealPanel, DeleteCustomMealPanel deleteCustomMealPanel) {
         this.user = user;
         this.viewCustomMealPanel = viewCustomMealPanel;
         this.deleteCustomMealPanel = deleteCustomMealPanel;
-        setLayout(new BorderLayout(10, 10));
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
 
+        setLayout(new BorderLayout(10, 10));
+        initGUI();
+    }
+
+    private void initGUI() {
         JLabel title = new JLabel("Meal Section", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
@@ -76,24 +86,11 @@ public class MealPanel extends JPanel {
         });
     }
 
-    private JPanel createInfoPanel(){
-        JPanel newPanel = new JPanel(new GridLayout(2, 1, 5, 5));
-        newPanel.setBorder(BorderFactory.createTitledBorder("Statistics"));
-        if(user.getMealLogs()== null){
-            newPanel.add(new JLabel("Total number of days you logged: 0 days"));
-        }else{
-            newPanel.add(new JLabel("Total number of days you logged: " + user.getMealLogs().size() + " days"));
-        }
-
-        newPanel.add(new JLabel("Total calories burned: " + user.getTotalCaloriesBurned() + " kcal"));
-        return newPanel;
-    }
 
     public void refresh(){
-        remove(infoPanel);
-        infoPanel = createInfoPanel();
-        add(infoPanel, BorderLayout.CENTER);
-        repaint();
+        removeAll();
+        initGUI();
         revalidate();
+        repaint();
     }
 }

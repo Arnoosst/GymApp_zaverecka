@@ -9,10 +9,22 @@ import java.awt.*;
 import java.util.HashSet;
 
 public class AddMealFromOwnPanel extends JPanel {
+    private User user;
+    private UserManager userManager;
+    private JPanel parentPanel;
+    private CardLayout cardLayout;
 
     public AddMealFromOwnPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
-        setLayout(new BorderLayout());
+        this.user = user;
+        this.userManager = userManager;
+        this.parentPanel = parentPanel;
+        this.cardLayout = cardLayout;
 
+        setLayout(new BorderLayout());
+        initGUI();
+    }
+
+    private void initGUI(){
         JPanel mealAddFromOwnPanel = new JPanel();
         mealAddFromOwnPanel.setLayout(new BoxLayout(mealAddFromOwnPanel, BoxLayout.Y_AXIS));
         HashSet<Meal> meals = user.getCustomMeals();

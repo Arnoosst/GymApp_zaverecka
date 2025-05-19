@@ -1,19 +1,30 @@
 package GUI.MealGUI;
 
-import Model.Meal;
-import Model.PreparedMealLoader;
-import Model.User;
-import Model.UserManager;
+import GUI.WorkoutGUI.WorkoutPanel;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class AddMealFromPreLoadPanel extends JPanel {
+    private User user;
+    private UserManager userManager;
+    private JPanel parentPanel;
+    private CardLayout cardLayout;
+
 
     public AddMealFromPreLoadPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
-        setLayout(new BorderLayout());
+        this.user = user;
+        this.userManager = userManager;
+        this.parentPanel = parentPanel;
+        this.cardLayout = cardLayout;
 
+        setLayout(new BorderLayout());
+        initGUI();
+    }
+
+    private void initGUI(){
         JPanel mealAddFromPreLoadPanel = new JPanel();
         mealAddFromPreLoadPanel.setLayout(new BoxLayout(mealAddFromPreLoadPanel, BoxLayout.Y_AXIS));
         ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");

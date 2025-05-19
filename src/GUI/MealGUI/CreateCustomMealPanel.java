@@ -14,10 +14,21 @@ public class CreateCustomMealPanel extends JPanel {
     private JTextField proteinTextField;
     private JTextField carbsTextField;
     private JTextField fatsTextField;
+    private User user;
+    private UserManager userManager;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
 
     public CreateCustomMealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
-        setLayout(new BorderLayout(10, 10));
+        this.user = user;
+        this.userManager = userManager;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
 
+        setLayout(new BorderLayout(10, 10));
+        initGUI();
+    }
+    private void initGUI() {
         JPanel inputPanel = new JPanel(new GridLayout(6, 2, 10, 10));
         nameTextField = new JTextField();
         kcalTextField = new JTextField();

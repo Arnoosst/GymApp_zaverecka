@@ -19,13 +19,21 @@ public class WorkoutPanel extends JPanel {
     private ViewCustomWorkoutPanel viewCustomWorkoutPanel;
     private DeleteCustomWorkoutPanel deleteCustomWorkoutPanel;
     private User user;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
+
 
     public WorkoutPanel(User user, JPanel parentPanel, CardLayout cardLayout, ViewCustomWorkoutPanel viewCustomWorkoutPanel, DeleteCustomWorkoutPanel deleteCustomWorkoutPanel) {
         this.viewCustomWorkoutPanel = viewCustomWorkoutPanel;
         this.deleteCustomWorkoutPanel = deleteCustomWorkoutPanel;
         this.user = user;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
         setLayout(new BorderLayout(10, 10));
+        initGUI();
+    }
 
+    private void initGUI() {
         JLabel title = new JLabel("Workout Section", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
@@ -85,21 +93,9 @@ public class WorkoutPanel extends JPanel {
     }
 
 
-    private JPanel createInfoPanel(){
-        JPanel panel = new JPanel(new GridLayout(6, 1, 5, 5));
-
-        panel.setBorder(BorderFactory.createTitledBorder("Statistics"));
-        panel.add(new JLabel("Total number of workouts: " + user.getWorkoutLogs().size()));
-        panel.add(new JLabel("Total volume lifted: " + user.getTotalVolumeLifted() + " kg"));
-        panel.add(new JLabel("Total calories burned: " + user.getTotalCaloriesBurned() + " kcal"));
-        panel.add(new JLabel("Total time spent: " + user.getTotalWorkoutHours() + " h"));
-
-        return panel;
-    }
     public void refresh() {
-        remove(infoPanel);
-        infoPanel = createInfoPanel();
-        add(infoPanel, BorderLayout.CENTER);
+        removeAll();
+        initGUI();
         revalidate();
         repaint();
     }

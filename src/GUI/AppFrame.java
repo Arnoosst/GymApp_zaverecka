@@ -69,9 +69,10 @@ public class AppFrame extends JFrame {
         deleteCustomMealPanel = new DeleteCustomMealPanel(user, userManager, layout, cards);
         editMealsPanel = new EditMealsPanel(user, userManager, layout, cards);
         caloriesChartMenuPanel = new CaloriesChartMenuPanel(user, userManager, layout, cards, editMealsPanel);
+        editMealsPanel.setCaloriesChartMenuPanel(caloriesChartMenuPanel);
 
 
-        cards.add(new MainMenuPanel(user, userManager, layout, cards), "mainMenu");
+        cards.add(new MainMenuPanel(layout, cards), "mainMenu");
         cards.add(new ViewPresetWorkoutsPanel(layout, cards), "viewPresetWorkouts");
         cards.add(viewCustomWorkoutPanel, "viewCustomWorkouts");
         cards.add(deleteCustomWorkoutPanel, "deleteWorkout");

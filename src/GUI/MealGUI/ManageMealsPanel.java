@@ -7,11 +7,23 @@ import java.awt.*;
 
 public class ManageMealsPanel extends JPanel {
     private CaloriesChartMenuPanel caloriesChartMenuPanel;
+    private UserManager userManager;
+    private User user;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
+
 
     public ManageMealsPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, CaloriesChartMenuPanel caloriesChartMenuPanel) {
         this.caloriesChartMenuPanel = caloriesChartMenuPanel;
-        setLayout(new BorderLayout());
+        this.userManager = userManager;
+        this.user = user;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
 
+        setLayout(new BorderLayout());
+        initGUI();
+    }
+    private void initGUI() {
         JPanel mainPanel = new JPanel(new GridLayout(4, 1, 10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 

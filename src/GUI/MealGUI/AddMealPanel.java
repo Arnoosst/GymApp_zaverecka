@@ -9,10 +9,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddMealPanel extends JPanel {
+    private User user;
+    private UserManager userManager;
+    private JPanel parentPanel;
+    private CardLayout cardLayout;
+
+
 
     public AddMealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
-        setLayout(new BorderLayout());
+        this.user = user;
+        this.userManager = userManager;
+        this.parentPanel = parentPanel;
+        this.cardLayout = cardLayout;
 
+        setLayout(new BorderLayout());
+        initGUI();
+    }
+    private void initGUI() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(6, 2, 10, 10));
 

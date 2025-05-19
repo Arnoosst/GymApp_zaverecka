@@ -8,13 +8,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class WorkoutInfoFrame extends JFrame {
+    private Workout workout;
     public WorkoutInfoFrame(Workout workout) {
+        this.workout = workout;
         setTitle("Workout Info: " + workout.getName());
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        initGUI();
+    }
 
-
+    private void initGUI() {
         JTextArea infoArea = new JTextArea();
         infoArea.setEditable(false);
 

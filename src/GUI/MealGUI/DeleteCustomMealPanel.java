@@ -22,7 +22,7 @@ public class DeleteCustomMealPanel extends JPanel {
         initGUI();
     }
 
-    public void initGUI() {
+    private void initGUI() {
         JPanel mealsPanel = new JPanel();
         mealsPanel.setLayout(new BoxLayout(mealsPanel, BoxLayout.Y_AXIS));
 

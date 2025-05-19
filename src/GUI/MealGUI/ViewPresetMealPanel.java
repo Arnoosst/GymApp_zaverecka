@@ -8,11 +8,21 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ViewPresetMealPanel extends JPanel {
+    private JTextArea textArea;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
 
-    public ViewPresetMealPanel(CardLayout cardLayout, JPanel parentPanel){
+
+    public ViewPresetMealPanel(CardLayout cardLayout, JPanel parentPanel) {
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
+
         setLayout(new BorderLayout());
+        initGUI();
+    }
 
-        JTextArea textArea = new JTextArea();
+    private void initGUI() {
+        textArea = new JTextArea();
         textArea.setEditable(false);
 
         ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");

@@ -12,10 +12,27 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SelectWorkoutPanel extends JPanel {
+    private Workout workout;
+    private User user;
+    private UserManager userManager;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
+
+
 
     public SelectWorkoutPanel(Workout workout, User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
-        setLayout(new BorderLayout());
+        this.workout = workout;
+        this.user = user;
+        this.userManager = userManager;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
 
+
+        setLayout(new BorderLayout());
+        initGUI();
+    }
+
+    private void initGUI() {
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to start this workout?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;

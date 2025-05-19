@@ -16,16 +16,22 @@ public class UserPanel extends JPanel {
     private JPanel centerPanel;
     private ViewMealLogsPanel viewMealLogsPanel;
     private ViewWorkoutLogsPanel viewWorkoutLogsPanel;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
 
     public UserPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, ViewMealLogsPanel viewMealLogsPanel, ViewWorkoutLogsPanel viewWorkoutLogsPanel) {
         this.user = user;
         this.userManager = userManager;
         this.viewWorkoutLogsPanel = viewWorkoutLogsPanel;
         this.viewMealLogsPanel = viewMealLogsPanel;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
 
 
         setLayout(new BorderLayout(10, 10));
-
+        initGUI();
+    }
+    private void initGUI() {
         JLabel title = new JLabel("User: " + user.getUserName(), SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 16));
         add(title, BorderLayout.NORTH);

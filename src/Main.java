@@ -7,9 +7,4 @@ public class Main {
         UserManager userManager = new UserManager();
         new AppFrame(userManager);
     }
-
-
-        //TODO Predelat exeinputdialog back na jframe
-
-
 }

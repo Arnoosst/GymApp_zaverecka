@@ -11,9 +11,14 @@ public class ViewCustomWorkoutPanel extends JPanel {
 
     private JTextArea textArea;
     private User user;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
+
 
     public ViewCustomWorkoutPanel(User user, CardLayout cardLayout, JPanel parentPanel) {
         this.user = user;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
 
         setLayout(new BorderLayout());
 

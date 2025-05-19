@@ -13,10 +13,19 @@ public class RegisterPanel extends JPanel {
     private JTextField usernameField, passwordField, ageField, heightField, weightField, nameField;
     private JComboBox<Gender> genderBox;
     private JButton registerButton, backButton;
+    private UserManager userManager;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
 
     public RegisterPanel(UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
-        setLayout(new GridLayout(8, 2, 10, 5));
+        this.userManager = userManager;
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
 
+        setLayout(new GridLayout(8, 2, 10, 5));
+        initGUI();
+    }
+    private void initGUI() {
         usernameField = new JTextField();
         passwordField = new JTextField();
         ageField = new JTextField();

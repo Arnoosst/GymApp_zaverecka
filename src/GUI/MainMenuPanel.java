@@ -12,9 +12,17 @@ import java.awt.*;
 import java.time.LocalDate;
 
 public class MainMenuPanel extends JPanel {
-    public MainMenuPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
-        setLayout(new GridLayout(3, 1, 10, 10));
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
 
+    public MainMenuPanel(CardLayout cardLayout, JPanel parentPanel) {
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
+        setLayout(new GridLayout(3, 1, 10, 10));
+        initGUI();
+    }
+
+    private void initGUI() {
         JButton userProfileButton = new JButton("User");
         JButton workoutButton = new JButton("Workout");
         JButton mealButton = new JButton("Kalorie");

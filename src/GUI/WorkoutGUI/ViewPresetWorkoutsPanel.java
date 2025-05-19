@@ -9,10 +9,18 @@ import java.util.ArrayList;
 
 public class ViewPresetWorkoutsPanel extends JPanel {
     private JButton backButton;
+    private CardLayout cardLayout;
+    private JPanel parentPanel;
 
-    public ViewPresetWorkoutsPanel(CardLayout cardLayout, JPanel parentPanel){
+    public ViewPresetWorkoutsPanel(CardLayout cardLayout, JPanel parentPanel) {
+        this.cardLayout = cardLayout;
+        this.parentPanel = parentPanel;
+
         setLayout(new BorderLayout());
+        initGUI();
+    }
 
+    private void initGUI() {
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
 

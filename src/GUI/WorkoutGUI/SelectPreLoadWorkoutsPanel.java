@@ -26,10 +26,10 @@ public class SelectPreLoadWorkoutsPanel extends JPanel {
         this.workoutPanel2 = workoutPanel2;
 
         setLayout(new BorderLayout(10, 10));
-        initGUI(workoutPanel2);
+        initGUI();
     }
 
-    private void initGUI(WorkoutPanel workoutPanel2) {
+    private void initGUI() {
         JPanel workoutPanel = new JPanel();
         workoutPanel.setLayout(new BoxLayout(workoutPanel, BoxLayout.Y_AXIS));
 

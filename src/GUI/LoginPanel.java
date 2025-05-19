@@ -39,7 +39,7 @@ public class LoginPanel extends JPanel {
 
             if (user != null) {
                 JOptionPane.showMessageDialog(this, "Login successful!");
-                appFrame.initializeUserPanels(user);  // aktualizace dynamických panelů
+                appFrame.initializeUserPanels(user);
                 cardLayout.show(parentPanel, "mainMenu");
             } else {
                 JOptionPane.showMessageDialog(this, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);
