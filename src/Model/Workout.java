@@ -55,6 +55,16 @@ public class Workout implements Serializable {
         return kcal;
     }
 
+    public int calculateTimeDuration() {
+        int duraion = 0;
+        for (Exercise exercise : exercises) {
+            for (ExerciseSets set : exercise.getSets()) {
+                duration += (set.getReps() *2);
+            }
+        }
+        return duration;
+    }
+
 
 
 

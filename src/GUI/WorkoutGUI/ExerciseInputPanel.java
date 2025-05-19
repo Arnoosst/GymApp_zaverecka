@@ -85,11 +85,12 @@ public class ExerciseInputPanel extends JPanel {
             }
 
             result = exercise;
-
-            JOptionPane.showMessageDialog(this, "Exercise added successfully!");
-            userManager.saveUsers();
-
-
+            if (returnPanel.addExercise(result)){
+                JOptionPane.showMessageDialog(this, "Exercise added successfully!");
+                userManager.saveUsers();
+            }else {
+                JOptionPane.showMessageDialog(this, "Exrecise wast added");
+            }
             cardLayout.show(parentPanel, "createWorkout");
         });
 

@@ -53,13 +53,7 @@ public class CreateWorkoutPanel extends JPanel {
         addExerciseButton.addActionListener(e -> {
             ExerciseInputPanel exerciseInputPanel = new ExerciseInputPanel(user, userManager, parentPanel, cardLayout, this);
             parentPanel.add(exerciseInputPanel, "exerciseInput");
-            Exercise exercise = exerciseInputPanel.getResult();
-
-            if (exercise != null) {
-                exerciseList.add(exercise);
-                JOptionPane.showMessageDialog(this, "Exercise \"" + exercise.getName() + "\" added.");
-                userManager.saveUsers();
-            }
+            cardLayout.show(parentPanel, "exerciseInput");
         });
 
         saveButton.addActionListener(e -> {
@@ -88,6 +82,14 @@ public class CreateWorkoutPanel extends JPanel {
         backButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "workout");
         });
+    }
+
+    public boolean addExercise(Exercise exercise) {
+        if(exercise != null) {
+            exerciseList.add(exercise);
+            return true;
+        }
+        return false;
     }
 }
 

@@ -6,6 +6,7 @@ import Model.Workout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 
 public class WorkoutExecutionFrame extends JFrame {
     private User user;
@@ -146,6 +147,8 @@ public class WorkoutExecutionFrame extends JFrame {
                 }
             }
             if (!cancelExercise) {
+                workout.setDate(LocalDate.now());
+                workout.setDuration(workout.calculateTimeDuration());
                 user.addWorkoutToLog(workout);
                 userManager.saveUsers();
                 workoutPanel2.refresh();
