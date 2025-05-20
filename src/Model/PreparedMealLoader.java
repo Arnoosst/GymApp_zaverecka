@@ -11,11 +11,7 @@ public class PreparedMealLoader {
             String line;
 
             while ((line = reader.readLine()) != null) {
-
-
                 String[] parts = line.split(";");
-
-                if (parts.length != 5) continue;
 
                 String name = parts[0].trim();
                 int kcal = Integer.parseInt(parts[1].trim());

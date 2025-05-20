@@ -23,20 +23,21 @@ public class WorkoutInfoFrame extends JFrame {
         infoArea.setEditable(false);
 
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("🏋️ Workout: ").append(workout.getName()).append("\n");
+        String text = "🏋️ Workout: " + workout.getName() + "\n";
+        text += "Exercises:\n";
 
-        sb.append("Exercises:\n");
         for (Exercise exercise : workout.getExercises()) {
-            sb.append("  • ").append(exercise.getName()).append("\n");
+            text += "  • " + exercise.getName() + "\n";
             for (ExerciseSets set : exercise.getSets()) {
-                sb.append("      - Reps: ").append(set.getReps())
-                        .append(", Weight: ").append(set.getWeight()).append(" kg\n");
+                text += "      - Reps: " + set.getReps() + ", Weight: " + set.getWeight() + " kg\n";
             }
-            sb.append("\n");
+            text += "\n";
         }
 
-        infoArea.setText(sb.toString());
+        //TODO neco s tim scrollpane
+
+
+        infoArea.setText(text);
 
         JScrollPane scrollPane = new JScrollPane(infoArea);
 

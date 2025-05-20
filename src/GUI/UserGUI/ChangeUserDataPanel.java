@@ -27,7 +27,7 @@ public class ChangeUserDataPanel extends JPanel {
 
     private void initGUI() {
         JPanel panel = new JPanel(new GridLayout(6, 1, 10, 10));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         JButton nameButton = new JButton("Change Name");
         JButton passwordButton = new JButton("Change Password");

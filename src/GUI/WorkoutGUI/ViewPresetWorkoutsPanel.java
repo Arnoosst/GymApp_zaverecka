@@ -24,12 +24,19 @@ public class ViewPresetWorkoutsPanel extends JPanel {
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
 
+        String text = "";
+
         ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts("src/data/prepared_workouts.txt");
         if (!workouts.isEmpty()) {
             for (Workout workout : workouts) {
-                textArea.append(workout.getName() + ": " + workout.getWorkoutLevel() + "\n\n");
+                text += workout.getName() + ": " + workout.getWorkoutLevel() + "\n\n";
             }
+        } else {
+            text = "No workouts found.\n";
         }
+
+        textArea.setText(text);
+
 
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(ev ->{

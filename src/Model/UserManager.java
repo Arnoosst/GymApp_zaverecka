@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.HashMap;
 
 public class UserManager implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; //TODO IDK jestli tu musi byt, nabidlo mi to sama idea a funguje to, skusim pak jestli ok
     
     private HashMap<String, User> users;
     private static final String fileName = "users.txt";
@@ -56,4 +56,6 @@ public class UserManager implements Serializable {
             return new HashMap<>();
         }
     }
+
+    //TODO projit si poradne tuhle load metodu
 }

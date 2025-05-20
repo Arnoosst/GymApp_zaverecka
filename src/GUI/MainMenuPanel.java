@@ -31,7 +31,7 @@ public class MainMenuPanel extends JPanel {
         add(workoutButton);
         add(mealButton);
 
-        setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         userProfileButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "user");

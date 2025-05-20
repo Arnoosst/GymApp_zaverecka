@@ -19,21 +19,27 @@ public class PreparedWorkoutLoader {
                 line = line.trim();
 
                 if (line.startsWith("Workout:")) {
-                    List<String> parts = Arrays.asList(line.substring(8).split(";"));
-                    String name = parts.get(0);
-                    int duration = Integer.parseInt(parts.get(1));
-                    LocalDate date = LocalDate.parse(parts.get(2));
-                    WorkoutLevel level = WorkoutLevel.valueOf(parts.get(3).toUpperCase());
+                    String[] mainParts = line.split(":", 2);
+                    String[] parts = mainParts[1].trim().split(";");
+
+                    String name = parts[0].trim();
+                    int duration = Integer.parseInt(parts[1].trim());
+                    LocalDate date = LocalDate.parse(parts[2].trim());
+                    WorkoutLevel level = WorkoutLevel.valueOf(parts[3].trim().toUpperCase());
 
                     currentWorkout = new Workout(name, duration, date, level);
                 }
 
+
+
                 else if (line.startsWith("Exercise:") && currentWorkout != null) {
-                    List<String> parts = Arrays.asList(line.substring(9).split(";"));
-                    String exName = parts.get(0);
-                    int sets = Integer.parseInt(parts.get(1));
-                    int reps = Integer.parseInt(parts.get(2));
-                    double weight = Double.parseDouble(parts.get(3));
+                    String[] mainParts = line.split(":", 2);
+                    String[] parts = mainParts[1].trim().split(";");
+
+                    String exName = parts[0].trim();
+                    int sets = Integer.parseInt(parts[1]);
+                    int reps = Integer.parseInt(parts[2]);
+                    double weight = Double.parseDouble(parts[3]);
 
                     Exercise exercise = new Exercise(exName);
                     exercise.initializeSets(sets);

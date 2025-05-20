@@ -17,6 +17,8 @@ public class AppFrame extends JFrame {
     private final JPanel cards;
     private final UserManager userManager;
 
+    //TODO mozna nemusi byt final = zjistit
+
     private User user;
 
 

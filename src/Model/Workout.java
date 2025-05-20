@@ -21,14 +21,14 @@ public class Workout implements Serializable {
     }
 
     public Workout() {
-        this.exercises = new ArrayList<>();  // Add this line
+        this.exercises = new ArrayList<>();
     }
 
     public boolean addExercise(Exercise exercise){
         if(exercise==null){
             return false;
         }
-        if (exercises == null) {  // Add this check
+        if (exercises == null) {
             exercises = new ArrayList<>();
         }
         exercises.add(exercise);

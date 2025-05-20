@@ -53,52 +53,50 @@ public class RegisterPanel extends JPanel {
         add(registerButton);
         add(backButton);
 
-        registerButton.addActionListener(new ActionListener() {
+        registerButton.addActionListener(e -> {
+            String username = usernameField.getText().trim();
+            String password = passwordField.getText().trim();
+            String name = nameField.getText().trim();
+            int age, height, weight;
 
-            public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText().trim();
-                String password = passwordField.getText().trim();
-                String name = nameField.getText().trim();
-                int age, height, weight;
+            try {
 
-                try {
+                age = Integer.parseInt(ageField.getText().trim());
+                height = Integer.parseInt(heightField.getText().trim());
+                weight = Integer.parseInt(weightField.getText().trim());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please check that age, height and weight are valid numbers.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-                    age = Integer.parseInt(ageField.getText().trim());
-                    height = Integer.parseInt(heightField.getText().trim());
-                    weight = Integer.parseInt(weightField.getText().trim());
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please check that age, height and weight are valid numbers.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            Gender gender = (Gender) genderBox.getSelectedItem();
 
-                Gender gender = (Gender) genderBox.getSelectedItem();
+            if (username.isEmpty()) {
+                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please enter username.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-                if (username.isEmpty()) {
-                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please enter username.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            if (password.isEmpty()) {
+                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please enter password.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-                if (password.isEmpty()) {
-                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please enter password.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                User newUser = new User(username, age,name, height,weight, gender, password);
+            User newUser = new User(username, age, name, height, weight, gender, password);
 
 
-                boolean success = userManager.registerUser(newUser);
+            boolean success = userManager.registerUser(newUser);
 
-                if (success) {
-                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Registration successful!");
-                    cardLayout.show(parentPanel, "login");
-                } else {
-                    JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "User already exists.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+            if (success) {
+                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Registration successful!");
+                cardLayout.show(parentPanel, "login");
+            } else {
+                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "User already exists.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
         backButton.addActionListener(e -> {
             cardLayout.show(parentPanel, "login");
         });
+
     }
 }
