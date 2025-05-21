@@ -12,6 +12,7 @@ public class AddMealFromPreLoadPanel extends JPanel {
     private UserManager userManager;
     private JPanel parentPanel;
     private CardLayout cardLayout;
+    private ArrayList<Meal> meals;
 
 
     public AddMealFromPreLoadPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
@@ -19,6 +20,7 @@ public class AddMealFromPreLoadPanel extends JPanel {
         this.userManager = userManager;
         this.parentPanel = parentPanel;
         this.cardLayout = cardLayout;
+        this.meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");
 
         setLayout(new BorderLayout());
         initGUI();
@@ -27,7 +29,6 @@ public class AddMealFromPreLoadPanel extends JPanel {
     private void initGUI(){
         JPanel mealAddFromPreLoadPanel = new JPanel();
         mealAddFromPreLoadPanel.setLayout(new BoxLayout(mealAddFromPreLoadPanel, BoxLayout.Y_AXIS));
-        ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");
 
         for (Meal meal : meals) {
             JPanel singleMeal = new JPanel(new BorderLayout());

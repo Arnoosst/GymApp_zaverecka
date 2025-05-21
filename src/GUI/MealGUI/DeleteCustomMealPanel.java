@@ -28,7 +28,6 @@ public class DeleteCustomMealPanel extends JPanel {
 
         for (Meal meal : user.getCustomMeals()) {
             JPanel singleMealPanel = new JPanel(new BorderLayout());
-            singleMealPanel.setBorder(BorderFactory.createTitledBorder(meal.getName()));
 
             JPanel buttonPanel = new JPanel();
             JButton infoButton = new JButton("More Info");

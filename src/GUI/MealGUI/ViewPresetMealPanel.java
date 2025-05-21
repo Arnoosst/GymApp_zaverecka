@@ -25,12 +25,19 @@ public class ViewPresetMealPanel extends JPanel {
         textArea = new JTextArea();
         textArea.setEditable(false);
 
+        String text = "";
+
         ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");
         if (!meals.isEmpty()) {
             for (Meal meal : meals) {
-                textArea.append(meal.getName() + ": " + meal.getKcal() +" kcal" + "\n\n");
+                text += meal.getName() + ": " + meal.getKcal() + " kcal\n\n";
             }
+        } else {
+            text = "No meals found.\n";
         }
+
+        textArea.setText(text);
+
 
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(ev ->{

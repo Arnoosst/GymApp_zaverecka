@@ -27,14 +27,19 @@ public class ViewCustomMealPanel extends JPanel {
         textArea = new JTextArea();
         textArea.setEditable(false);
 
+        String text = "";
+
         HashSet<Meal> meals = user.getCustomMeals();
         if (meals != null && !meals.isEmpty()) {
             for (Meal meal : meals) {
-                textArea.append(meal.toString() + "\n\n");
+                text += meal.toString() + "\n\n";
             }
         } else {
-            textArea.setText("No custom meals.");
+            text = "No custom meals.";
         }
+
+        textArea.setText(text);
+
 
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(ev -> {
