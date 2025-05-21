@@ -8,6 +8,13 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A panel that allows the user to add a meal to their daily log.
+ * The user can input the meal's name, calories, protein, carbohydrates, and fat.
+ * After successful input, the meal is saved and the user is navigated back to the meal management screen.
+ *
+ * @author Vojtěch Malínek
+ */
 public class AddMealPanel extends JPanel {
     private User user;
     private UserManager userManager;
@@ -15,7 +22,14 @@ public class AddMealPanel extends JPanel {
     private CardLayout cardLayout;
 
 
-
+    /**
+     * Constructs the AddMealPanel with required data.
+     *
+     * @param user the current user
+     * @param userManager the user manager used to save user data
+     * @param cardLayout the layout controller for switching panels
+     * @param parentPanel the parent panel that uses CardLayout
+     */
     public AddMealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         this.user = user;
         this.userManager = userManager;

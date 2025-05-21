@@ -10,6 +10,15 @@ import java.time.LocalDate;
 
 import java.util.ArrayList;
 
+
+/**
+ * Panel that displays the current day's calorie intake, macro totals, and calorie goal.
+ * Allows the user to add meals, change their calorie goal, and edit today's meals.
+ *
+ * This panel is part of a CardLayout and can navigate to other panels.
+ *
+ * @author Vojtěch Malínek
+ */
 public class CaloriesChartMenuPanel extends JPanel {
 
     private JLabel caloriesLabel;
@@ -20,6 +29,16 @@ public class CaloriesChartMenuPanel extends JPanel {
     private JPanel parentPanel;
     private EditMealsPanel editMealsPanel;
 
+
+    /**
+     * Constructs the CaloriesChartMenuPanel.
+     *
+     * @param user the current user
+     * @param userManager the manager responsible for saving user data
+     * @param cardLayout the layout used for navigating between panels
+     * @param parentPanel the parent container for card switching
+     * @param editMealsPanel the panel for editing today's meals
+     */
     public CaloriesChartMenuPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, EditMealsPanel editMealsPanel) {
         this.user = user;
         this.userManager = userManager;
@@ -102,6 +121,9 @@ public class CaloriesChartMenuPanel extends JPanel {
     }
 
 
+    /**
+     * Refreshes the panel to show updated calorie and nutrient data.
+     */
     public void refresh() {
         removeAll();
         initGUI();

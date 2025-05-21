@@ -8,12 +8,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 
+
+/**
+ * A panel that allows the user to add one of their custom meals to today's log.
+ *
+ * @author Vojtěch Malínek
+ */
 public class AddMealFromOwnPanel extends JPanel {
     private User user;
     private UserManager userManager;
     private JPanel parentPanel;
     private CardLayout cardLayout;
 
+
+    /**
+     * Constructs the panel for selecting meals from the user's custom meals.
+     *
+     * @param user the current user
+     * @param userManager the user manager used to save user data
+     * @param cardLayout the layout manager used to switch between panels
+     * @param parentPanel the parent panel that holds this panel
+     */
     public AddMealFromOwnPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         this.user = user;
         this.userManager = userManager;

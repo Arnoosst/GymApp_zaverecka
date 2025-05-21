@@ -7,6 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * A panel that allows the user to add a meal from a predefined list of meals
+ * loaded from a file. The user can view details of each meal or select one
+ * to add to their daily log.
+ *
+ * @author Vojtěch Malínek
+ */
 public class AddMealFromPreLoadPanel extends JPanel {
     private User user;
     private UserManager userManager;
@@ -14,7 +21,14 @@ public class AddMealFromPreLoadPanel extends JPanel {
     private CardLayout cardLayout;
     private ArrayList<Meal> meals;
 
-
+    /**
+     * Constructs the panel that allows adding meals from a predefined file.
+     *
+     * @param user the current user
+     * @param userManager the user manager used to save user data
+     * @param cardLayout the layout manager used for switching panels
+     * @param parentPanel the parent panel that contains this panel
+     */
     public AddMealFromPreLoadPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         this.user = user;
         this.userManager = userManager;
