@@ -7,8 +7,20 @@ import Model.Workout;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A JFrame displaying detailed information about a selected workout,
+ * including exercises and their sets.
+ *
+ * @Author Vojtěch Malínek
+ */
 public class WorkoutInfoFrame extends JFrame {
     private Workout workout;
+
+    /**
+     * Constructs a frame displaying information about the given workout.
+     *
+     * @param workout The workout to display.
+     */
     public WorkoutInfoFrame(Workout workout) {
         this.workout = workout;
         setTitle("Workout Info: " + workout.getName());
@@ -18,6 +30,10 @@ public class WorkoutInfoFrame extends JFrame {
         initGUI();
     }
 
+
+    /**
+     * Initializes the GUI components of the frame.
+     */
     private void initGUI() {
         JTextArea infoArea = new JTextArea();
         infoArea.setEditable(false);

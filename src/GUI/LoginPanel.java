@@ -8,6 +8,14 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * Panel that provides the login interface for users.
+ * Allows users to enter their credentials and log into the system,
+ * or navigate to the registration panel.
+ *
+ * @Author: Vojtěch Malínek
+ */
 public class LoginPanel extends JPanel {
     private final JTextField usernameField;
     private final JTextField passwordField;
@@ -15,6 +23,15 @@ public class LoginPanel extends JPanel {
     private final JButton registerButton;
     private final AppFrame appFrame;
 
+
+    /**
+     * Creates a new LoginPanel.
+     *
+     * @param userManager the manager responsible for handling user login
+     * @param cardLayout the layout manager used to switch between panels
+     * @param parentPanel the container that holds the panels
+     * @param appFrame the main application frame used to initialize user panels upon login
+     */
     public LoginPanel(UserManager userManager, CardLayout cardLayout, JPanel parentPanel, AppFrame appFrame) {
         this.appFrame = appFrame;
 

@@ -6,6 +6,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+
+/**
+ * Represents a user of the fitness and meal tracking system.
+ * Stores personal data, custom meals/workouts, logs and preferences.
+ * Implements Serializable for data persistence.
+ *
+ * Author: Vojtěch
+ */
 public class User implements Serializable {
     private String userName;
     private int age;
@@ -39,6 +47,13 @@ public class User implements Serializable {
 
 
 
+
+    /**
+     * Adds a meal to today's meal log.
+     * @param meal the meal to add
+     * @return true if successful
+     */
+
     public boolean addMealToLog(Meal meal) {
         if (meal == null) return false;
 
@@ -49,21 +64,41 @@ public class User implements Serializable {
 
 
 
+    /**
+     * Adds a workout to the workout log.
+     * @param workout the workout to add
+     * @return true if successful
+     */
     public boolean addWorkoutToLog(Workout workout) {
         workoutLogs.add(workout);
         return true;
     }
 
+    /**
+     * Adds a custom meal.
+     * @param meal the meal to add
+     * @return true if added
+     */
     public boolean addCustomMeal(Meal meal) {
         customMeals.add(meal);
         return true;
     }
 
+
+    /**
+     * Adds a custom workout.
+     * @param workout the workout to add
+     * @return true if added
+     */
     public boolean addCustomWorkout(Workout workout) {
         customWorkouts.add(workout);
         return true;
     }
 
+    /**
+     * Calculates BMR using Mifflin-St Jeor Equation.
+     * @return calculated BMR
+     */
     public double calculateBMR(User user) {
         double bmr = 0;
         if(user.getGender() == Gender.MALE){
@@ -76,6 +111,10 @@ public class User implements Serializable {
 
 
 
+    /**
+     * Calculates total calories burned from all workouts.
+     * @return total burned kcal
+     */
     public int getTotalCaloriesBurned() {
         int total = 0;
         for (Workout w : workoutLogs) {
@@ -84,6 +123,11 @@ public class User implements Serializable {
         return total;
     }
 
+
+    /**
+     * Calculates total volume lifted across all workouts.
+     * @return total kg lifted
+     */
     public double getTotalVolumeLifted() {
         double total = 0;
         for (Workout w : workoutLogs) {
@@ -92,6 +136,11 @@ public class User implements Serializable {
         return total;
     }
 
+
+    /**
+     * Calculates total workout time in hours.
+     * @return total hours
+     */
     public double getTotalWorkoutHours() {
         double total = 0;
         for (Workout w : workoutLogs) {
@@ -205,8 +254,4 @@ public class User implements Serializable {
                 ", gender=" + gender +
                 '}';
     }
-
-
-
-
 }

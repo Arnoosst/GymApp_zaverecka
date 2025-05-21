@@ -7,6 +7,16 @@ import Model.Workout;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * Panel for deleting custom workouts.
+ *
+ * Displays all custom workouts of the user, each with an option
+ * to view more info or delete it. Deletion requires user confirmation.
+ * After deletion, the panel refreshes to reflect changes.
+ *
+ * @author Vojtěch
+ */
 public class DeleteCustomWorkoutPanel extends JPanel {
 
     private User user;
@@ -14,6 +24,16 @@ public class DeleteCustomWorkoutPanel extends JPanel {
     private JPanel parentPanel;
     private CardLayout cardLayout;
 
+
+
+    /**
+     * Constructs the panel for deleting custom workouts.
+     *
+     * @param user the current user
+     * @param userManager the user manager instance
+     * @param parentPanel the main panel with CardLayout
+     * @param cardLayout the CardLayout used for switching views
+     */
     public DeleteCustomWorkoutPanel(User user, UserManager userManager, JPanel parentPanel, CardLayout cardLayout) {
         this.user = user;
         this.userManager = userManager;
@@ -24,6 +44,11 @@ public class DeleteCustomWorkoutPanel extends JPanel {
         initGUI();
     }
 
+
+
+    /**
+     * Initializes the GUI components and workout list.
+     */
     private void initGUI() {
         JPanel workoutPanel = new JPanel();
         workoutPanel.setLayout(new BoxLayout(workoutPanel, BoxLayout.Y_AXIS));
@@ -71,6 +96,11 @@ public class DeleteCustomWorkoutPanel extends JPanel {
         });
     }
 
+
+
+    /**
+     * Refreshes the panel after deleting a workout.
+     */
     public void refresh() {
         removeAll();
         initGUI();

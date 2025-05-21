@@ -4,6 +4,15 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+/**
+ * Represents an exercise that contains a name and an array of exercise sets.
+ * Used for building workout routines with defined sets, repetitions, and weights.
+ * Each exercise can have multiple sets initialized with default or custom values.
+ * Implements Serializable for file storage or data persistence.
+ *
+ * @Author: Vojtěch Malínek
+ */
 public class Exercise implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
@@ -41,6 +50,13 @@ public class Exercise implements Serializable {
         this.sets = sets;
     }
 
+
+    /**
+     * Initializes the sets array with the given number of default sets.
+     * Each set starts with 1 rep and 1.0 kg.
+     *
+     * @param count the number of sets to initialize
+     */
     public void initializeSets(int count) {
         sets = new ExerciseSets[count];
         for (int i = 0; i < count; i++) {

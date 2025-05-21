@@ -2,6 +2,14 @@ package Model;
 
 import java.io.Serializable;
 
+
+/**
+ * Represents a single set of an exercise, including the number of repetitions
+ * and the weight used.
+ * This class is serializable and is used in workout tracking or planning applications.
+ *
+ * @author Vojtěch Malínek
+ */
 public class ExerciseSets implements Serializable {
     private int reps;
     private double weight;

@@ -11,10 +11,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 
+
+/**
+ * Main menu panel that provides navigation buttons to access different parts of the application.
+ * Includes buttons for user profile, workouts, and meals.
+ *
+ * Author: Vojtěch Malínek
+ */
 public class MainMenuPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel parentPanel;
 
+
+    /**
+     * Creates a new MainMenuPanel.
+     *
+     * @param cardLayout the layout manager used to switch panels
+     * @param parentPanel the container that holds the panels
+     */
     public MainMenuPanel(CardLayout cardLayout, JPanel parentPanel) {
         this.cardLayout = cardLayout;
         this.parentPanel = parentPanel;
@@ -22,6 +36,12 @@ public class MainMenuPanel extends JPanel {
         initGUI();
     }
 
+
+    /**
+     * Initializes the GUI components including buttons for user profile,
+     * workout management, and meal tracking. Sets their respective actions
+     * to switch to the corresponding panels.
+     */
     private void initGUI() {
         JButton userProfileButton = new JButton("User");
         JButton workoutButton = new JButton("Workout");

@@ -6,7 +6,11 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * A panel that allows the user to change personal data such as name, password,
+ * weight, and height.
+ *
+ */
 public class ChangeUserDataPanel extends JPanel {
     private User user;
     private UserManager userManager;
@@ -14,6 +18,15 @@ public class ChangeUserDataPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel parentPanel;
 
+    /**
+     * Constructs a new ChangeUserDataPanel.
+     *
+     * @param user         the currently logged-in user
+     * @param userManager  the user manager responsible for saving changes
+     * @param cardLayout   the layout used for switching between panels
+     * @param parentPanel  the parent container that holds this panel
+     * @param userPanel    the user panel to refresh after changes
+     */
     public ChangeUserDataPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, UserPanel userPanel) {
         this.user = user;
         this.userManager = userManager;

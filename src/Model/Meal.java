@@ -3,6 +3,17 @@ package Model;
 import java.io.Serializable;
 import java.util.Objects;
 
+
+/**
+ * Represents a meal with its nutritional values including calories,
+ * protein, fat, and carbohydrates.
+ *
+ * This class is serializable and is typically used for tracking or managing
+ * meals in a calorie tracking or fitness application.
+ *
+ *
+ * @author Vojtěch Malínek
+ */
 public class Meal implements Serializable {
     private String name;
     private int kcal;

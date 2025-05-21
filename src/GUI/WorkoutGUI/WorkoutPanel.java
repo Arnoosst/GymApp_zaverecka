@@ -6,6 +6,13 @@ import Model.User;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * Panel providing user access to workout-related actions and statistics.
+ * Displays user statistics and buttons for starting, creating, viewing, and deleting workouts.
+ *
+ * @Author Vojtěch Malínek
+ */
 public class WorkoutPanel extends JPanel {
 
     private JPanel infoPanel;
@@ -23,6 +30,15 @@ public class WorkoutPanel extends JPanel {
     private JPanel parentPanel;
 
 
+    /**
+     * Constructs the WorkoutPanel with navigation and data panels.
+     *
+     * @param user                  Current logged-in user.
+     * @param parentPanel           Parent panel using CardLayout.
+     * @param cardLayout            Layout manager for switching views.
+     * @param viewCustomWorkoutPanel Panel for viewing custom workouts.
+     * @param deleteCustomWorkoutPanel Panel for deleting custom workouts.
+     */
     public WorkoutPanel(User user, JPanel parentPanel, CardLayout cardLayout, ViewCustomWorkoutPanel viewCustomWorkoutPanel, DeleteCustomWorkoutPanel deleteCustomWorkoutPanel) {
         this.viewCustomWorkoutPanel = viewCustomWorkoutPanel;
         this.deleteCustomWorkoutPanel = deleteCustomWorkoutPanel;
@@ -33,6 +49,10 @@ public class WorkoutPanel extends JPanel {
         initGUI();
     }
 
+
+    /**
+     * Initializes GUI components: title, user statistics, and action buttons.
+     */
     private void initGUI() {
         JLabel title = new JLabel("Workout Section", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));

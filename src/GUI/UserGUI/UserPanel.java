@@ -9,6 +9,16 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 
+
+
+/**
+ * A panel that displays user information and provides actions related to the user's data.
+ *
+ * This panel allows users to view and manage their personal information, meal logs, and workout logs.
+ * It also includes a BMR calculator and navigation controls.
+ *
+ * @Author: Vojtěch
+ */
 public class UserPanel extends JPanel {
     private User user;
     private UserManager userManager;
@@ -19,6 +29,17 @@ public class UserPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel parentPanel;
 
+
+    /**
+     * Constructs the UserPanel with all required components.
+     *
+     * @param user the current user whose data will be displayed
+     * @param userManager the manager for user-related operations
+     * @param cardLayout layout manager used for switching panels
+     * @param parentPanel the parent container holding all panels
+     * @param viewMealLogsPanel panel for displaying meal logs
+     * @param viewWorkoutLogsPanel panel for displaying workout logs
+     */
     public UserPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, ViewMealLogsPanel viewMealLogsPanel, ViewWorkoutLogsPanel viewWorkoutLogsPanel) {
         this.user = user;
         this.userManager = userManager;
@@ -95,31 +116,14 @@ public class UserPanel extends JPanel {
         add(centerPanel, BorderLayout.CENTER);
     }
 
-    private JPanel createInfoPanel() {
-        JPanel panel = new JPanel(new GridLayout(10, 1, 5, 5));
-        panel.setBorder(BorderFactory.createTitledBorder("User Information"));
-        panel.add(new JLabel("Username: " + user.getUserName()));
-        panel.add(new JLabel("Name: " + user.getName()));
-        panel.add(new JLabel("Age: " + user.getAge() + " years"));
-        panel.add(new JLabel("Height: " + user.getHeight() + " cm"));
-        panel.add(new JLabel("Weight: " + user.getWeight() + " kg"));
-        panel.add(new JLabel("Gender: " + user.getGender()));
 
-        if (user.getMealLogs() == null) {
-            panel.add(new JLabel("Calorie logs: 0 days"));
-        } else {
-            panel.add(new JLabel("Calorie logs: " + user.getMealLogs().size() + " days"));
-        }
-
-        panel.add(new JLabel("Workout logs: " + user.getWorkoutLogs().size() + " days"));
-        return panel;
-    }
-
+    /**
+     * Refreshes the panel content.
+     */
     public void refresh() {
-        centerPanel.remove(infoPanel);
-        infoPanel = createInfoPanel();
-        centerPanel.add(infoPanel, 0);
-        centerPanel.revalidate();
-        centerPanel.repaint();
+        removeAll();
+        initGUI();
+        revalidate();
+        repaint();
     }
 }

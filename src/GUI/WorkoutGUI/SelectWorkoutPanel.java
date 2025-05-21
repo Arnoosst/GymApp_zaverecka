@@ -11,6 +11,13 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * Panel that allows the user to go through a selected workout by entering
+ * the number of sets, repetitions, and weight for each exercise.
+ *
+ * @author Vojtěch
+ */
 public class SelectWorkoutPanel extends JPanel {
     private Workout workout;
     private User user;
@@ -19,7 +26,15 @@ public class SelectWorkoutPanel extends JPanel {
     private JPanel parentPanel;
 
 
-
+    /**
+     * Constructs the panel for going through a workout.
+     *
+     * @param workout the workout selected by the user
+     * @param user the current user performing the workout
+     * @param userManager the manager responsible for user data persistence
+     * @param cardLayout the layout used to switch between panels
+     * @param parentPanel the parent panel which contains this and other screens
+     */
     public SelectWorkoutPanel(Workout workout, User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         this.workout = workout;
         this.user = user;
@@ -32,6 +47,12 @@ public class SelectWorkoutPanel extends JPanel {
         initGUI();
     }
 
+
+    /**
+     * Initializes and executes the interactive workout process.
+     * Validates all inputs and provides error messages when necessary.
+     * Allows the user to cancel at any point.
+     */
     private void initGUI() {
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to start this workout?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {

@@ -10,6 +10,14 @@ import java.awt.*;
 import java.util.HashSet;
 
 
+/**
+ * Panel for selecting a custom workout created by the user.
+ *
+ * Displays a list of the user's saved workouts, each with options to view more info
+ * or to select the workout for execution.
+ *
+ * @author Vojtěch
+ */
 public class SelectUserWorkoutPanel extends JPanel {
 
     private User user;
@@ -18,6 +26,16 @@ public class SelectUserWorkoutPanel extends JPanel {
     private CardLayout cardLayout;
     private WorkoutPanel workoutPanel2;
 
+
+    /**
+     * Constructs the SelectUserWorkoutPanel.
+     *
+     * @param user the current user
+     * @param userManager the manager responsible for saving and loading users
+     * @param parentPanel the parent panel for CardLayout switching
+     * @param cardLayout the layout manager used to switch between panels
+     * @param workoutPanel2 reference to the workout panel used for execution
+     */
     public SelectUserWorkoutPanel(User user, UserManager userManager, JPanel parentPanel, CardLayout cardLayout, WorkoutPanel workoutPanel2) {
         this.user = user;
         this.userManager = userManager;
@@ -29,6 +47,10 @@ public class SelectUserWorkoutPanel extends JPanel {
         initGUI();
     }
 
+    /**
+     * Initializes the UI by listing all user-created workouts.
+     * Each workout is shown with options to view details or select it.
+     */
     private void initGUI() {
         JPanel workoutPanel = new JPanel();
         workoutPanel.setLayout(new BoxLayout(workoutPanel, BoxLayout.Y_AXIS));
@@ -72,6 +94,10 @@ public class SelectUserWorkoutPanel extends JPanel {
         });
     }
 
+    /**
+     * Refreshes the panel by reinitializing the UI.
+     * This should be called when the user's custom workouts change.
+     */
     public void refresh() {
         removeAll();
         initGUI();

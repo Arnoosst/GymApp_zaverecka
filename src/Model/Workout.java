@@ -5,6 +5,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
+/**
+ * Represents a workout with name, date, duration, level, and exercises.
+ *
+ * @author Vojtěch Malínek
+ */
 public class Workout implements Serializable {
     private String name;
     private int duration;
@@ -12,6 +18,15 @@ public class Workout implements Serializable {
     private WorkoutLevel workoutLevel;
     private ArrayList<Exercise> exercises;
 
+
+    /**
+     * Creates a workout with given name, duration, date and level.
+     *
+     * @param name         Name of the workout
+     * @param duration     Duration in minutes
+     * @param date         Date of the workout
+     * @param workoutLevel Difficulty level of the workout
+     */
     public Workout(String name, int duration, LocalDate date, WorkoutLevel workoutLevel) {
         this.name = name;
         this.duration = duration;
@@ -24,6 +39,13 @@ public class Workout implements Serializable {
         this.exercises = new ArrayList<>();
     }
 
+
+    /**
+     * Adds an exercise to the workout.
+     *
+     * @param exercise The exercise to add
+     * @return true if added successfully, false if exercise is null
+     */
     public boolean addExercise(Exercise exercise){
         if(exercise==null){
             return false;
@@ -35,6 +57,13 @@ public class Workout implements Serializable {
         return true;
     }
 
+
+    /**
+     * Calculates the total volume lifted in the workout.
+     * Volume = sum of (reps * weight) for all sets.
+     *
+     * @return Total volume lifted in kilograms
+     */
     public double calculateTotalVolumeLifted() {
         double totalVolume = 0;
         for (Exercise exercise : exercises) {
@@ -44,6 +73,14 @@ public class Workout implements Serializable {
         }
         return totalVolume;
     }
+
+
+    /**
+     * Estimates calories burned during the workout.
+     * Uses formula: 0.1 * reps * weight for each set.
+     *
+     * @return Estimated calories burned
+     */
 
     public int calculateKcalBurned() {
         int kcal = 0;
@@ -55,14 +92,21 @@ public class Workout implements Serializable {
         return kcal;
     }
 
+
+    /**
+     * Estimates the duration of the workout based on all reps.
+     * Adds 2 seconds per rep.
+     *
+     * @return Estimated time in seconds
+     */
     public int calculateTimeDuration() {
-        int duraion = 0;
+        int totalDuration = 0;
         for (Exercise exercise : exercises) {
             for (ExerciseSets set : exercise.getSets()) {
-                duration += (set.getReps() *2);
+                totalDuration += set.getReps() * 2;
             }
         }
-        return duration;
+        return totalDuration;
     }
 
 

@@ -7,6 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 
+
+/**
+ * Panel for viewing the user's custom workouts.
+ * Displays a list of custom workouts or a message if none exist.
+ * Allows returning to the main workout panel.
+ *
+ * @author Vojtěch
+ */
 public class ViewCustomWorkoutPanel extends JPanel {
 
     private JTextArea textArea;
@@ -15,6 +23,13 @@ public class ViewCustomWorkoutPanel extends JPanel {
     private JPanel parentPanel;
 
 
+    /**
+     * Constructs the panel for viewing custom workouts.
+     *
+     * @param user the user whose workouts are being displayed
+     * @param cardLayout the CardLayout used to switch panels
+     * @param parentPanel the parent container that uses CardLayout
+     */
     public ViewCustomWorkoutPanel(User user, CardLayout cardLayout, JPanel parentPanel) {
         this.user = user;
         this.cardLayout = cardLayout;
@@ -36,6 +51,12 @@ public class ViewCustomWorkoutPanel extends JPanel {
         refresh();
     }
 
+
+
+    /**
+     * Refreshes the text area to display the latest custom workouts.
+     * If no workouts are found, displays a corresponding message.
+     */
     public void refresh() {
         textArea.setText("");
 

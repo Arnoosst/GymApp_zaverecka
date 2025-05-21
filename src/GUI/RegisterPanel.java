@@ -9,6 +9,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Panel that allows the user to register a new account.
+ * Collects login credentials and personal information.
+ * On successful registration, switches back to the login panel.
+ *
+ * Author: Vojtěch Malínek
+ */
 public class RegisterPanel extends JPanel {
     private JTextField usernameField, passwordField, ageField, heightField, weightField, nameField;
     private JComboBox<Gender> genderBox;
@@ -17,6 +24,13 @@ public class RegisterPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel parentPanel;
 
+    /**
+     * Creates a new RegisterPanel instance.
+     *
+     * @param userManager the user manager used to handle registration
+     * @param cardLayout the layout used to switch between panels
+     * @param parentPanel the main container that holds all panels
+     */
     public RegisterPanel(UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         this.userManager = userManager;
         this.cardLayout = cardLayout;
@@ -25,6 +39,11 @@ public class RegisterPanel extends JPanel {
         setLayout(new GridLayout(8, 2, 10, 5));
         initGUI();
     }
+
+    /**
+     * Initializes the GUI components and sets up the layout and actions.
+     * Includes input fields for user data and buttons for register and back.
+     */
     private void initGUI() {
         usernameField = new JTextField();
         passwordField = new JTextField();

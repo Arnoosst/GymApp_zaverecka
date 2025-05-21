@@ -5,6 +5,18 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * Panel for creating and inputting a new exercise.
+ *
+ * Allows the user to enter the exercise name, number of sets,
+ * reps per set, and weight per set. The exercise is then added
+ * to the workout being created.
+ *
+ * Also allows returning to the previous panel.
+ *
+ * @author Vojtěch
+ */
 public class ExerciseInputPanel extends JPanel {
 
     private Exercise result;
@@ -20,6 +32,16 @@ public class ExerciseInputPanel extends JPanel {
     private CardLayout cardLayout;
     private CreateWorkoutPanel returnPanel;
 
+
+    /**
+     * Constructs the ExerciseInputPanel.
+     *
+     * @param user the current user
+     * @param userManager the user manager instance
+     * @param parentPanel the main parent panel with CardLayout
+     * @param cardLayout the CardLayout instance
+     * @param returnPanel the panel to return to after saving the exercise
+     */
     public ExerciseInputPanel(User user, UserManager userManager, JPanel parentPanel, CardLayout cardLayout, CreateWorkoutPanel returnPanel) {
         this.user = user;
         this.userManager = userManager;
@@ -30,6 +52,11 @@ public class ExerciseInputPanel extends JPanel {
         initGUI();
     }
 
+
+
+    /**
+     * Initializes the input form GUI and action listeners for save and back buttons.
+     */
     private void initGUI() {
         JPanel panel = new JPanel(new GridLayout(5, 2, 10, 5));
 

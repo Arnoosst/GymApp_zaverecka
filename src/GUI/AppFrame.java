@@ -12,6 +12,14 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * The main application window (frame) for the fitness app.
+ * Manages panel navigation using CardLayout and initializes
+ * all panels after a successful user login.
+ *
+ * @Author: Vojtěch Malínek
+ */
 public class AppFrame extends JFrame {
     private final CardLayout layout;
     private final JPanel cards;
@@ -34,6 +42,13 @@ public class AppFrame extends JFrame {
     private ViewMealLogsPanel viewMealLogsPanel;
     private ViewWorkoutLogsPanel viewWorkoutLogsPanel;
 
+
+    /**
+     * Constructs the main application frame.
+     * Sets up the login and registration panels by default.
+     *
+     * @param userManager the manager responsible for user operations like login and registration
+     */
     public AppFrame(UserManager userManager) {
         this.userManager = userManager;
         this.layout = new CardLayout();
@@ -55,6 +70,12 @@ public class AppFrame extends JFrame {
     }
 
 
+
+    /**
+     * Initializes all user-specific panels after successful login.
+     *
+     * @param user the logged-in user whose data will be used in the app
+     */
     public void initializeUserPanels(User user) {
         this.user = user;
 

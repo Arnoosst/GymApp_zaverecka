@@ -3,7 +3,32 @@ package Model;
 import java.io.*;
 import java.util.ArrayList;
 
+
+/**
+ * The PreparedMealLoader class provides functionality for loading meals
+ * from a file into a list of Meal objects.
+ *
+ * The file should contain one meal per line, with the following format:
+ *
+ * MealName;kcal;protein;fat;carbs
+ *
+ * For example:
+ * Chicken Breast;250;40;5;0
+ *
+ * @author Vojtěch Malínek
+ */
 public class PreparedMealLoader {
+
+    /**
+     * Loads meals from the specified file and returns them as a list.
+     *
+     * Each line in the file is expected to contain five values separated by this = ;
+     * the name of the meal, its calories, protein content, fat content, and carbohydrate content.
+     *
+     *
+     * @param filePath the path to the file containing meal definitions
+     * @return a list of Meal objects parsed from the file; returns an empty list if file cannot be read
+     */
     public static ArrayList<Meal> loadMealsFromFile(String filePath) {
         ArrayList<Meal> meals = new ArrayList<>();
 
