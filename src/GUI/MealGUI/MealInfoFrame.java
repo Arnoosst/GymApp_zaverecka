@@ -5,8 +5,22 @@ import Model.Meal;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * MealInfoFrame is a simple pop-up window that displays detailed information
+ * about a selected meal using its toString() method.
+ *
+ * The window includes a scrollable text area and a close button.
+ *
+ * @author Vojtěch Malínek
+ */
 public class MealInfoFrame extends JFrame {
 
+    /**
+     * Constructs a new MealInfoFrame that displays information about the given meal.
+     *
+     * @param meal the meal to be displayed
+     */
     public MealInfoFrame(Meal meal) {
         setTitle("Meal Info");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

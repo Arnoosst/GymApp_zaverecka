@@ -8,12 +8,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 
+/**
+ * This panel displays all custom meals created by the user.
+ *
+ * The panel includes a close button to return to the main meal screen,
+ * and a refresh() method to reload the displayed data.
+ *
+ * @author Vojtěch Malínek
+ */
 public class ViewCustomMealPanel extends JPanel {
     private JTextArea textArea;
     private User user;
     private CardLayout cardLayout;
     private JPanel parentPanel;
 
+
+    /**
+     * Constructs a panel that displays the user's custom meals.
+     *
+     * @param user         the user whose meals are displayed
+     * @param cardLayout   layout used for switching between panels
+     * @param parentPanel  parent container with CardLayout
+     */
     public ViewCustomMealPanel(User user, CardLayout cardLayout, JPanel parentPanel) {
         this.user = user;
         this.cardLayout = cardLayout;
@@ -51,6 +67,9 @@ public class ViewCustomMealPanel extends JPanel {
 
     }
 
+    /**
+     * Refreshes the panel content by reloading the user's custom meals.
+     */
     public void refresh() {
         textArea.setText("");
 

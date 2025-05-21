@@ -7,6 +7,13 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel that allows the user to create a custom meal by entering name and macros.
+ * After creation, the meal is added to the user's list of custom meals.
+ * Provides basic input validation and error handling.
+ *
+ * @author Vojtěch Malínek
+ */
 public class CreateCustomMealPanel extends JPanel {
 
     private JTextField kcalTextField;
@@ -19,6 +26,15 @@ public class CreateCustomMealPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel parentPanel;
 
+
+    /**
+     * Constructs the panel for creating a custom meal.
+     *
+     * @param user the current user
+     * @param userManager the user manager responsible for saving data
+     * @param cardLayout the layout manager for screen switching
+     * @param parentPanel the parent panel that contains all cards
+     */
     public CreateCustomMealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         this.user = user;
         this.userManager = userManager;

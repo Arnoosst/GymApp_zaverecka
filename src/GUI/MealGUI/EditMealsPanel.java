@@ -10,6 +10,14 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+
+
+/**
+ * EditMealsPanel allows users to view and manage the meals they have logged for the current day.
+ * It displays a list of meals with options to view details or delete them.
+ *
+ * @author Vojtěch Malínek
+ */
 public class EditMealsPanel extends JPanel {
 
     private UserManager userManager;
@@ -19,6 +27,14 @@ public class EditMealsPanel extends JPanel {
     private CaloriesChartMenuPanel caloriesChartMenuPanel;
 
 
+    /**
+     * Constructs the EditMealsPanel.
+     *
+     * @param user        the currently logged-in user
+     * @param userManager the user manager instance
+     * @param cardLayout  the CardLayout used for switching views
+     * @param parentPanel the panel container using CardLayout
+     */
     public EditMealsPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         this.userManager = userManager;
         this.user = user;
@@ -89,6 +105,9 @@ public class EditMealsPanel extends JPanel {
         });
     }
 
+    /**
+     * Refreshes the panel by rebuilding the UI based on the current data.
+     */
     public void refresh() {
         removeAll();
         initGUI();

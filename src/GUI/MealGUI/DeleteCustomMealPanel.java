@@ -7,12 +7,28 @@ import Model.UserManager;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * Panel that allows the user to view and delete their custom-created meals.
+ * Each meal is displayed with buttons to show more information or delete it.
+ *
+ * @author Vojtěch Malínek
+ */
 public class DeleteCustomMealPanel extends JPanel {
     private User user;
     private UserManager userManager;
     private JPanel parentPanel;
     private CardLayout cardLayout;
 
+
+    /**
+     * Constructs the panel for deleting custom meals.
+     *
+     * @param user        the current user
+     * @param userManager the user manager instance
+     * @param cardLayout  the layout manager used for navigation
+     * @param parentPanel the parent panel containing this panel
+     */
     public DeleteCustomMealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel) {
         this.user = user;
         this.userManager = userManager;
@@ -68,6 +84,9 @@ public class DeleteCustomMealPanel extends JPanel {
     }
 
 
+    /**
+     * Refreshes the panel by rebuilding the UI based on the current data.
+     */
     public void refresh() {
         removeAll();
         initGUI();

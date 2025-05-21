@@ -5,6 +5,14 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * ManageMealsPanel provides a user interface for managing meals. It allows users to:
+ *
+ * This panel is intended to be used inside a CardLayout-based navigation system.
+ *
+ * @author Vojtěch Malínek
+ */
 public class ManageMealsPanel extends JPanel {
     private CaloriesChartMenuPanel caloriesChartMenuPanel;
     private UserManager userManager;
@@ -13,6 +21,15 @@ public class ManageMealsPanel extends JPanel {
     private JPanel parentPanel;
 
 
+    /**
+     * Constructs the ManageMealsPanel.
+     *
+     * @param user the current user
+     * @param userManager the user manager instance
+     * @param cardLayout the layout controller for switching views
+     * @param parentPanel the container that uses CardLayout
+     * @param caloriesChartMenuPanel the panel to return to after meal management
+     */
     public ManageMealsPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, CaloriesChartMenuPanel caloriesChartMenuPanel) {
         this.caloriesChartMenuPanel = caloriesChartMenuPanel;
         this.userManager = userManager;
@@ -23,6 +40,7 @@ public class ManageMealsPanel extends JPanel {
         setLayout(new BorderLayout());
         initGUI();
     }
+
     private void initGUI() {
         JPanel mainPanel = new JPanel(new GridLayout(4, 1, 10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));

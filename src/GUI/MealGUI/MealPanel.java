@@ -6,6 +6,15 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * MealPanel is the main panel for handling user meal-related actions such as:
+ * logging meals, creating and viewing custom or preset meals, and deleting custom meals.
+ *
+ * It shows basic user statistics and offers buttons to navigate to other related panels.
+ *
+ * @author Vojtěch Malínek
+ */
 public class MealPanel extends JPanel {
     private User user;
     private JPanel infoPanel;
@@ -15,6 +24,16 @@ public class MealPanel extends JPanel {
     private JPanel parentPanel;
 
 
+    /**
+     * Constructs the MealPanel with required components and dependencies.
+     *
+     * @param user                  current user
+     * @param userManager           unused but could be used for future extensions
+     * @param cardLayout            layout used to switch between views
+     * @param parentPanel           parent container for CardLayout
+     * @param viewCustomMealPanel  panel used to display custom meals
+     * @param deleteCustomMealPanel panel used to delete custom meals
+     */
     public MealPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, ViewCustomMealPanel viewCustomMealPanel, DeleteCustomMealPanel deleteCustomMealPanel) {
         this.user = user;
         this.viewCustomMealPanel = viewCustomMealPanel;
@@ -87,6 +106,10 @@ public class MealPanel extends JPanel {
     }
 
 
+    /**
+     * Refreshes the panel by reinitializing all components.
+     * Call this if user data has changed and the view needs to be updated.
+     */
     public void refresh(){
         removeAll();
         initGUI();
