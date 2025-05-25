@@ -88,6 +88,4 @@ public class UserManager implements Serializable {
             return new HashMap<>();
         }
     }
-
-    //TODO projit si poradne tuhle load metodu
 }
