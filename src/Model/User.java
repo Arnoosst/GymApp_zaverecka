@@ -42,6 +42,11 @@ public class User implements Serializable {
         this.workoutLogs = new ArrayList<>();
     }
 
+    public User (String userName, String password){
+        this.userName = userName;
+        this.password = password;
+    }
+
     public User() {
     }
 
