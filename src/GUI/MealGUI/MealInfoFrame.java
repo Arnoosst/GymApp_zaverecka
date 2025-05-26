@@ -10,7 +10,7 @@ import java.awt.*;
  * MealInfoFrame is a simple pop-up window that displays detailed information
  * about a selected meal using its toString() method.
  *
- * The window includes a scrollable text area and a close button.
+ * The window includes a scrollable text area and a back button.
  *
  * @author Vojtěch Malínek
  */
@@ -31,7 +31,7 @@ public class MealInfoFrame extends JFrame {
         infoArea.setEditable(false);
         infoArea.setText(meal.toString());
 
-        JButton closeButton = new JButton("Close");
+        JButton closeButton = new JButton("Back");
         closeButton.addActionListener(e -> dispose());
 
         add(new JScrollPane(infoArea), BorderLayout.CENTER);

@@ -45,7 +45,7 @@ public class MainMenuPanel extends JPanel {
     private void initGUI() {
         JButton userProfileButton = new JButton("User");
         JButton workoutButton = new JButton("Workout");
-        JButton mealButton = new JButton("Kalorie");
+        JButton mealButton = new JButton("Calories");
 
         add(userProfileButton);
         add(workoutButton);

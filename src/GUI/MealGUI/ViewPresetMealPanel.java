@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * A panel that displays a list of preset meals loaded from a file.
  * The meals are shown in a non-editable text area along with their calorie values.
  *
- * This panel also includes a "Close" button that returns the user to the
+ * This panel also includes a "Back" button that returns the user to the
  * main meal management screen using CardLayout.
  *
  * @Author: Vojtěch Malínek
@@ -55,7 +55,7 @@ public class ViewPresetMealPanel extends JPanel {
         textArea.setText(text);
 
 
-        JButton closeButton = new JButton("Close");
+        JButton closeButton = new JButton("Back");
         closeButton.addActionListener(ev ->{
             cardLayout.show(parentPanel, "meal");
         });

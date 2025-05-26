@@ -50,7 +50,7 @@ public class ViewWorkoutLogsPanel extends JPanel {
             textArea.setText("No workouts");
         }
 
-        JButton closeButton = new JButton("Close");
+        JButton closeButton = new JButton("Back");
         closeButton.addActionListener(ev -> {
             cardLayout.show(parentPanel, "user");
         });

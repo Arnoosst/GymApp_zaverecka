@@ -40,7 +40,7 @@ public class ViewCustomWorkoutPanel extends JPanel {
         textArea = new JTextArea();
         textArea.setEditable(false);
 
-        JButton closeButton = new JButton("Close");
+        JButton closeButton = new JButton("Back");
         closeButton.addActionListener(ev -> {
             cardLayout.show(parentPanel, "workout");
         });

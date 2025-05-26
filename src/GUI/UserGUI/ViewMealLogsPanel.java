@@ -57,7 +57,7 @@ public class ViewMealLogsPanel extends JPanel{
             textArea.setText("No meals.");
         }
 
-        JButton closeButton = new JButton("Close");
+        JButton closeButton = new JButton("Back");
         closeButton.addActionListener(ev -> {
             cardLayout.show(parentPanel, "user");
         });

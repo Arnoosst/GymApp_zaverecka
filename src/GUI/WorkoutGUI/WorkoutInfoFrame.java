@@ -50,14 +50,12 @@ public class WorkoutInfoFrame extends JFrame {
             text += "\n";
         }
 
-        //TODO neco s tim scrollpane
-
 
         infoArea.setText(text);
 
         JScrollPane scrollPane = new JScrollPane(infoArea);
 
-        JButton backButton = new JButton("Close");
+        JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> dispose());
 
         JPanel bottomPanel = new JPanel();

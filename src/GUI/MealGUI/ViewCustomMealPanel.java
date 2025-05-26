@@ -57,7 +57,7 @@ public class ViewCustomMealPanel extends JPanel {
         textArea.setText(text);
 
 
-        JButton closeButton = new JButton("Close");
+        JButton closeButton = new JButton("Back");
         closeButton.addActionListener(ev -> {
             cardLayout.show(parentPanel, "meal");
         });
