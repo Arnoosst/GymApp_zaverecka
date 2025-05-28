@@ -1,6 +1,7 @@
 package GUI;
 
 
+import GUI.MealGUI.MealPanel;
 import Model.User;
 import Model.UserManager;
 import Model.Workout;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 public class MainMenuPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel parentPanel;
+    private MealPanel mealPanel;
 
 
     /**
@@ -29,9 +31,10 @@ public class MainMenuPanel extends JPanel {
      * @param cardLayout the layout manager used to switch panels
      * @param parentPanel the container that holds the panels
      */
-    public MainMenuPanel(CardLayout cardLayout, JPanel parentPanel) {
+    public MainMenuPanel(CardLayout cardLayout, JPanel parentPanel, MealPanel mealPanel) {
         this.cardLayout = cardLayout;
         this.parentPanel = parentPanel;
+        this.mealPanel = mealPanel;
         setLayout(new GridLayout(3, 1, 10, 10));
         initGUI();
     }
@@ -62,6 +65,7 @@ public class MainMenuPanel extends JPanel {
         });
 
         mealButton.addActionListener(e -> {
+            mealPanel.refresh();
             cardLayout.show(parentPanel, "meal");
         });
     }

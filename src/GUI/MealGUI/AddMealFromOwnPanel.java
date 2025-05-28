@@ -87,4 +87,14 @@ public class AddMealFromOwnPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
     }
+
+    /**
+     * Refreshes the panel by rebuilding the UI based on the current data.
+     */
+    public void refresh() {
+        removeAll();
+        initGUI();
+        revalidate();
+        repaint();
+    }
 }

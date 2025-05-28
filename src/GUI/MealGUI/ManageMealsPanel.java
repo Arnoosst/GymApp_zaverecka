@@ -19,6 +19,7 @@ public class ManageMealsPanel extends JPanel {
     private User user;
     private CardLayout cardLayout;
     private JPanel parentPanel;
+    private AddMealFromOwnPanel addMealFromOwnPanel;
 
 
     /**
@@ -30,12 +31,13 @@ public class ManageMealsPanel extends JPanel {
      * @param parentPanel the container that uses CardLayout
      * @param caloriesChartMenuPanel the panel to return to after meal management
      */
-    public ManageMealsPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, CaloriesChartMenuPanel caloriesChartMenuPanel) {
+    public ManageMealsPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, CaloriesChartMenuPanel caloriesChartMenuPanel, AddMealFromOwnPanel addMealFromOwnPanel) {
         this.caloriesChartMenuPanel = caloriesChartMenuPanel;
         this.userManager = userManager;
         this.user = user;
         this.cardLayout = cardLayout;
         this.parentPanel = parentPanel;
+        this.addMealFromOwnPanel = addMealFromOwnPanel;
 
         setLayout(new BorderLayout());
         initGUI();
@@ -66,6 +68,7 @@ public class ManageMealsPanel extends JPanel {
         });
 
         addMealFromOwnMealsButton.addActionListener(e -> {
+            addMealFromOwnPanel.refresh();
             cardLayout.show(parentPanel, "addMealFromOwn");
         });
 

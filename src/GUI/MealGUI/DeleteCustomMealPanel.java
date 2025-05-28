@@ -49,6 +49,8 @@ public class DeleteCustomMealPanel extends JPanel {
             JButton infoButton = new JButton("More Info");
             JButton deleteButton = new JButton("Delete");
 
+            singleMealPanel.setBorder(BorderFactory.createTitledBorder(meal.getName()));
+
             buttonPanel.add(infoButton);
             buttonPanel.add(deleteButton);
             singleMealPanel.add(buttonPanel, BorderLayout.EAST);

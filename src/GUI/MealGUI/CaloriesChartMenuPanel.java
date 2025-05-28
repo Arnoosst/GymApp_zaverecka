@@ -28,6 +28,7 @@ public class CaloriesChartMenuPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel parentPanel;
     private EditMealsPanel editMealsPanel;
+    private MealPanel mealPanel;
 
 
     /**
@@ -39,12 +40,13 @@ public class CaloriesChartMenuPanel extends JPanel {
      * @param parentPanel the parent container for card switching
      * @param editMealsPanel the panel for editing today's meals
      */
-    public CaloriesChartMenuPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, EditMealsPanel editMealsPanel) {
+    public CaloriesChartMenuPanel(User user, UserManager userManager, CardLayout cardLayout, JPanel parentPanel, EditMealsPanel editMealsPanel, MealPanel mealPanel) {
         this.user = user;
         this.userManager = userManager;
         this.cardLayout = cardLayout;
         this.parentPanel = parentPanel;
         this.editMealsPanel = editMealsPanel;
+        this.mealPanel = mealPanel;
 
         setLayout(new BorderLayout(10, 10));
         user.setCaloriesGoal(user.calculateBMR(user));
@@ -117,7 +119,10 @@ public class CaloriesChartMenuPanel extends JPanel {
             cardLayout.show(parentPanel, "editMeals");
         });
 
-        backButton.addActionListener(e -> cardLayout.show(parentPanel, "meal"));
+        backButton.addActionListener(e ->{
+            mealPanel.refresh();
+            cardLayout.show(parentPanel, "meal");
+        });
     }
 
 

@@ -86,7 +86,7 @@ public class Workout implements Serializable {
         int kcal = 0;
         for (Exercise exercise : exercises) {
             for (ExerciseSets set : exercise.getSets()) {
-                kcal += (int)(0.1 * set.getReps() * set.getWeight());
+                kcal += (int)(set.getReps() * set.getWeight());
             }
         }
         return kcal;
