@@ -21,9 +21,9 @@ import java.time.LocalDate;
  */
 public class WorkoutExecutionFrame extends JFrame {
 
-    private final User user;
-    private final UserManager userManager;
-    private final WorkoutPanel workoutPanel;
+    private User user;
+    private UserManager userManager;
+    private WorkoutPanel workoutPanel;
 
     /**
      * Constructs the WorkoutExecutionFrame for performing a workout.
@@ -77,13 +77,13 @@ public class WorkoutExecutionFrame extends JFrame {
                 continue;
             }
 
-            JPanel setCountPanel = new JPanel(new GridLayout(2, 2, 10, 5));
+            JPanel setHowManySets = new JPanel(new GridLayout(2, 2, 10, 5));
             JTextField setsField = new JTextField();
 
-            setCountPanel.add(new JLabel("Enter number of sets for exercise " + (i + 1) + ":"));
-            setCountPanel.add(setsField);
+            setHowManySets.add(new JLabel("Enter number of sets for exercise " + (i + 1) + ":"));
+            setHowManySets.add(setsField);
 
-            int result = JOptionPane.showConfirmDialog(this, setCountPanel,
+            int result = JOptionPane.showConfirmDialog(this, setHowManySets,
                     "Set Count", JOptionPane.OK_CANCEL_OPTION);
 
             if (result != JOptionPane.OK_OPTION) {
@@ -108,17 +108,17 @@ public class WorkoutExecutionFrame extends JFrame {
                     JLabel exerciseLabel = new JLabel(exercise.getName(), JLabel.CENTER);
                     inputPanel.add(exerciseLabel, BorderLayout.NORTH);
 
-                    JPanel grid = new JPanel(new GridLayout(2, 2, 5, 5));
+                    JPanel repsPanelWeight = new JPanel(new GridLayout(2, 2, 5, 5));
 
-                    grid.add(new JLabel("Reps for set " + (j + 1) + ":"));
+                    repsPanelWeight.add(new JLabel("Reps for set " + (j + 1) + ":"));
                     JTextField repsField = new JTextField();
-                    grid.add(repsField);
+                    repsPanelWeight.add(repsField);
 
-                    grid.add(new JLabel("Weight (kg):"));
+                    repsPanelWeight.add(new JLabel("Weight (kg):"));
                     JTextField weightField = new JTextField();
-                    grid.add(weightField);
+                    repsPanelWeight.add(weightField);
 
-                    inputPanel.add(grid, BorderLayout.CENTER);
+                    inputPanel.add(repsPanelWeight, BorderLayout.CENTER);
 
                     result = JOptionPane.showConfirmDialog(this, inputPanel,
                             "Set Details", JOptionPane.OK_CANCEL_OPTION);

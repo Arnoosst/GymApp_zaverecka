@@ -76,7 +76,7 @@ public class RegisterPanel extends JPanel {
             String username = usernameField.getText().trim();
             String password = passwordField.getText().trim();
             String name = nameField.getText().trim();
-            int age, height, weight;
+            int age = 0, height = 0, weight = 0;
 
             try {
 
@@ -84,32 +84,32 @@ public class RegisterPanel extends JPanel {
                 height = Integer.parseInt(heightField.getText().trim());
                 weight = Integer.parseInt(weightField.getText().trim());
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please check that age, height and weight are valid numbers.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+                JOptionPane.showMessageDialog(RegisterPanel.this,
+                        "Please check that age, height and weight are valid numbers.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
 
             Gender gender = (Gender) genderBox.getSelectedItem();
 
             if (username.isEmpty()) {
-                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please enter username.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(RegisterPanel.this, "Please enter username.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             if (password.isEmpty()) {
-                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Please enter password.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(RegisterPanel.this, "Please enter password.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             User newUser = new User(username, age, name, height, weight, gender, password);
-
-
             boolean success = userManager.registerUser(newUser);
 
             if (success) {
-                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "Registration successful!");
+                JOptionPane.showMessageDialog(RegisterPanel.this, "Registration successful!");
                 cardLayout.show(parentPanel, "login");
             } else {
-                JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(RegisterPanel.this), "User already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(RegisterPanel.this, "User already exists.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
