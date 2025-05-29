@@ -76,18 +76,28 @@ public class RegisterPanel extends JPanel {
             String username = usernameField.getText().trim();
             String password = passwordField.getText().trim();
             String name = nameField.getText().trim();
-            int age = 0, height = 0, weight = 0;
+            int age = 0;
+            int height = 0, weight = 0;
 
             try {
-
                 age = Integer.parseInt(ageField.getText().trim());
                 height = Integer.parseInt(heightField.getText().trim());
                 weight = Integer.parseInt(weightField.getText().trim());
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(RegisterPanel.this,
-                        "Please check that age, height and weight are valid numbers.",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter valid numbers for age, height and weight.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (age < 12) {
+                JOptionPane.showMessageDialog(this, "You must be at least 12 years old to register.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (height < 60) {
+                JOptionPane.showMessageDialog(this, "Height must be at least 60 cm.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (weight < 30) {
+                JOptionPane.showMessageDialog(this, "Weight must be at least 30 kg.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
             Gender gender = (Gender) genderBox.getSelectedItem();
@@ -101,6 +111,42 @@ public class RegisterPanel extends JPanel {
                 JOptionPane.showMessageDialog(RegisterPanel.this, "Please enter password.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
+            if (name.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter your name.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!username.matches("^[a-zA-Z0-9]{4,16}$")) {
+                JOptionPane.showMessageDialog(this, "Username must be 4–16 characters long and contain only letters and numbers.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+
+            if (password.length() < 6) {
+                JOptionPane.showMessageDialog(this, "Password must be at least 6 characters long.");
+                return;
+            }
+
+            if (!password.matches(".*[A-Za-z].*")) {
+                JOptionPane.showMessageDialog(this, "Password must contain at least one letter.");
+                return;
+            }
+
+            if (!password.matches(".*\\d.*")) {
+                JOptionPane.showMessageDialog(this, "Password must contain at least one number.");
+                return;
+            }
+
+
+            if (!name.matches("^[A-Za-zÀ-ž ]+$")) {
+                JOptionPane.showMessageDialog(this, "Name must contain only letters.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+
+
+
 
             User newUser = new User(username, age, name, height, weight, gender, password);
             boolean success = userManager.registerUser(newUser);
