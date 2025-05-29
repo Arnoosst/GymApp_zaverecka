@@ -7,6 +7,4 @@ public class Main {
         UserManager userManager = new UserManager();
         new AppFrame(userManager);
     }
-
-    //TODO zkusit projit novou registraci, zmena udelana v regexecg
 }
