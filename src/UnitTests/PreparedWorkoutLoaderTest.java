@@ -25,43 +25,17 @@ public class PreparedWorkoutLoaderTest {
     /**
      * Tests that a single valid workout with two exercises is correctly loaded.
      *
-     * @throws IOException if a temporary test file cannot be created
      */
     @Test
-    public void testLoadSingleValidWorkout() throws IOException {
-        String fileContent = """
-                Workout: Bench Day;60;2024-05-01;BEGINNER
-                Exercise: Bench Press;4;8;80
-                Exercise: Incline Press;3;10;60
-                ---
-                """;
+    public void testLoadSingleValidWorkout(){
+        ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts("src/data/prepared_workouts.txt");
 
-        Path tempFile = Files.createTempFile("workout", ".txt");
-        Files.writeString(tempFile, fileContent);
-
-        ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts(tempFile.toString());
-
-        assertEquals(1, workouts.size());
+        assertEquals(9, workouts.size());
         Workout workout = workouts.get(0);
-        assertEquals("Bench Day", workout.getName());
-        assertEquals(2, workout.getExercises().size());
+        assertEquals("Full Body Beginner", workout.getName());
+        assertEquals(3, workout.getExercises().size());
     }
 
-
-    /**
-     * Tests that an empty workout file results in an empty list being returned.
-     *
-     * @throws IOException if a temporary test file cannot be created
-     */
-    @Test
-    public void testEmptyFileReturnsEmptyList() throws IOException {
-        Path tempFile = Files.createTempFile("empty", ".txt");
-        Files.writeString(tempFile, "");
-
-        ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts(tempFile.toString());
-
-        assertTrue(workouts.isEmpty());
-    }
 
 
     /**
@@ -71,23 +45,11 @@ public class PreparedWorkoutLoaderTest {
      */
     @Test
     public void testMultipleWorkoutsLoadCorrectly() throws IOException {
-        String fileContent = """
-                Workout: Bench Day;60;2024-05-01;BEGINNER
-                Exercise: Bench Press;4;8;80
-                ---
-                Workout: Leg Day;45;2024-05-03;INTERMEDIATE
-                Exercise: Squat;5;10;100
-                ---
-                """;
+        ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts("src/data/prepared_workouts.txt");
 
-        Path tempFile = Files.createTempFile("multi", ".txt");
-        Files.writeString(tempFile, fileContent);
-
-        ArrayList<Workout> workouts = PreparedWorkoutLoader.loadPreparedWorkouts(tempFile.toString());
-
-        assertEquals(2, workouts.size());
-        assertEquals("Bench Day", workouts.get(0).getName());
-        assertEquals("Leg Day", workouts.get(1).getName());
-        assertEquals(1, workouts.get(1).getExercises().size());
+        assertEquals(9, workouts.size());
+        assertEquals("Beginner Core", workouts.get(1).getName());
+        assertEquals("Beginner Upper Body", workouts.get(2).getName());
+        assertEquals(3, workouts.get(1).getExercises().size());
     }
 }

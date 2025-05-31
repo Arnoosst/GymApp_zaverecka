@@ -27,28 +27,18 @@ public class PreparedMealLoaderTest {
      * Tests loading meals from a valid file.
      * Asserts that the parsed meals match the expected values in the file.
      *
-     * @throws IOException if the temporary test file cannot be created or written to
      */
     @Test
-    public void testLoadMealsFromValidFile() throws IOException {
-        File tempFile = File.createTempFile("test_meals", ".txt");
-        tempFile.deleteOnExit();
+    public void testLoadMealsFromValidFile() {
+        ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile("src/data/prepared_meals.txt");
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-        writer.write("Eggs and Toast;400;25;20;30\n");
-        writer.write("Yogurt and Banana;300;15;5;40\n");
-        writer.close();
-
-
-        ArrayList<Meal> meals = PreparedMealLoader.loadMealsFromFile(tempFile.getAbsolutePath());
-
-        assertEquals(2, meals.size());
+        assertEquals(23, meals.size());
 
         Meal first = meals.get(0);
-        assertEquals("Eggs and Toast", first.getName());
-        assertEquals(400, first.getKcal());
-        assertEquals(25, first.getProtein());
-        assertEquals(20, first.getFat());
-        assertEquals(30, first.getCarbs());
+        assertEquals("Chicken Breast", first.getName());
+        assertEquals(200, first.getKcal());
+        assertEquals(30, first.getProtein());
+        assertEquals(3, first.getFat());
+        assertEquals(0, first.getCarbs());
     }
 }

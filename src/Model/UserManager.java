@@ -11,7 +11,8 @@ import java.util.HashMap;
  * @author Vojtěch
  */
 public class UserManager implements Serializable {
-    private static final long serialVersionUID = 1L; //TODO IDK jestli tu musi byt, nabidlo mi to sama idea a funguje to, skusim pak jestli ok
+    // Line 15 was suggested by IntelliJ IDEA and it fixed my problem with serializable.
+    private static final long serialVersionUID = 1L;
     
     private HashMap<String, User> users;
     private static final String fileName = "users.txt";
